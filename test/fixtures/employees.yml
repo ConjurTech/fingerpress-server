@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  sex: MyString
+  birthdate: 2015-08-15 21:45:31
+  joindate: 2015-08-15 21:45:31
+  leavedate: 2015-08-15 21:45:31
+  bankdetails: MyString
+
+two:
+  name: MyString
+  sex: MyString
+  birthdate: 2015-08-15 21:45:31
+  joindate: 2015-08-15 21:45:31
+  leavedate: 2015-08-15 21:45:31
+  bankdetails: MyString
