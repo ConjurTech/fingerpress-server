@@ -1,41 +1,58 @@
 <%= form_for(@employee) do |f| %>
-  <% if @employee.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@employee.errors.count, "error") %> prohibited this employee from being saved:</h2>
+    <% if @employee.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@employee.errors.count, "error") %> prohibited this employee from being saved:</h2>
 
-      <ul>
-      <% @employee.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+          <ul>
+            <% @employee.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+    <div class="col s6 offset-s3">
+      <div class="input-field">
+        <%= f.label :name %>
+        <%= f.text_field :name %>
+      </div>
+
+      <div class="input-field">
+        <%= f.select(:sex, options: {include_blank: "Sex"}) do %>
+            <% [['male', 1], ['female', 2]].each do |c| %>
+                <%= content_tag(:option, c.first, value: c.last) %>
+            <% end %>
+        <% end %>
+
+      </div>
+
+
+      <div class="input-field">
+        <%= f.label :birthdate %>
+        <%= f.date_field :birthdate, :class => "datepicker" %>
+      </div>
+
+
+      <div class="input-field">
+        <%= f.label :joindate %>
+        <%= f.date_field :joindate, :class => "datepicker" %>
+      </div>
+
+
+      <div class="input-field">
+        <%= f.label :leavedate %>
+        <%= f.date_field :leavedate, class: "datepicker" %>
+      </div>
+
+
+      <div class="input-field">
+        <%= f.label :bankdetails %>
+        <%= f.text_field :bankdetails %>
+      </div>
+
+
+      <div class="actions">
+        <%= f.submit class: "waves-effect waves-light btn" %>
+      </div>
     </div>
-  <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :sex %><br>
-    <%= f.text_field :sex %>
-  </div>
-  <div class="field">
-    <%= f.label :birthdate %><br>
-    <%= f.datetime_select :birthdate %>
-  </div>
-  <div class="field">
-    <%= f.label :joindate %><br>
-    <%= f.datetime_select :joindate %>
-  </div>
-  <div class="field">
-    <%= f.label :leavedate %><br>
-    <%= f.datetime_select :leavedate %>
-  </div>
-  <div class="field">
-    <%= f.label :bankdetails %><br>
-    <%= f.text_field :bankdetails %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
 <% end %>
