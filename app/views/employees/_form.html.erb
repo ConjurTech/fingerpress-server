@@ -10,6 +10,7 @@
           </ul>
         </div>
     <% end %>
+
     <div class="col s6 offset-s3">
       <div class="input-field">
         <%= f.label :name %>
@@ -17,20 +18,18 @@
       </div>
 
       <div class="input-field">
-        <%= f.select(:sex, options: {include_blank: "Sex"}) do %>
-            <% [['male', 1], ['female', 2]].each do |c| %>
+        <%= f.label :sex, class: 'active' %>
+        <%= f.select(:sex) do %>
+            <% [['male', 'male'], ['female', 'female']].each do |c| %>
                 <%= content_tag(:option, c.first, value: c.last) %>
             <% end %>
         <% end %>
-
       </div>
-
 
       <div class="input-field">
         <%= f.label :birthdate %>
         <%= f.date_field :birthdate, :class => "datepicker" %>
       </div>
-
 
       <div class="input-field">
         <%= f.label :joindate %>
@@ -48,7 +47,6 @@
         <%= f.label :bankdetails %>
         <%= f.text_field :bankdetails %>
       </div>
-
 
       <div class="actions">
         <%= f.submit class: "waves-effect waves-light btn" %>
