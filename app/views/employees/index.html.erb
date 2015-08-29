@@ -22,7 +22,11 @@
         <td><%= employee.joindate %></td>
         <td><%= employee.leavedate %></td>
         <td class="wrapped"><%= employee.bankdetails %></td>
-        <td><%= link_to 'Show', employee %></td>
+        <td>
+          <%= link_to employee do %>
+          <i class="material-icons">pageview</i>
+              <% end %>
+        </td>
         <td><%= link_to 'Edit', edit_employee_path(employee) %></td>
         <td><%= link_to 'Destroy', employee, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
