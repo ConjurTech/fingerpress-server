@@ -47,8 +47,8 @@ gem 'active_link_to'
 
 gem 'devise'
 
-gem 'bcrypt-ruby'
-
-gem 'bcrypt'
+gem 'bcrypt', platforms: :ruby
 
 gem 'quiet_assets' ,  group: :development
+
+gem 'simple_form'

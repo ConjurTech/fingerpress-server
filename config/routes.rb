@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :timelogs
   devise_for :admins
   resources :employees
 

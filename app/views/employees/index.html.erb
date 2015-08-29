@@ -16,12 +16,12 @@
   <tbody>
     <% @employees.each do |employee| %>
       <tr>
-        <td><%= employee.name %></td>
+        <td class="wrapped"><%= employee.name %></td>
         <td><%= employee.sex %></td>
         <td><%= employee.birthdate %></td>
         <td><%= employee.joindate %></td>
         <td><%= employee.leavedate %></td>
-        <td><%= employee.bankdetails %></td>
+        <td class="wrapped"><%= employee.bankdetails %></td>
         <td><%= link_to 'Show', employee %></td>
         <td><%= link_to 'Edit', edit_employee_path(employee) %></td>
         <td><%= link_to 'Destroy', employee, method: :delete, data: { confirm: 'Are you sure?' } %></td>
