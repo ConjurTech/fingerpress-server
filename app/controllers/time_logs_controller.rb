@@ -1,5 +1,6 @@
 class TimeLogsController < ApplicationController
   before_action :set_time_log, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_admin!
 
   # GET /time_logs
   # GET /time_logs.json
