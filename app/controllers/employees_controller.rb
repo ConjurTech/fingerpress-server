@@ -10,7 +10,7 @@ class EmployeesController < ApplicationController
   # GET /employees/1
   # GET /employees/1.json
   def show
-    @timelogs = @employee.timelogs
+    @time_logs = @employee.time_logs
   end
 
   # GET /employees/new

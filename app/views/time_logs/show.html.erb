@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Date in:</strong>
+  <%= @time_log.date_in %>
+</p>
+
+<p>
+  <strong>Date out:</strong>
+  <%= @time_log.date_out %>
+</p>
+
+<p>
+  <strong>Employee:</strong>
+  <%= @time_log.employee %>
+</p>
+
+<p>
+  <strong>Pay scheme:</strong>
+  <%= @time_log.pay_scheme %>
+</p>
+
+<%= link_to 'Edit', edit_time_log_path(@time_log) %> |
+<%= link_to 'Back', time_logs_path %>

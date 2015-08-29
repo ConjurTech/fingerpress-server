@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class TimelogTest < ActiveSupport::TestCase
+class TimeLogTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

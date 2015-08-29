@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date_in: 2015-08-29 22:27:43
+  date_out: 2015-08-29 22:27:43
+  employee_id: 
+  pay_scheme_id: 
+
+two:
+  date_in: 2015-08-29 22:27:43
+  date_out: 2015-08-29 22:27:43
+  employee_id: 
+  pay_scheme_id: 

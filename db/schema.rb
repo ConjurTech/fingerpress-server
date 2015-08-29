@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150829094044) do
+ActiveRecord::Schema.define(version: 20150829142743) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
@@ -42,15 +42,36 @@ ActiveRecord::Schema.define(version: 20150829094044) do
     t.datetime "updated_at"
   end
 
-  create_table "timelogs", force: :cascade do |t|
-    t.datetime "date_in"
-    t.datetime "date_out"
-    t.integer  "employee_id", limit: 4
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+  create_table "pay_schemes", force: :cascade do |t|
+    t.integer  "pay_type_id",        limit: 4
+    t.float    "pay",                limit: 24
+    t.float    "pay_ot",             limit: 24
+    t.float    "pay_public_holiday", limit: 24
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
   end
 
-  add_index "timelogs", ["employee_id"], name: "index_timelogs_on_employee_id", using: :btree
+  add_index "pay_schemes", ["pay_type_id"], name: "index_pay_schemes_on_pay_type_id", using: :btree
 
-  add_foreign_key "timelogs", "employees"
+  create_table "pay_types", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  create_table "time_logs", force: :cascade do |t|
+    t.datetime "date_in"
+    t.datetime "date_out"
+    t.integer  "employee_id",   limit: 4
+    t.integer  "pay_scheme_id", limit: 4
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  add_index "time_logs", ["employee_id"], name: "index_time_logs_on_employee_id", using: :btree
+  add_index "time_logs", ["pay_scheme_id"], name: "index_time_logs_on_pay_scheme_id", using: :btree
+
+  add_foreign_key "pay_schemes", "pay_types"
+  add_foreign_key "time_logs", "employees"
+  add_foreign_key "time_logs", "pay_schemes"
 end

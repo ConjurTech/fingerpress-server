@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Pay type:</strong>
+  <%= @pay_scheme.pay_type %>
+</p>
+
+<p>
+  <strong>Pay:</strong>
+  <%= @pay_scheme.pay %>
+</p>
+
+<p>
+  <strong>Pay ot:</strong>
+  <%= @pay_scheme.pay_ot %>
+</p>
+
+<p>
+  <strong>Pay public holiday:</strong>
+  <%= @pay_scheme.pay_public_holiday %>
+</p>
+
+<%= link_to 'Edit', edit_pay_scheme_path(@pay_scheme) %> |
+<%= link_to 'Back', pay_schemes_path %>

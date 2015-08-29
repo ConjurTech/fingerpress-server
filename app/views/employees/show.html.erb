@@ -40,13 +40,13 @@
   </thead>
 
   <tbody>
-  <% @timelogs.each do |timelog| %>
+  <% @time_logs.each do |time_log| %>
       <tr>
-        <td><%= timelog.date_in %></td>
-        <td><%= timelog.date_out %></td>
-        <td><%= link_to 'Show', timelog %></td>
-        <td><%= link_to 'Edit', edit_timelog_path(timelog) %></td>
-        <td><%= link_to 'Destroy', timelog, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= time_log.date_in %></td>
+        <td><%= time_log.date_out %></td>
+        <td><%= link_to 'Show', time_log %></td>
+        <td><%= link_to 'Edit', edit_time_log_path(time_log) %></td>
+        <td><%= link_to 'Destroy', time_log, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
   <% end %>
   </tbody>

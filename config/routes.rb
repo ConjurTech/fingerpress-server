@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  resources :timelogs
+  resources :time_logs
+  resources :pay_schemes
   devise_for :admins
   resources :employees
 

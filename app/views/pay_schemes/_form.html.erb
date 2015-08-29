@@ -1,0 +1,14 @@
+<%= simple_form_for(@pay_scheme) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :pay_type %>
+    <%= f.input :pay %>
+    <%= f.input :pay_ot %>
+    <%= f.input :pay_public_holiday %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

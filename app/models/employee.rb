@@ -1,3 +1,3 @@
 class Employee < ActiveRecord::Base
-  has_many :timelogs
+  has_many :time_logs
 end

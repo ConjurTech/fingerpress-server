@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Time Logs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Date in</th>
+      <th>Date out</th>
+      <th>Employee</th>
+      <th>Pay scheme</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @time_logs.each do |time_log| %>
+      <tr>
+        <td><%= time_log.date_in %></td>
+        <td><%= time_log.date_out %></td>
+        <td><%= time_log.employee %></td>
+        <td><%= time_log.pay_scheme %></td>
+        <td><%= link_to 'Show', time_log %></td>
+        <td><%= link_to 'Edit', edit_time_log_path(time_log) %></td>
+        <td><%= link_to 'Destroy', time_log, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Time log', new_time_log_path %>
