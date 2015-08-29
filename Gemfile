@@ -44,3 +44,11 @@ gem 'coffee-script-source', '1.8.0'
 gem 'jquery-turbolinks'
 
 gem 'active_link_to'
+
+gem 'devise'
+
+gem 'bcrypt-ruby'
+
+gem 'bcrypt'
+
+gem 'quiet_assets' ,  group: :development
