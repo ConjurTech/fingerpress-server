@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  total_pay: 1.5
+  bonus: 1.5
+  paid_at: 2015-09-06 13:43:23
+
+two:
+  total_pay: 1.5
+  bonus: 1.5
+  paid_at: 2015-09-06 13:43:23

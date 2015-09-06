@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  pay_type_id: 
+  pay: 1.5
+  pay_ot: 1.5
+  pay_public_holiday: 1.5
+  created_at: 2015-09-06 13:34:57
+  updated_at: 2015-09-06 13:34:57
+
+two:
+  pay_type_id: 
+  pay: 1.5
+  pay_ot: 1.5
+  pay_public_holiday: 1.5
+  created_at: 2015-09-06 13:34:57
+  updated_at: 2015-09-06 13:34:57

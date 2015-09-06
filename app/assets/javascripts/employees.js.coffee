@@ -3,8 +3,8 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 $(document).ready ->
   $('.datepicker').pickadate ->
-    console.log("wtf")
     selectMonths: true
     selectYears: 15
+    format: 'dd/mm/yyyy'
 
   $('select').material_select()

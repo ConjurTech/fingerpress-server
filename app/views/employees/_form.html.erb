@@ -10,47 +10,44 @@
           </ul>
         </div>
     <% end %>
+    <div class="input-field">
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </div>
 
-    <div class="col s6 offset-s3">
-      <div class="input-field">
-        <%= f.label :name %>
-        <%= f.text_field :name %>
-      </div>
+    <div class="input-field">
+      <%= f.label :sex, class: 'active' %>
+      <%= f.select(:sex) do %>
+          <% [['male', 'male'], ['female', 'female']].each do |c| %>
+              <%= content_tag(:option, c.first, value: c.last) %>
+          <% end %>
+      <% end %>
+    </div>
 
-      <div class="input-field">
-        <%= f.label :sex, class: 'active' %>
-        <%= f.select(:sex) do %>
-            <% [['male', 'male'], ['female', 'female']].each do |c| %>
-                <%= content_tag(:option, c.first, value: c.last) %>
-            <% end %>
-        <% end %>
-      </div>
+    <div class="input-field">
+      <%= f.label :birthdate %>
+      <%= f.date_field :birthdate, :class => "datepicker" %>
+    </div>
 
-      <div class="input-field">
-        <%= f.label :birthdate %>
-        <%= f.date_field :birthdate, :class => "datepicker" %>
-      </div>
-
-      <div class="input-field">
-        <%= f.label :joindate %>
-        <%= f.date_field :joindate, :class => "datepicker" %>
-      </div>
+    <div class="input-field">
+      <%= f.label :joindate %>
+      <%= f.date_field :joindate, :class => "datepicker" %>
+    </div>
 
 
-      <div class="input-field">
-        <%= f.label :leavedate %>
-        <%= f.date_field :leavedate, class: "datepicker" %>
-      </div>
+    <div class="input-field">
+      <%= f.label :leavedate %>
+      <%= f.date_field :leavedate, class: "datepicker" %>
+    </div>
 
 
-      <div class="input-field">
-        <%= f.label :bankdetails %>
-        <%= f.text_field :bankdetails %>
-      </div>
+    <div class="input-field">
+      <%= f.label :bankdetails %>
+      <%= f.text_field :bankdetails %>
+    </div>
 
-      <div class="actions">
-        <%= f.submit class: "waves-effect waves-light btn" %>
-      </div>
+    <div class="actions">
+      <%= f.submit class: "waves-effect waves-light btn" %>
     </div>
 
 <% end %>

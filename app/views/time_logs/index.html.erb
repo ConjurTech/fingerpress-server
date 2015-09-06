@@ -9,6 +9,7 @@
       <th>Date out</th>
       <th>Employee</th>
       <th>Pay scheme</th>
+      <th>Pay slip</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -20,6 +21,7 @@
         <td><%= time_log.date_out %></td>
         <td><%= time_log.employee %></td>
         <td><%= time_log.pay_scheme %></td>
+        <td><%= time_log.payment_record %></td>
         <td><%= link_to 'Show', time_log %></td>
         <td><%= link_to 'Edit', edit_time_log_path(time_log) %></td>
         <td><%= link_to 'Destroy', time_log, method: :delete, data: { confirm: 'Are you sure?' } %></td>

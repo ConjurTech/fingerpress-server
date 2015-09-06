@@ -1,0 +1,19 @@
+<%= simple_form_for(@payment_record) do |f| %>
+    <%= f.error_notification %>
+
+    <div class="input-field">
+      <%= f.label :employee, class: 'active' %>
+      <%= f.association :employee, :label => false %>
+    </div>
+    <div class="input-field">
+      <%= f.label :start_date %>
+      <%= f.date_field :start_date, :class => "datepicker" %>
+    </div>
+    <div class="input-field">
+      <%= f.label :end_date %>
+      <%= f.date_field :end_date, class: "datepicker" %>
+    </div>
+    <div class="form-actions">
+      <%= f.button :submit %>
+    </div>
+<% end %>
