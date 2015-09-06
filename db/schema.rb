@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150906125231) do
+ActiveRecord::Schema.define(version: 20150906151002) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
@@ -87,10 +87,11 @@ ActiveRecord::Schema.define(version: 20150906125231) do
     t.float    "total_pay",   limit: 24
     t.float    "bonus",       limit: 24
     t.datetime "paid_at"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
     t.datetime "start_date"
     t.datetime "end_date"
+    t.boolean  "paid",        limit: 1,  default: false
   end
 
   add_index "payment_records", ["employee_id"], name: "index_payment_records_on_employee_id", using: :btree

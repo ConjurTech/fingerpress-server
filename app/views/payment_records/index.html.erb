@@ -6,6 +6,7 @@
   <thead>
     <tr>
       <th>Employee Name</th>
+      <th>Status</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -14,6 +15,7 @@
     <% @payment_records.each do |payment_record| %>
       <tr>
         <td><%= payment_record.try(:employee).try(:name) %></td>
+        <td><%= payment_record.paid ? payment_record.paid_at : 'Unpaid' %></td>
         <td><%= link_to 'Show', payment_record %></td>
         <td><%= link_to 'Edit', edit_payment_record_path(payment_record) %></td>
         <td><%= link_to 'Destroy', payment_record, method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -85,6 +85,6 @@ class PaymentRecordsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def payment_record_params
-      params.require(:payment_record).permit(:start_date, :end_date, :total_pay, :bonus, :paid_at, :employee_id)
+      params.require(:payment_record).permit(:start_date, :end_date, :total_pay, :bonus, :paid_at, :employee_id, :paid)
     end
 end

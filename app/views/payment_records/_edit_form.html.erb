@@ -1,9 +1,7 @@
 <p id="notice"><%= notice %></p>
-<p><strong>Employee: </strong><%= @payment_record.employee.name %></p>
-<p><strong>Total pay: </strong><%= @payment_record.total_pay %></p>
-<p><strong>Bonus: </strong><%= @payment_record.bonus %></p>
-<p><strong>Status: </strong><%= @payment_record.paid ? 'paid on ' + @payment_record.paid_at.to_formatted_s(:long) : 'Unpaid' %></p>
-
+<p><strong>employee: </strong><%= @payment_record.employee.name %></p>
+<p><strong>total pay: </strong><%= @payment_record.total_pay %></p>
+<p><strong>bonus: </strong><%= @payment_record.bonus %></p>
 
 <table>
   <thead>
@@ -45,6 +43,17 @@
 <!--t.datetime "created_at",                    null: false-->
 <!--t.datetime "updated_at",                    null: false-->
 <!--end-->
+<%= simple_form_for(@payment_record) do |f| %>
+    <%= f.error_notification %>
+    <div class="input-field">
+      <%= f.label :bonus %>
+      <%= f.input :bonus %>
+    </div>
 
-<%= link_to 'Edit', edit_payment_record_path(@payment_record) %> |
-<%= link_to 'Back', payment_records_path %>
+    <%= f.check_box :paid %>
+    <%= f.label :paid %> <br />
+    <div class="form-actions">
+      <%= f.button :submit %>
+    </div>
+<% end %>
+
