@@ -2,9 +2,8 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 $(document).ready ->
-  $('.datepicker').pickadate ->
+  $('.datepicker').pickadate
     selectMonths: true
     selectYears: 15
-    format: 'dd/mm/yyyy'
 
   $('select').material_select()
