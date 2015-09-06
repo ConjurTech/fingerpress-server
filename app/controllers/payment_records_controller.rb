@@ -25,6 +25,22 @@ class PaymentRecordsController < ApplicationController
   # POST /payment_records.json
   def create
     @payment_record = PaymentRecord.new(payment_record_params)
+    employee_time_logs = @payment_record.employee.time_logs.where(date_time_in: payment_record_params[:start_date].to_datetime..payment_record_params[:end_date].to_datetime)
+    employee_time_logs.each do |employee_time_log|
+      payment_record_pay_scheme = PaymentRecordPayScheme.new(pay_type: employee_time_log.pay_scheme.pay_type,
+                                                             pay: employee_time_log.pay_scheme.pay,
+                                                             pay_ot: employee_time_log.pay_scheme.pay_ot,
+                                                             pay_public_holiday: employee_time_log.pay_scheme.pay_public_holiday)
+      payment_record_pay_scheme.save
+      PaymentRecordTimeLog.new(date_time_in: employee_time_log.date_time_in,
+                               date_time_out: employee_time_log.date_time_out,
+                               payment_record_pay_scheme: payment_record_pay_scheme,
+                               payment_record: @payment_record
+                               ).save
+      employee_time_log.payment_record = @payment_record
+      employee_time_log.save
+    end
+
 
     respond_to do |format|
       if @payment_record.save

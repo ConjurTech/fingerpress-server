@@ -70,6 +70,6 @@ class TimeLogsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def time_log_params
-      params.require(:time_log).permit(:date_in, :date_out, :employee_id, :pay_scheme_id)
+      params.require(:time_log).permit(:date_time_in, :date_time_out, :employee_id, :pay_scheme_id)
     end
 end

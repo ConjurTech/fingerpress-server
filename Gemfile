@@ -24,9 +24,6 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0',          group: :doc
 
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
-
 # Use unicorn as the app server
 # gem 'unicorn'
 
@@ -52,3 +49,22 @@ gem 'bcrypt', platforms: :ruby
 gem 'quiet_assets' ,  group: :development
 
 gem 'simple_form'
+
+group :development, :test do
+  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'byebug'
+  # Access an IRB console on exception pages or by using <%= console %> in views
+  gem 'web-console', '~> 2.0'
+  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'spring'
+  # Dotenv solves the problems of setting project-specific environment vars
+  gem 'dotenv-rails'
+  # RailRoady generates Rails 3/4 model (ActiveRecord, Mongoid, Datamapper) and controller UML diagrams as cross-platform .svg files, as well as in the DOT language.
+  gem 'railroady'
+  # Better Errors replaces the standard Rails error page with a much better and more useful error page.
+  gem "better_errors"
+  # If you would like to use Better Errors' advanced features (REPL, local/instance variable inspection, pretty stack frame names), you need to add the binding_of_caller gem
+  gem "binding_of_caller"
+
+  gem 'brakeman', :require => false
+end

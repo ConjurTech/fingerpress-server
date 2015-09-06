@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150906063108) do
+ActiveRecord::Schema.define(version: 20150906125231) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
@@ -70,6 +70,18 @@ ActiveRecord::Schema.define(version: 20150906063108) do
 
   add_index "payment_record_pay_schemes", ["pay_type_id"], name: "index_payment_record_pay_schemes_on_pay_type_id", using: :btree
 
+  create_table "payment_record_time_logs", force: :cascade do |t|
+    t.datetime "date_time_in"
+    t.datetime "date_time_out"
+    t.integer  "payment_record_pay_scheme_id", limit: 4
+    t.integer  "payment_record_id",            limit: 4
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+  end
+
+  add_index "payment_record_time_logs", ["payment_record_id"], name: "index_payment_record_time_logs_on_payment_record_id", using: :btree
+  add_index "payment_record_time_logs", ["payment_record_pay_scheme_id"], name: "index_payment_record_time_logs_on_payment_record_pay_scheme_id", using: :btree
+
   create_table "payment_records", force: :cascade do |t|
     t.integer  "employee_id", limit: 4
     t.float    "total_pay",   limit: 24
@@ -84,8 +96,8 @@ ActiveRecord::Schema.define(version: 20150906063108) do
   add_index "payment_records", ["employee_id"], name: "index_payment_records_on_employee_id", using: :btree
 
   create_table "time_logs", force: :cascade do |t|
-    t.datetime "date_in"
-    t.datetime "date_out"
+    t.datetime "date_time_in"
+    t.datetime "date_time_out"
     t.integer  "employee_id",       limit: 4
     t.integer  "pay_scheme_id",     limit: 4
     t.datetime "created_at",                  null: false
@@ -99,6 +111,8 @@ ActiveRecord::Schema.define(version: 20150906063108) do
 
   add_foreign_key "pay_schemes", "pay_types"
   add_foreign_key "payment_record_pay_schemes", "pay_types"
+  add_foreign_key "payment_record_time_logs", "payment_record_pay_schemes"
+  add_foreign_key "payment_record_time_logs", "payment_records"
   add_foreign_key "payment_records", "employees"
   add_foreign_key "time_logs", "employees"
   add_foreign_key "time_logs", "pay_schemes"

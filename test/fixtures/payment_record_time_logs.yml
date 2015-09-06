@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date_time_in: 2015-09-06 17:19:04
+  date_time_out: 2015-09-06 17:19:04
+  payment_record_pay_scheme_id: 
+  payment_record_id: 
+
+two:
+  date_time_in: 2015-09-06 17:19:04
+  date_time_out: 2015-09-06 17:19:04
+  payment_record_pay_scheme_id: 
+  payment_record_id: 

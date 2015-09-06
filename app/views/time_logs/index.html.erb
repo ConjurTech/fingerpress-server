@@ -17,10 +17,10 @@
   <tbody>
     <% @time_logs.each do |time_log| %>
       <tr>
-        <td><%= time_log.date_in %></td>
-        <td><%= time_log.date_out %></td>
-        <td><%= time_log.employee %></td>
-        <td><%= time_log.pay_scheme %></td>
+        <td><%= time_log.date_time_in %></td>
+        <td><%= time_log.date_time_out %></td>
+        <td><%= time_log.employee.name %></td>
+        <td><%= time_log.pay_scheme.id %></td>
         <td><%= time_log.payment_record %></td>
         <td><%= link_to 'Show', time_log %></td>
         <td><%= link_to 'Edit', edit_time_log_path(time_log) %></td>

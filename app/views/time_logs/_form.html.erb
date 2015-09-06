@@ -1,19 +1,22 @@
 <%= simple_form_for(@time_log) do |f| %>
-  <%= f.error_notification %>
+    <%= f.error_notification %>
 
-  <div class="form-inputs">
-
-    <%= f.input :date_in %>
-
-    <%= f.input :date_out %>
-
-    <%= f.association :employee %>
-
-    <%= f.association :pay_scheme %>
-
-  </div>
-
-  <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
+    <div class="input-field">
+      <%= f.label :date_time_in %>
+      <%= f.date_field :date_time_in, class: "datepicker" %>
+    </div>
+    <div class="input-field">
+      <%= f.label :date_time_out %>
+      <%= f.date_field :date_time_out, class: "datepicker" %>
+    </div>
+    <div class="input-field">
+      <%= f.label :employee, class: 'active' %>
+      <%= f.association :employee, label: false %>
+    </div>
+    <div class="input-field">
+      <%= f.association :pay_scheme %>
+    </div>
+    <div class="form-actions">
+      <%= f.button :submit %>
+    </div>
 <% end %>
