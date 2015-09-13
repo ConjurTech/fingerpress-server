@@ -4,26 +4,37 @@
 
 <table>
   <thead>
-    <tr>
-      <th>Employee Name</th>
-      <th>Status</th>
-      <th colspan="3"></th>
-    </tr>
+  <tr>
+    <th>Employee Name</th>
+    <th>Status</th>
+    <th colspan="3"></th>
+  </tr>
   </thead>
 
   <tbody>
-    <% @payment_records.each do |payment_record| %>
+  <% @payment_records.each do |payment_record| %>
       <tr>
         <td><%= payment_record.try(:employee).try(:name) %></td>
-        <td><%= payment_record.paid ? payment_record.paid_at : 'Unpaid' %></td>
-        <td><%= link_to 'Show', payment_record %></td>
-        <td><%= link_to 'Edit', edit_payment_record_path(payment_record) %></td>
-        <td><%= link_to 'Destroy', payment_record, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= payment_record.paid ? payment_record.paid_at.to_formatted_s(:long) : 'Unpaid' %></td>
+        <td>
+          <%= link_to payment_record do %>
+              <i class="material-icons">pageview</i>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to edit_payment_record_path(payment_record) do %>
+              <i class="material-icons">edit</i>
+          <% end %>
+        </td>
+        <td><%= link_to payment_record, method: :delete, data: {confirm: 'Are you sure?'} do %>
+              <i class="material-icons">delete</i>
+          <% end %>
+        </td>
       </tr>
-    <% end %>
+  <% end %>
   </tbody>
 </table>
 
 <br>
 
-<%= link_to 'Generate Slip', new_payment_record_path,  class: "waves-effect waves-light btn" %>
+<%= link_to 'Generate Slip', new_payment_record_path, class: "waves-effect waves-light btn" %>

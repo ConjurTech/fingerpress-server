@@ -2,11 +2,11 @@
     <%= f.error_notification %>
 
     <div class="input-field">
-      <%= f.label :date_time_in %>
+      <%= f.label :date_time_in, class: 'active' %>
       <%= f.date_field :date_time_in, class: "datepicker" %>
     </div>
     <div class="input-field">
-      <%= f.label :date_time_out %>
+      <%= f.label :date_time_out, class: 'active' %>
       <%= f.date_field :date_time_out, class: "datepicker" %>
     </div>
     <div class="input-field">
@@ -14,7 +14,8 @@
       <%= f.association :employee, label: false %>
     </div>
     <div class="input-field">
-      <%= f.association :pay_scheme %>
+      <%= f.label :pay_scheme, class: 'active' %>
+      <%= f.association :pay_scheme, label: false %>
     </div>
     <div class="form-actions">
       <%= f.button :submit %>

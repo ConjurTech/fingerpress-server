@@ -12,17 +12,17 @@
 
 <p>
   <strong>Birthdate:</strong>
-  <%= @employee.birthdate %>
+  <%= @employee.birthdate.to_formatted_s(:long) %>
 </p>
 
 <p>
   <strong>Joindate:</strong>
-  <%= @employee.joindate %>
+  <%= @employee.joindate.to_formatted_s(:long) %>
 </p>
 
 <p>
   <strong>Leavedate:</strong>
-  <%= @employee.leavedate %>
+  <%= @employee.leavedate.to_formatted_s(:long) %>
 </p>
 
 <p>
@@ -42,8 +42,8 @@
   <tbody>
   <% @time_logs.each do |time_log| %>
       <tr>
-        <td><%= time_log.date_in %></td>
-        <td><%= time_log.date_out %></td>
+        <td><%= time_log.date_time_in.to_formatted_s(:long) %></td>
+        <td><%= time_log.date_time_out.to_formatted_s(:long) %></td>
         <td><%= link_to 'Show', time_log %></td>
         <td><%= link_to 'Edit', edit_time_log_path(time_log) %></td>
         <td><%= link_to 'Destroy', time_log, method: :delete, data: { confirm: 'Are you sure?' } %></td>

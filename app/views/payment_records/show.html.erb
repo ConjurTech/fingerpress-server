@@ -18,8 +18,8 @@
   <tbody>
   <% @payment_record.payment_record_time_logs.each do |time_log| %>
       <tr>
-        <td><%= time_log.date_time_in %></td>
-        <td><%= time_log.date_time_out %></td>
+        <td><%= time_log.date_time_in.to_formatted_s(:long) %></td>
+        <td><%= time_log.date_time_out.to_formatted_s(:long) %></td>
         <td><%= time_log.payment_record_pay_scheme %></td>
         <td><%= time_log.payment_record %></td>
       </tr>

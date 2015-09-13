@@ -2,12 +2,12 @@
 
 <p>
   <strong>Date in:</strong>
-  <%= @time_log.date_time_in %>
+  <%= @time_log.date_time_in.to_formatted_s(:long) %>
 </p>
 
 <p>
   <strong>Date out:</strong>
-  <%= @time_log.date_time_out %>
+  <%= @time_log.date_time_out.to_formatted_s(:long) %>
 </p>
 
 <p>

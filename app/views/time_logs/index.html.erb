@@ -17,14 +17,26 @@
   <tbody>
     <% @time_logs.each do |time_log| %>
       <tr>
-        <td><%= time_log.date_time_in %></td>
-        <td><%= time_log.date_time_out %></td>
+        <td><%= time_log.date_time_in.to_formatted_s(:long) %></td>
+        <td><%= time_log.date_time_out.to_formatted_s(:long) %></td>
         <td><%= time_log.employee.name %></td>
         <td><%= time_log.pay_scheme.id %></td>
-        <td><%= time_log.payment_record %></td>
-        <td><%= link_to 'Show', time_log %></td>
-        <td><%= link_to 'Edit', edit_time_log_path(time_log) %></td>
-        <td><%= link_to 'Destroy', time_log, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= time_log.payment_record.id %></td>
+        <td>
+          <%= link_to time_log do %>
+              <i class="material-icons">pageview</i>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to edit_time_log_path(time_log) do %>
+              <i class="material-icons">edit</i>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to time_log, method: :delete, data: { confirm: 'Are you sure?' } do %>
+              <i class="material-icons">delete</i>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>
