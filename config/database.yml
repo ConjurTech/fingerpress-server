@@ -44,11 +44,14 @@ test:
 #
 # You can use this database configuration with:
 #
-#   production:
-#     url: <%= ENV['DATABASE_URL'] %>
-#
-production:
-  <<: *default
-  database: finger_press_production
-  username: finger_press
-  password: <%= ENV['FINGER_PRESS_DATABASE_PASSWORD'] %>
+   production:
+     adapter: postgresql
+     encoding: unicode
+     pool: 5
+     url: <%= ENV['DATABASE_URL'] %>
+
+#production:
+#  <<: *default
+#  database: finger_press_production
+#  username: finger_press
+#  password: <%= ENV['FINGER_PRESS_DATABASE_PASSWORD'] %>

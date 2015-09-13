@@ -67,4 +67,6 @@ group :development, :test do
   gem "binding_of_caller"
 
   gem 'brakeman', :require => false
+
+  gem 'rails_12factor', group: :production
 end
