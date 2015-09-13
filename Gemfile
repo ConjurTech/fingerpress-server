@@ -50,6 +50,11 @@ gem 'quiet_assets' ,  group: :development
 
 gem 'simple_form'
 
+gem 'pg'
+
+gem 'rails_12factor', group: :production
+
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
@@ -68,5 +73,4 @@ group :development, :test do
 
   gem 'brakeman', :require => false
 
-  gem 'rails_12factor', group: :production
 end
