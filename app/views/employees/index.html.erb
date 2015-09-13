@@ -2,38 +2,46 @@
 
 <table>
   <thead>
-    <tr>
-      <th>Name</th>
-      <th>Sex</th>
-      <th>Birthdate</th>
-      <th>Joindate</th>
-      <th>Leavedate</th>
-      <th>Bankdetails</th>
-      <th colspan="3"></th>
-    </tr>
+  <tr>
+    <th>Name</th>
+    <th>Sex</th>
+    <th>Birthdate</th>
+    <th>Joindate</th>
+    <th>Leavedate</th>
+    <th>Bankdetails</th>
+    <th colspan="3"></th>
+  </tr>
   </thead>
 
   <tbody>
-    <% @employees.each do |employee| %>
+  <% @employees.each do |employee| %>
       <tr>
         <td class="wrapped"><%= employee.name %></td>
         <td><%= employee.sex %></td>
-        <td><%= employee.birthdate %></td>
-        <td><%= employee.joindate %></td>
-        <td><%= employee.leavedate %></td>
+        <td><%= employee.birthdate.to_formatted_s(:long) %></td>
+        <td><%= employee.joindate.to_formatted_s(:long) %></td>
+        <td><%= employee.leavedate.to_formatted_s(:long) %></td>
         <td class="wrapped"><%= employee.bankdetails %></td>
         <td>
           <%= link_to employee do %>
-          <i class="material-icons">pageview</i>
-              <% end %>
+              <i class="material-icons">pageview</i>
+          <% end %>
         </td>
-        <td><%= link_to 'Edit', edit_employee_path(employee) %></td>
-        <td><%= link_to 'Destroy', employee, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <%= link_to edit_employee_path(employee) do %>
+              <i class="material-icons">edit</i>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to employee, method: :delete, data: {confirm: 'Are you sure?'} do %>
+              <i class="material-icons">delete</i>
+          <% end %>
+        </td>
       </tr>
-    <% end %>
+  <% end %>
   </tbody>
 </table>
 
 <br>
 
-<%= link_to 'Add Employee' , new_employee_path,  class: "waves-effect waves-light btn" %>
+<%= link_to 'Add Employee', new_employee_path, class: "waves-effect waves-light btn" %>
