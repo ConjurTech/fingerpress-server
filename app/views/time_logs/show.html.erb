@@ -1,24 +1,29 @@
-<p id="notice"><%= notice %></p>
+<h1>Time Log</h1>
+<div class="card blue-grey darken-1">
+  <div class="card-content white-text">
+    <span class="card-title">Details</span>
+    <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Date in:</strong>
-  <%= @time_log.date_time_in.to_formatted_s(:long) %>
-</p>
+    <p>
+      <strong>Date in:</strong>
+      <%= @time_log.date_time_in.to_formatted_s(:long) %>
+    </p>
 
-<p>
-  <strong>Date out:</strong>
-  <%= @time_log.date_time_out.to_formatted_s(:long) %>
-</p>
+    <p>
+      <strong>Date out:</strong>
+      <%= @time_log.date_time_out.to_formatted_s(:long) %>
+    </p>
 
-<p>
-  <strong>Employee:</strong>
-  <%= @time_log.employee %>
-</p>
+    <p>
+      <strong>Employee:</strong>
+      <%= @time_log.employee.name %>
+    </p>
 
-<p>
-  <strong>Pay scheme:</strong>
-  <%= @time_log.pay_scheme %>
-</p>
-
+    <p>
+      <strong>Pay scheme:</strong>
+      <%= link_to @time_log.pay_scheme.id, pay_scheme_path(@time_log.pay_scheme) %>
+    </p>
+  </div>
+</div>
 <%= link_to 'Edit', edit_time_log_path(@time_log) %> |
 <%= link_to 'Back', time_logs_path %>

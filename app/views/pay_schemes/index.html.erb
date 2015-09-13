@@ -4,30 +4,42 @@
 
 <table>
   <thead>
-    <tr>
-      <th>Pay type</th>
-      <th>Pay</th>
-      <th>Pay ot</th>
-      <th>Pay public holiday</th>
-      <th colspan="3"></th>
-    </tr>
+  <tr>
+    <th>Pay type</th>
+    <th>Pay</th>
+    <th>Pay ot</th>
+    <th>Pay public holiday</th>
+    <th colspan="3"></th>
+  </tr>
   </thead>
 
   <tbody>
-    <% @pay_schemes.each do |pay_scheme| %>
+  <% @pay_schemes.each do |pay_scheme| %>
       <tr>
-        <td><%= pay_scheme.pay_type %></td>
+        <td><%= pay_scheme.pay_type.name %></td>
         <td><%= pay_scheme.pay %></td>
         <td><%= pay_scheme.pay_ot %></td>
         <td><%= pay_scheme.pay_public_holiday %></td>
-        <td><%= link_to 'Show', pay_scheme %></td>
-        <td><%= link_to 'Edit', edit_pay_scheme_path(pay_scheme) %></td>
-        <td><%= link_to 'Destroy', pay_scheme, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <%= link_to pay_scheme do %>
+              <i class="material-icons">pageview</i>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to edit_pay_scheme_path(pay_scheme) do %>
+              <i class="material-icons">edit</i>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to pay_scheme, method: :delete, data: {confirm: 'Are you sure?'} do %>
+              <i class="material-icons">delete</i>
+          <% end %>
+        </td>
       </tr>
-    <% end %>
+  <% end %>
   </tbody>
 </table>
 
 <br>
 
-<%= link_to 'New Pay scheme', new_pay_scheme_path,  class: "waves-effect waves-light btn" %>
+<%= link_to 'New Pay scheme', new_pay_scheme_path, class: "waves-effect waves-light btn" %>

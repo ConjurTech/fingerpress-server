@@ -1,31 +1,47 @@
-<p id="notice"><%= notice %></p>
-<p><strong>Employee: </strong><%= @payment_record.employee.name %></p>
-<p><strong>Total pay: </strong><%= @payment_record.total_pay %></p>
-<p><strong>Bonus: </strong><%= @payment_record.bonus %></p>
-<p><strong>Status: </strong><%= @payment_record.paid ? 'paid on ' + @payment_record.paid_at.to_formatted_s(:long) : 'Unpaid' %></p>
+<div class="card blue-grey darken-1">
+  <div class="card-content white-text">
+    <span class="card-title">Details</span>
 
+    <p id="notice"><%= notice %></p>
 
-<table>
-  <thead>
-  <tr>
-    <th>Date in</th>
-    <th>Date out</th>
-    <th>Employee</th>
-    <th>Pay scheme</th>
-  </tr>
-  </thead>
+    <p><strong>Employee: </strong><%= @payment_record.employee.name %></p>
 
-  <tbody>
-  <% @payment_record.payment_record_time_logs.each do |time_log| %>
+    <p><strong>Total pay: </strong><%= @payment_record.total_pay %></p>
+
+    <p><strong>Bonus: </strong><%= @payment_record.bonus %></p>
+
+    <p>
+      <strong>Status: </strong><%= @payment_record.paid ? 'Paid on ' + @payment_record.paid_at.to_formatted_s(:long) : 'Unpaid' %>
+    </p>
+  </div>
+</div>
+
+<div class="card white darken-1">
+  <div class="card-content">
+    <span class="card-title black-text">Time Log</span>
+    <table>
+      <thead>
       <tr>
-        <td><%= time_log.date_time_in.to_formatted_s(:long) %></td>
-        <td><%= time_log.date_time_out.to_formatted_s(:long) %></td>
-        <td><%= time_log.payment_record_pay_scheme %></td>
-        <td><%= time_log.payment_record %></td>
+        <th>Date in</th>
+        <th>Date out</th>
+        <th>Employee</th>
+        <th>Pay scheme</th>
       </tr>
-  <% end %>
-  </tbody>
-</table>
+      </thead>
+
+      <tbody>
+      <% @payment_record.payment_record_time_logs.each do |time_log| %>
+          <tr>
+            <td><%= time_log.date_time_in.to_formatted_s(:long) %></td>
+            <td><%= time_log.date_time_out.to_formatted_s(:long) %></td>
+            <td><%= time_log.payment_record_pay_scheme %></td>
+            <td><%= time_log.payment_record %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
 <!--create_table "payment_record_time_logs", force: :cascade do |t|-->
 <!--t.datetime "date_time_in"-->
 <!--t.datetime "date_time_out"-->

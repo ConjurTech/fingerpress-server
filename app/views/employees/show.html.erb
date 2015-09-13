@@ -1,56 +1,76 @@
-<p id="notice"><%= notice %></p>
+<div class="card blue-grey darken-1">
+  <div class="card-content white-text">
+    <span class="card-title">Details</span>
+    <p id="notice"><%= notice %></p>
+    <p>
+      <strong>Name:</strong>
+      <%= @employee.name %>
+    </p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @employee.name %>
-</p>
+    <p>
+      <strong>Sex:</strong>
+      <%= @employee.sex %>
+    </p>
 
-<p>
-  <strong>Sex:</strong>
-  <%= @employee.sex %>
-</p>
+    <p>
+      <strong>Birthdate:</strong>
+      <%= @employee.birthdate.to_formatted_s(:long) %>
+    </p>
 
-<p>
-  <strong>Birthdate:</strong>
-  <%= @employee.birthdate.to_formatted_s(:long) %>
-</p>
+    <p>
+      <strong>Joindate:</strong>
+      <%= @employee.joindate.to_formatted_s(:long) %>
+    </p>
 
-<p>
-  <strong>Joindate:</strong>
-  <%= @employee.joindate.to_formatted_s(:long) %>
-</p>
+    <p>
+      <strong>Leavedate:</strong>
+      <%= @employee.leavedate.to_formatted_s(:long) %>
+    </p>
 
-<p>
-  <strong>Leavedate:</strong>
-  <%= @employee.leavedate.to_formatted_s(:long) %>
-</p>
-
-<p>
-  <strong>Bankdetails:</strong>
-  <%= @employee.bankdetails %>
-</p>
-
-<table>
-  <thead>
-  <tr>
-    <th>Date in</th>
-    <th>Date out</th>
-    <th colspan="3"></th>
-  </tr>
-  </thead>
-
-  <tbody>
-  <% @time_logs.each do |time_log| %>
+    <p>
+      <strong>Bankdetails:</strong>
+      <%= @employee.bankdetails %>
+    </p>
+  </div>
+</div>
+<div class="card white darken-1">
+  <div class="card-content">
+    <span class="card-title black-text">Time Log</span>
+    <table>
+      <thead>
       <tr>
-        <td><%= time_log.date_time_in.to_formatted_s(:long) %></td>
-        <td><%= time_log.date_time_out.to_formatted_s(:long) %></td>
-        <td><%= link_to 'Show', time_log %></td>
-        <td><%= link_to 'Edit', edit_time_log_path(time_log) %></td>
-        <td><%= link_to 'Destroy', time_log, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>Date in</th>
+        <th>Date out</th>
+        <th colspan="3"></th>
       </tr>
-  <% end %>
-  </tbody>
-</table>
+      </thead>
+
+      <tbody>
+      <% @time_logs.each do |time_log| %>
+          <tr>
+            <td><%= time_log.date_time_in.to_formatted_s(:long) %></td>
+            <td><%= time_log.date_time_out.to_formatted_s(:long) %></td>
+            <td>
+              <%= link_to time_log do %>
+                  <i class="material-icons">pageview</i>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to edit_time_log_path(time_log) do %>
+                  <i class="material-icons">edit</i>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to time_log, method: :delete, data: {confirm: 'Are you sure?'} do %>
+                  <i class="material-icons">delete</i>
+              <% end %>
+            </td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
 
 <%= link_to 'Edit', edit_employee_path(@employee) %> |
 <%= link_to 'Back', employees_path %>
