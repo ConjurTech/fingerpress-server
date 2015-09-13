@@ -44,11 +44,11 @@ test:
 #
 # You can use this database configuration with:
 #
-   production:
-     adapter: postgresql
-     encoding: unicode
-     pool: 5
-     url: <%= ENV['DATABASE_URL'] %>
+production:
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  url: <%= ENV['DATABASE_URL'] %>
 
 #production:
 #  <<: *default
