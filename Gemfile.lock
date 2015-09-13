@@ -231,7 +231,7 @@ DEPENDENCIES
   jquery-rails
   jquery-turbolinks
   materialize-sass
-  mysql2
+  mysql2 (~> 0.3.19)
   quiet_assets
   railroady
   rails (= 4.2.1)
