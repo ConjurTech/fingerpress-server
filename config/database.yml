@@ -4,21 +4,22 @@
 #   gem install mysql2
 #
 # Ensure the MySQL gem is defined in your Gemfile
-#   gem 'mysql2'
+#   gem 'mysql"
 #
 # And be sure to use new-style password hashing:
 #   http://dev.mysql.com/doc/refman/5.0/en/old-client.html
 #
 default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+
+development:
   adapter: mysql2
   encoding: utf8
   pool: 5
   username: root
   password: mysql
-  host: localhost
-
-development:
-  <<: *default
   database: finger_press_development
 
 # Warning: The database defined as "test" will be erased and
