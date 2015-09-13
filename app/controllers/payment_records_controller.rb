@@ -44,7 +44,7 @@ class PaymentRecordsController < ApplicationController
 
     respond_to do |format|
       if @payment_record.save
-        format.html { redirect_to @payment_record, notice: 'Payment record was successfully created.' }
+        format.html { redirect_to edit_payment_record_path(@payment_record), notice: 'Payment record was successfully created.' }
         format.json { render :show, status: :created, location: @payment_record }
       else
         format.html { render :new }

@@ -1,59 +1,69 @@
 <p id="notice"><%= notice %></p>
-<p><strong>employee: </strong><%= @payment_record.employee.name %></p>
-<p><strong>total pay: </strong><%= @payment_record.total_pay %></p>
-<p><strong>bonus: </strong><%= @payment_record.bonus %></p>
-
-<table>
-  <thead>
-  <tr>
-    <th>Date in</th>
-    <th>Date out</th>
-    <th>Employee</th>
-    <th>Pay scheme</th>
-  </tr>
-  </thead>
-
-  <tbody>
-  <% @payment_record.payment_record_time_logs.each do |time_log| %>
-      <tr>
-        <td><%= time_log.date_time_in %></td>
-        <td><%= time_log.date_time_out %></td>
-        <td><%= time_log.payment_record_pay_scheme %></td>
-        <td><%= time_log.payment_record %></td>
-      </tr>
-  <% end %>
-  </tbody>
-</table>
-<!--create_table "payment_record_time_logs", force: :cascade do |t|-->
-<!--t.datetime "date_time_in"-->
-<!--t.datetime "date_time_out"-->
-<!--t.integer  "payment_record_pay_scheme_id", limit: 4-->
-<!--t.integer  "payment_record_id",            limit: 4-->
-<!--t.datetime "created_at",                             null: false-->
-<!--t.datetime "updated_at",                             null: false-->
-<!--end-->
-
-
-
-<!--create_table "payment_record_pay_schemes", force: :cascade do |t|-->
-<!--t.integer  "pay_type_id",        limit: 4-->
-<!--t.float    "pay",                limit: 24-->
-<!--t.float    "pay_ot",             limit: 24-->
-<!--t.float    "pay_public_holiday", limit: 24-->
-<!--t.datetime "created_at",                    null: false-->
-<!--t.datetime "updated_at",                    null: false-->
-<!--end-->
 <%= simple_form_for(@payment_record) do |f| %>
     <%= f.error_notification %>
-    <div class="input-field">
-      <%= f.label :bonus %>
-      <%= f.input :bonus %>
+    <div class="card blue-grey darken-1">
+      <div class="card-content white-text">
+        <span class="card-title">Details</span>
+        <p><strong>Employee: </strong><%= @payment_record.employee.name %></p>
+        <p><strong>Total Pay: </strong><%= @payment_record.total_pay %></p>
+
+        <div class="input-field">
+          <%= f.input :bonus %>
+        </div>
+
+        <%= f.check_box :paid %>
+        <%= f.label :paid %> <br/>
+      </div>
     </div>
 
-    <%= f.check_box :paid %>
-    <%= f.label :paid %> <br />
+    <div class="card white darken-1">
+      <div class="card-content black-text">
+        <span class="card-title black-text">Time Log</span>
+
+        <table>
+          <thead>
+          <tr>
+            <th>Date in</th>
+            <th>Date out</th>
+            <th>Pay scheme</th>
+            <th>Remarks</th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <% @payment_record.payment_record_time_logs.each do |time_log| %>
+              <tr>
+                <td><%= time_log.date_time_in.to_formatted_s(:long) %></td>
+                <td><%= time_log.date_time_out.to_formatted_s(:long) %></td>
+                <td><%= link_to time_log.payment_record_pay_scheme.id %> LINK TO THE PAYMENT RECORD PAY SCHEME</td>
+                <td> TO BE IMPLEMENTED (MAYBE)</td>
+              </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!--create_table "payment_record_time_logs", force: :cascade do |t|-->
+    <!--t.datetime "date_time_in"-->
+    <!--t.datetime "date_time_out"-->
+    <!--t.integer  "payment_record_pay_scheme_id", limit: 4-->
+    <!--t.integer  "payment_record_id",            limit: 4-->
+    <!--t.datetime "created_at",                             null: false-->
+    <!--t.datetime "updated_at",                             null: false-->
+    <!--end-->
+
+
+
+    <!--create_table "payment_record_pay_schemes", force: :cascade do |t|-->
+    <!--t.integer  "pay_type_id",        limit: 4-->
+    <!--t.float    "pay",                limit: 24-->
+    <!--t.float    "pay_ot",             limit: 24-->
+    <!--t.float    "pay_public_holiday", limit: 24-->
+    <!--t.datetime "created_at",                    null: false-->
+    <!--t.datetime "updated_at",                    null: false-->
+    <!--end-->
+
     <div class="form-actions">
       <%= f.button :submit %>
     </div>
 <% end %>
-
