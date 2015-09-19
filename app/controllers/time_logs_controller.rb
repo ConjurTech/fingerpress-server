@@ -5,7 +5,7 @@ class TimeLogsController < ApplicationController
   # GET /time_logs
   # GET /time_logs.json
   def index
-    @time_logs = TimeLog.all
+    @time_logs = TimeLog.all.order(date_time_in: :desc)
   end
 
   # GET /time_logs/1

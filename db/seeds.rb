@@ -8,3 +8,9 @@
 PayType.create(name: 'Monthly')
 PayType.create(name: 'Hourly')
 PayType.create(name: 'Hourly(Fixed)')
+PayType.create(name: 'Weekly')
+PayType.create(name: 'Daily')
+
+
+
+

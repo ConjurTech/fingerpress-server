@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150919090640) do
+ActiveRecord::Schema.define(version: 20150919134850) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
@@ -43,13 +43,22 @@ ActiveRecord::Schema.define(version: 20150919090640) do
   end
 
   create_table "pay_schemes", force: :cascade do |t|
-    t.integer  "pay_type_id",        limit: 4
-    t.float    "pay",                limit: 24
-    t.float    "pay_ot",             limit: 24
-    t.float    "pay_public_holiday", limit: 24
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
-    t.string   "name",               limit: 255
+    t.integer  "pay_type_id",               limit: 4
+    t.float    "pay",                       limit: 24
+    t.float    "pay_ot",                    limit: 24
+    t.float    "pay_public_holiday",        limit: 24
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.string   "name",                      limit: 255
+    t.string   "ot_type",                   limit: 255
+    t.string   "weekend_type",              limit: 255
+    t.string   "public_holiday_type",       limit: 255
+    t.float    "ot_multiplier",             limit: 24
+    t.time     "ot_time_range_start"
+    t.time     "ot_time_range_end"
+    t.float    "public_holiday_multiplier", limit: 24
+    t.float    "pay_weekend",               limit: 24
+    t.float    "weekend_multiplier",        limit: 24
   end
 
   add_index "pay_schemes", ["pay_type_id"], name: "index_pay_schemes_on_pay_type_id", using: :btree
