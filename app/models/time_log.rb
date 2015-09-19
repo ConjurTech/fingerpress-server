@@ -42,6 +42,7 @@ class TimeLog < ActiveRecord::Base
   end
 
   def convert_to_datetime
+    return true if @date_time_in_date_field.blank? || @date_time_in_time_field.blank?
     self.date_time_in = DateTime.parse("#{@date_time_in_date_field} #{@date_time_in_time_field}")
     self.date_time_out = DateTime.parse("#{@date_time_out_date_field} #{@date_time_out_time_field}")
   end
