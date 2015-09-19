@@ -5,6 +5,7 @@
 <table>
   <thead>
   <tr>
+    <th>Name</th>
     <th>Pay type</th>
     <th>Pay</th>
     <th>Pay ot</th>
@@ -16,6 +17,7 @@
   <tbody>
   <% @pay_schemes.each do |pay_scheme| %>
       <tr>
+        <td><%= pay_scheme.name %></td>
         <td><%= pay_scheme.pay_type.name %></td>
         <td><%= pay_scheme.pay %></td>
         <td><%= pay_scheme.pay_ot %></td>

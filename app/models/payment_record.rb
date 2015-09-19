@@ -12,4 +12,8 @@ class PaymentRecord < ActiveRecord::Base
   def set_paid_at
     self.paid_at = Time.zone.now
   end
+
+  def set_pay
+
+  end
 end

@@ -6,8 +6,13 @@
     <p id="notice"><%= notice %></p>
 
     <p>
+      <strong>Name:</strong>
+      <%= @pay_scheme.name %>
+    </p>
+
+    <p>
       <strong>Pay type:</strong>
-      <%= @pay_scheme.pay_type %>
+      <%= @pay_scheme.pay_type.name %>
     </p>
 
     <p>

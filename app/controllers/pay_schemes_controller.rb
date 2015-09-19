@@ -70,6 +70,6 @@ class PaySchemesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def pay_scheme_params
-      params.require(:pay_scheme).permit(:pay_type_id, :pay, :pay_ot, :pay_public_holiday)
+      params.require(:pay_scheme).permit(:pay_type_id, :pay, :pay_ot, :pay_public_holiday, :name)
     end
 end
