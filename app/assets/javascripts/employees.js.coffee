@@ -6,4 +6,6 @@ $(document).ready ->
     selectMonths: true
     selectYears: 15
 
+  $('.timepicker').pickatime
+
   $('select').material_select()

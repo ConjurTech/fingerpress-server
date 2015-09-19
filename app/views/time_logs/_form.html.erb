@@ -2,12 +2,20 @@
     <%= f.error_notification %>
 
     <div class="input-field">
-      <%= f.label :date_time_in, class: 'active' %>
-      <%= f.date_field :date_time_in, class: "datepicker" %>
+      <%= f.label :date_time_in_date_field, "Scheduled Date" %>
+      <%= f.date_field :date_time_in_date_field, :class => "datepicker" %>
+    </div>
+      <div class="input-field">
+      <%= f.label :date_time_in_time_field, "Scheduled Time", class: 'active' %>
+      <%= f.time_field :date_time_in_time_field, :class => "timepicker" %>
     </div>
     <div class="input-field">
-      <%= f.label :date_time_out, class: 'active' %>
-      <%= f.date_field :date_time_out, class: "datepicker" %>
+      <%= f.label :date_time_out_date_field, "Scheduled Date" %>
+      <%= f.date_field :date_time_out_date_field, :class => "datepicker" %>
+    </div>
+    <div class="input-field">
+      <%= f.label :date_time_out_time_field, "Scheduled Time", class: 'active' %>
+      <%= f.time_field :date_time_out_time_field, :class => "timepicker" %>
     </div>
     <div class="input-field">
       <%= f.label :employee, class: 'active' %>
