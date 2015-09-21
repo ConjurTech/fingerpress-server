@@ -44,7 +44,7 @@ gem 'active_link_to'
 
 gem 'devise'
 
-gem 'bcrypt', platforms: :ruby
+gem 'bcrypt', :require => 'bcrypt'
 
 gem 'quiet_assets' ,  group: :development
 

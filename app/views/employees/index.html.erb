@@ -20,7 +20,11 @@
         <td><%= employee.sex %></td>
         <td><%= employee.birthdate.to_formatted_s(:long) %></td>
         <td><%= employee.joindate.to_formatted_s(:long) %></td>
-        <td><%= employee.leavedate.to_formatted_s(:long) %></td>
+        <% if employee.leavedate.nil? %>
+        <td></td>
+        <% else %>
+            <td><%= employee.leavedate.to_formatted_s(:long) %></td>
+        <% end %>
         <td class="wrapped"><%= employee.bankdetails %></td>
         <td>
           <%= link_to employee do %>
