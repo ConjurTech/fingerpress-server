@@ -1,22 +1,55 @@
 <%= simple_form_for(@pay_scheme) do |f| %>
     <%= f.error_notification %>
 
-      <div class="card white darken-1 ">
+    <div class="card white darken-1 ">
+      <div class="card-content black-text">
+        <span class="card-title black-text">Pay Details</span>
+
+        <div class="row">
+          <div class="col s6">
+            <%= f.input :name %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col s6">
+            <%= f.association :pay_type, :default => 'Monthly' %>
+          </div>
+          <div class="col s6">
+            <%= f.input :pay %>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="form-inputs">
+      <div class="card white darken-1">
         <div class="card-content black-text">
-          <span class="card-title black-text">Pay Details</span>
+          <span class="card-title black-text">Ot Pay Details</span>
 
           <div class="row">
-            <div class="col s6">
-              <%= f.input :name %>
-            </div>
+            <input name="group1" type="radio" id="test1"/>
+            <label for="test1" class="input-field">
+              <div class="col s6 offset-s3   ">
+                <%= f.input :pay_ot, wrapper: false %>
+              </div>
+            </label>
           </div>
 
           <div class="row">
             <div class="col s6">
-              <%= f.association :pay_type, :default => 'Monthly' %>
+              <%= f.input :ot_multiplier %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col s6">
+              <%= f.label :ot_time_range_start, "Ot Start Time", class: 'active' %>
+              <%= f.time_field :ot_time_range_start, :class => "timepicker" %>
             </div>
             <div class="col s6">
-              <%= f.input :pay %>
+              <%= f.label :ot_time_range_end, "Ot End Time", class: 'active' %>
+              <%= f.time_field :ot_time_range_end, :class => "timepicker" %>
             </div>
           </div>
 
@@ -25,82 +58,39 @@
 
       <div class="form-inputs">
         <div class="card white darken-1">
-          <div class="card-content black-text">
-            <span class="card-title black-text">Ot Pay Details</span>
+          <div class="card-content black-text black-text">
+            <span class="card-title black-text">Public Holiday Pay Details</span>
 
             <div class="row">
               <div class="col s6">
-                <%= f.input :pay_ot %>
+                <%= f.input :pay_public_holiday %>
               </div>
             </div>
-            <div class="row">
-              <div class="col s6">
-                <%= f.input :ot_multiplier %>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col s6">
-                <%= f.label :ot_time_range_start, "Ot Start Time", class: 'active' %>
-            <%= f.time_field :ot_time_range_start, :class => "timepicker" %>
-                </div>
-              <div class="col s6">
-                <%= f.label :ot_time_range_end, "Ot End Time", class: 'active' %>
-            <%= f.time_field :ot_time_range_end, :class => "timepicker" %>
-                </div>
-              </div>
-
           </div>
         </div>
 
         <div class="form-inputs">
           <div class="card white darken-1">
             <div class="card-content black-text black-text">
-              <span class="card-title black-text">Public Holiday Pay Details</span>
+              <span class="card-title black-text">Weekend Pay Details</span>
+
               <div class="row">
                 <div class="col s6">
-              <%= f.input :pay_public_holiday %>
-                  </div>
-                  </div>
-            </div>
-          </div>
-
-          <div class="form-inputs">
-            <div class="card white darken-1">
-              <div class="card-content black-text black-text">
-                <span class="card-title black-text">Weekend Pay Details</span>
-                <div class="row">
-                  <div class="col s6">
-                    <%= f.input :pay_weekend %>
-                  </div>
+                  <%= f.input :pay_weekend %>
                 </div>
-                <div class="row">
-                  <div class="col s6">
-                    <%= f.input :weekend_multiplier%>
-                  </div>
+              </div>
+              <div class="row">
+                <div class="col s6">
+                  <%= f.input :weekend_multiplier %>
                 </div>
               </div>
             </div>
-
+          </div>
 
           <div class="form-actions">
             <%= f.button :submit %>
           </div>
+        </div>
+      </div>
+    </div>
 <% end %>
-
-t.integer  "pay_type_id",               limit: 4
-t.float    "pay",                       limit: 24
-t.float    "pay_ot",                    limit: 24
-t.float    "pay_public_holiday",        limit: 24
-t.datetime "created_at",                            null: false
-t.datetime "updated_at",                            null: false
-t.string   "name",                      limit: 255
-t.string   "ot_type",                   limit: 255
-t.string   "weekend_type",              limit: 255
-t.string   "public_holiday_type",       limit: 255
-t.float    "ot_multiplier",             limit: 24
-t.time     "ot_time_range_start"
-t.time     "ot_time_range_end"
-t.float    "public_holiday_multiplier", limit: 24
-t.float    "pay_weekend",               limit: 24
-t.float    "weekend_multiplier",        limit: 24
-
