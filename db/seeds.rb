@@ -11,6 +11,9 @@ PayType.create(name: 'Hourly(Fixed)')
 PayType.create(name: 'Weekly')
 PayType.create(name: 'Daily')
 
+OtType.create(name: 'None')
+OtType.create(name: 'PerHour')
+OtType.create(name: 'Multiplier')
 
 
 

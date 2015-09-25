@@ -13,7 +13,7 @@
 
         <div class="row">
           <div class="col s6">
-            <%= f.association :pay_type, :default => 'Monthly' %>
+            <%= f.association :pay_type %>
           </div>
           <div class="col s6">
             <%= f.input :pay %>
@@ -29,17 +29,18 @@
           <span class="card-title black-text">Ot Pay Details</span>
 
           <div class="row">
-            <input name="group1" type="radio" id="test1"/>
-            <label for="test1" class="input-field">
-              <div class="col s6 offset-s3   ">
-                <%= f.input :pay_ot, wrapper: false %>
-              </div>
-            </label>
-          </div>
-
-          <div class="row">
             <div class="col s6">
-              <%= f.input :ot_multiplier %>
+              <%= f.association :ot_type %>
+            </div>
+            <div id="pay_scheme_ot_multiplier_div">
+              <div class="col s6">
+                <%= f.input :ot_multiplier %>
+              </div>
+            </div>
+            <div id="pay_scheme_pay_ot_div">
+              <div class="col s6">
+                <%= f.input :pay_ot %>
+              </div>
             </div>
           </div>
           <div class="row">
