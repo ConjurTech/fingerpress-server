@@ -1,8 +1,6 @@
 <%= simple_form_for(@pay_scheme) do |f| %>
     <%= f.error_notification %>
 
-
-
       <div class="card white darken-1 ">
         <div class="card-content black-text">
           <span class="card-title black-text">Pay Details</span>
@@ -12,7 +10,6 @@
               <%= f.input :name %>
             </div>
           </div>
-
 
           <div class="row">
             <div class="col s6">
@@ -43,10 +40,12 @@
             </div>
             <div class="row">
               <div class="col s6">
-            <%= f.input :ot_time_range_start %>
+                <%= f.label :ot_time_range_start, "Ot Start Time", class: 'active' %>
+            <%= f.time_field :ot_time_range_start, :class => "timepicker" %>
                 </div>
               <div class="col s6">
-            <%= f.input :ot_time_range_end %>
+                <%= f.label :ot_time_range_end, "Ot End Time", class: 'active' %>
+            <%= f.time_field :ot_time_range_end, :class => "timepicker" %>
                 </div>
               </div>
 
@@ -57,14 +56,28 @@
           <div class="card white darken-1">
             <div class="card-content black-text black-text">
               <span class="card-title black-text">Public Holiday Pay Details</span>
+              <div class="row">
+                <div class="col s6">
               <%= f.input :pay_public_holiday %>
+                  </div>
+                  </div>
             </div>
           </div>
 
           <div class="form-inputs">
             <div class="card white darken-1">
               <div class="card-content black-text black-text">
-                <span class="card-title">Weekend Pay Details</span>
+                <span class="card-title black-text">Weekend Pay Details</span>
+                <div class="row">
+                  <div class="col s6">
+                    <%= f.input :pay_weekend %>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col s6">
+                    <%= f.input :weekend_multiplier%>
+                  </div>
+                </div>
               </div>
             </div>
 
