@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   devise_for :admins
   resources :employees
   resources :payment_records
+  resources :payment_record_pay_schemes
 
   root 'employees#index'
   # The priority is based upon order of creation: first created -> highest priority.

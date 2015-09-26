@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Payment Record Pay Schemes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @payment_record_pay_schemes.each do |payment_record_pay_scheme| %>
+      <tr>
+        <td><%= link_to 'Show', payment_record_pay_scheme %></td>
+        <td><%= link_to 'Edit', edit_payment_record_pay_scheme_path(payment_record_pay_scheme) %></td>
+        <td><%= link_to 'Destroy', payment_record_pay_scheme, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Payment record pay scheme', new_payment_record_pay_scheme_path %>
