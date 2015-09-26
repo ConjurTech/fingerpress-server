@@ -15,5 +15,10 @@ OtType.create(name: 'None')
 OtType.create(name: 'PerHour')
 OtType.create(name: 'Multiplier')
 
+PublicHolidayType.create(name: 'None')
+PublicHolidayType.create(name: 'PerHour')
+PublicHolidayType.create(name: 'Multiplier')
 
-
+WeekendType.create(name: 'None')
+WeekendType.create(name: 'PerHour')
+WeekendType.create(name: 'Multiplier')

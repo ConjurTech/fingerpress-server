@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150926053349) do
+ActiveRecord::Schema.define(version: 20150926061846) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
@@ -59,8 +59,6 @@ ActiveRecord::Schema.define(version: 20150926053349) do
     t.datetime "created_at",                            null: false
     t.datetime "updated_at",                            null: false
     t.string   "name",                      limit: 255
-    t.string   "weekend_type",              limit: 255
-    t.string   "public_holiday_type",       limit: 255
     t.float    "ot_multiplier",             limit: 24
     t.time     "ot_time_range_start"
     t.time     "ot_time_range_end"
@@ -68,6 +66,8 @@ ActiveRecord::Schema.define(version: 20150926053349) do
     t.float    "pay_weekend",               limit: 24
     t.float    "weekend_multiplier",        limit: 24
     t.integer  "ot_type_id",                limit: 4
+    t.integer  "public_holiday_type_id",    limit: 4
+    t.integer  "weekend_type_id",           limit: 4
   end
 
   add_index "pay_schemes", ["pay_type_id"], name: "index_pay_schemes_on_pay_type_id", using: :btree
@@ -116,6 +116,12 @@ ActiveRecord::Schema.define(version: 20150926053349) do
 
   add_index "payment_records", ["employee_id"], name: "index_payment_records_on_employee_id", using: :btree
 
+  create_table "public_holiday_types", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
   create_table "time_logs", force: :cascade do |t|
     t.datetime "date_time_in"
     t.datetime "date_time_out"
@@ -129,6 +135,12 @@ ActiveRecord::Schema.define(version: 20150926053349) do
   add_index "time_logs", ["employee_id"], name: "index_time_logs_on_employee_id", using: :btree
   add_index "time_logs", ["pay_scheme_id"], name: "index_time_logs_on_pay_scheme_id", using: :btree
   add_index "time_logs", ["payment_record_id"], name: "index_time_logs_on_payment_record_id", using: :btree
+
+  create_table "weekend_types", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
 
   add_foreign_key "pay_schemes", "pay_types"
   add_foreign_key "payment_record_pay_schemes", "pay_types"

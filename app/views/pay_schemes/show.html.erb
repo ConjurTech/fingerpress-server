@@ -21,14 +21,60 @@
     </p>
 
     <p>
+      <strong>Ot Pay Type:</strong>
+      <%= @pay_scheme.ot_type %>
+    </p>
+
+    <p>
       <strong>Pay ot:</strong>
       <%= @pay_scheme.pay_ot %>
+    </p>
+
+    <p>
+      <strong>Pay ot multiplier:</strong>
+      <%= @pay_scheme.ot_multiplier %>
+    </p>
+
+    <p>
+      <strong>Ot Start Time:</strong>
+      <%= @pay_scheme.ot_time_range_start %>
+    </p>
+
+    <p>
+      <strong>Ot End Time:</strong>
+      <%= @pay_scheme.ot_time_range_end %>
+    </p>
+
+    <p>
+      <strong>Public Holiday Pay Type</strong>
+      <%= @pay_scheme.public_holiday_type %>
     </p>
 
     <p>
       <strong>Pay public holiday:</strong>
       <%= @pay_scheme.pay_public_holiday %>
     </p>
+
+    <p>
+      <strong>Pay Public Holiday Multiplier</strong>
+      <%= @pay_scheme.public_holiday_multiplier %>
+    </p>
+
+    <p>
+      <strong>Weekend Pay Type</strong>
+      <%= @pay_scheme.weekend_type %>
+    </p>
+
+    <p>
+      <strong>Pay Weekend:</strong>
+      <%= @pay_scheme.pay_weekend %>
+    </p>
+
+    <p>
+      <strong>Weekend Pay Multiplier</strong>
+      <%= @pay_scheme.weekend_multiplier %>
+    </p>
+
   </div>
 </div>
 <%= link_to 'Edit', edit_pay_scheme_path(@pay_scheme) %> |
