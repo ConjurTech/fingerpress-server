@@ -4,7 +4,7 @@
 $(document).ready ->
   $('.datepicker').pickadate
     selectMonths: true
-    selectYears: 15
+    selectYears: 100
 
   $('.timepicker').pickatime
 
