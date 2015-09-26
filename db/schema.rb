@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150926114339) do
+ActiveRecord::Schema.define(version: 20150926132059) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 20150926114339) do
     t.datetime "updated_at"
     t.datetime "deleted_at"
     t.integer  "pay_scheme_id", limit: 4
+    t.string   "job",           limit: 255
   end
 
   add_index "employees", ["deleted_at"], name: "index_employees_on_deleted_at", using: :btree

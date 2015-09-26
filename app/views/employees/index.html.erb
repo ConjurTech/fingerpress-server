@@ -5,6 +5,7 @@
   <tr>
     <th>Name</th>
     <th>Sex</th>
+    <th>Job</th>
     <th>Birthdate</th>
     <th>Joindate</th>
     <th>Leavedate</th>
@@ -19,6 +20,7 @@
       <tr>
         <td class="wrapped"><%= employee.name %></td>
         <td><%= employee.sex %></td>
+        <td><%= employee.job %></td>
         <td><%= employee.birthdate.to_formatted_s(:long) %></td>
         <td><%= employee.joindate.to_formatted_s(:long) %></td>
         <% if employee.leavedate.nil? %>
