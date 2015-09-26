@@ -1,5 +1,5 @@
 class PaymentRecord < ActiveRecord::Base
-  belongs_to :employee
+  belongs_to :employee, -> { with_deleted }
   has_many :payment_record_time_logs, dependent: :destroy
   has_many :time_logs, dependent: :nullify
   accepts_nested_attributes_for :employee, reject_if: :all_blank, allow_destroy: false
