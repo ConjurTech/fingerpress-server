@@ -12,7 +12,7 @@
 
     <p>
       <strong>Pay type:</strong>
-      <%= @pay_scheme.pay_type.name %>
+      <%= @pay_scheme.try(:pay_type).try(:name) %>
     </p>
 
     <p>
