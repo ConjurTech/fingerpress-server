@@ -28,10 +28,13 @@ ShowOrHideOtDivs = ->
   if $('#pay_scheme_ot_type_id.select option:selected').text() == "PerHour"
     $('#pay_scheme_ot_multiplier_div').hide()
     $('#pay_scheme_pay_ot_div').show()
+    $('#pay_scheme_ot_time_div').show()
     $('#pay_scheme_ot_multiplier').val('')
+
 
   else if $('#pay_scheme_ot_type_id.select option:selected').text() == "Multiplier"
     $('#pay_scheme_ot_multiplier_div').show()
+    $('#pay_scheme_ot_time_div').show()
     $('#pay_scheme_pay_ot_div').hide()
     $('#pay_scheme_pay_ot').val('')
 
