@@ -33,6 +33,11 @@
     </p>
 
     <p>
+      <strong>PayScheme:</strong>
+      <%= @employee.try(:pay_scheme).try(:name) %>
+    </p>
+
+    <p>
       <strong>Bankdetails:</strong>
       <%= @employee.bankdetails %>
     </p>

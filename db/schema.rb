@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150926061846) do
+ActiveRecord::Schema.define(version: 20150926084521) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
@@ -32,18 +32,20 @@ ActiveRecord::Schema.define(version: 20150926061846) do
   add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true, using: :btree
 
   create_table "employees", force: :cascade do |t|
-    t.string   "name",        limit: 255
-    t.string   "sex",         limit: 255
+    t.string   "name",          limit: 255
+    t.string   "sex",           limit: 255
     t.datetime "birthdate"
     t.datetime "joindate"
     t.datetime "leavedate"
-    t.string   "bankdetails", limit: 255
+    t.string   "bankdetails",   limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "deleted_at"
+    t.integer  "pay_scheme_id", limit: 4
   end
 
   add_index "employees", ["deleted_at"], name: "index_employees_on_deleted_at", using: :btree
+  add_index "employees", ["pay_scheme_id"], name: "index_employees_on_pay_scheme_id", using: :btree
 
   create_table "ot_types", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -142,6 +144,7 @@ ActiveRecord::Schema.define(version: 20150926061846) do
     t.datetime "updated_at",             null: false
   end
 
+  add_foreign_key "employees", "pay_schemes"
   add_foreign_key "pay_schemes", "pay_types"
   add_foreign_key "payment_record_pay_schemes", "pay_types"
   add_foreign_key "payment_record_time_logs", "payment_record_pay_schemes"
