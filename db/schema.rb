@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150926084521) do
+ActiveRecord::Schema.define(version: 20150926114339) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
@@ -81,16 +81,28 @@ ActiveRecord::Schema.define(version: 20150926084521) do
   end
 
   create_table "payment_record_pay_schemes", force: :cascade do |t|
-    t.integer  "pay_type_id",        limit: 4
-    t.float    "pay",                limit: 24
-    t.float    "pay_ot",             limit: 24
-    t.float    "pay_public_holiday", limit: 24
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
-    t.string   "name",               limit: 255
+    t.integer  "pay_type_id",               limit: 4
+    t.float    "pay",                       limit: 24
+    t.float    "pay_ot",                    limit: 24
+    t.float    "pay_public_holiday",        limit: 24
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.string   "name",                      limit: 255
+    t.float    "ot_multiplier",             limit: 24
+    t.time     "ot_time_range_start"
+    t.time     "ot_time_range_end"
+    t.float    "public_holiday_multiplier", limit: 24
+    t.float    "pay_weekend",               limit: 24
+    t.float    "weekend_multiplier",        limit: 24
+    t.integer  "ot_type_id",                limit: 4
+    t.integer  "public_holiday_type_id",    limit: 4
+    t.integer  "weekend_type_id",           limit: 4
   end
 
+  add_index "payment_record_pay_schemes", ["ot_type_id"], name: "index_payment_record_pay_schemes_on_ot_type_id", using: :btree
   add_index "payment_record_pay_schemes", ["pay_type_id"], name: "index_payment_record_pay_schemes_on_pay_type_id", using: :btree
+  add_index "payment_record_pay_schemes", ["public_holiday_type_id"], name: "index_payment_record_pay_schemes_on_public_holiday_type_id", using: :btree
+  add_index "payment_record_pay_schemes", ["weekend_type_id"], name: "index_payment_record_pay_schemes_on_weekend_type_id", using: :btree
 
   create_table "payment_record_time_logs", force: :cascade do |t|
     t.datetime "date_time_in"
@@ -105,18 +117,20 @@ ActiveRecord::Schema.define(version: 20150926084521) do
   add_index "payment_record_time_logs", ["payment_record_pay_scheme_id"], name: "index_payment_record_time_logs_on_payment_record_pay_scheme_id", using: :btree
 
   create_table "payment_records", force: :cascade do |t|
-    t.integer  "employee_id", limit: 4
-    t.float    "total_pay",   limit: 24
-    t.float    "bonus",       limit: 24
+    t.integer  "employee_id",                  limit: 4
+    t.float    "total_pay",                    limit: 24
+    t.float    "bonus",                        limit: 24
     t.datetime "paid_at"
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
+    t.datetime "created_at",                                              null: false
+    t.datetime "updated_at",                                              null: false
     t.datetime "start_date"
     t.datetime "end_date"
-    t.boolean  "paid",        limit: 1,  default: false
+    t.boolean  "paid",                         limit: 1,  default: false
+    t.integer  "payment_record_pay_scheme_id", limit: 4
   end
 
   add_index "payment_records", ["employee_id"], name: "index_payment_records_on_employee_id", using: :btree
+  add_index "payment_records", ["payment_record_pay_scheme_id"], name: "index_payment_records_on_payment_record_pay_scheme_id", using: :btree
 
   create_table "public_holiday_types", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -146,10 +160,14 @@ ActiveRecord::Schema.define(version: 20150926084521) do
 
   add_foreign_key "employees", "pay_schemes"
   add_foreign_key "pay_schemes", "pay_types"
+  add_foreign_key "payment_record_pay_schemes", "ot_types"
   add_foreign_key "payment_record_pay_schemes", "pay_types"
+  add_foreign_key "payment_record_pay_schemes", "public_holiday_types"
+  add_foreign_key "payment_record_pay_schemes", "weekend_types"
   add_foreign_key "payment_record_time_logs", "payment_record_pay_schemes"
   add_foreign_key "payment_record_time_logs", "payment_records"
   add_foreign_key "payment_records", "employees"
+  add_foreign_key "payment_records", "payment_record_pay_schemes"
   add_foreign_key "time_logs", "employees"
   add_foreign_key "time_logs", "pay_schemes"
   add_foreign_key "time_logs", "payment_records"

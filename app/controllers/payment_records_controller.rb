@@ -30,7 +30,18 @@ class PaymentRecordsController < ApplicationController
       payment_record_pay_scheme = PaymentRecordPayScheme.new(pay_type: employee_time_log.pay_scheme.pay_type,
                                                              pay: employee_time_log.pay_scheme.pay,
                                                              pay_ot: employee_time_log.pay_scheme.pay_ot,
-                                                             pay_public_holiday: employee_time_log.pay_scheme.pay_public_holiday)
+                                                             pay_public_holiday: employee_time_log.pay_scheme.pay_public_holiday,
+                                                             name: employee_time_log.pay_scheme.name,
+                                                             ot_multiplier: employee_time_log.pay_scheme.ot_multiplier,
+                                                             ot_time_range_start: employee_time_log.pay_scheme.ot_time_range_start,
+                                                             ot_time_range_end: employee_time_log.pay_scheme.ot_time_range_end,
+                                                             public_holiday_multiplier: employee_time_log.pay_scheme.public_holiday_multiplier,
+                                                             pay_weekend: employee_time_log.pay_scheme.pay_weekend,
+                                                             weekend_multiplier: employee_time_log.pay_scheme.weekend_multiplier,
+                                                             ot_type: employee_time_log.pay_scheme.ot_type,
+                                                             public_holiday_type: employee_time_log.pay_scheme.public_holiday_type,
+                                                             weekend_type: employee_time_log.pay_scheme.weekend_type)
+
       payment_record_pay_scheme.save
       PaymentRecordTimeLog.new(date_time_in: employee_time_log.date_time_in,
                                date_time_out: employee_time_log.date_time_out,
