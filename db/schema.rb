@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151007065242) do
+ActiveRecord::Schema.define(version: 20151007140639) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
@@ -105,6 +105,7 @@ ActiveRecord::Schema.define(version: 20151007065242) do
     t.integer  "ot_type_id",                limit: 4
     t.integer  "public_holiday_type_id",    limit: 4
     t.integer  "weekend_type_id",           limit: 4
+    t.float    "hours_per_day",             limit: 24
   end
 
   add_index "payment_record_pay_schemes", ["ot_type_id"], name: "index_payment_record_pay_schemes_on_ot_type_id", using: :btree
@@ -117,8 +118,9 @@ ActiveRecord::Schema.define(version: 20151007065242) do
     t.datetime "date_time_out"
     t.integer  "payment_record_pay_scheme_id", limit: 4
     t.integer  "payment_record_id",            limit: 4
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+    t.float    "pay",                          limit: 24
   end
 
   add_index "payment_record_time_logs", ["payment_record_id"], name: "index_payment_record_time_logs_on_payment_record_id", using: :btree

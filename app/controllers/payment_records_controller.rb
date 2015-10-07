@@ -40,7 +40,8 @@ class PaymentRecordsController < ApplicationController
                                                              weekend_multiplier: employee_time_log.pay_scheme.weekend_multiplier,
                                                              ot_type: employee_time_log.pay_scheme.ot_type,
                                                              public_holiday_type: employee_time_log.pay_scheme.public_holiday_type,
-                                                             weekend_type: employee_time_log.pay_scheme.weekend_type)
+                                                             weekend_type: employee_time_log.pay_scheme.weekend_type,
+                                                              hours_per_day: employee_time_log.pay_scheme.hours_per_day)
 
       payment_record_pay_scheme.save
       PaymentRecordTimeLog.new(date_time_in: employee_time_log.date_time_in,
@@ -51,7 +52,6 @@ class PaymentRecordsController < ApplicationController
       employee_time_log.payment_record = @payment_record
       employee_time_log.save
     end
-
 
     respond_to do |format|
       if @payment_record.save

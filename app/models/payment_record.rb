@@ -114,12 +114,9 @@ class PaymentRecord < ActiveRecord::Base
       shift_pay
     }.reduce(:+)
     self.total_pay = total_pay
-    byebug
   end
 
   def is_public_holiday(date)
-    puts(date)
-    true
+    false
   end
-
 end
