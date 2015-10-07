@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :holidays
   resources :time_logs
   resources :pay_schemes
   devise_for :admins

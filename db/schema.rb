@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150926134119) do
+ActiveRecord::Schema.define(version: 20151007065242) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
@@ -47,6 +47,12 @@ ActiveRecord::Schema.define(version: 20150926134119) do
 
   add_index "employees", ["deleted_at"], name: "index_employees_on_deleted_at", using: :btree
   add_index "employees", ["pay_scheme_id"], name: "index_employees_on_pay_scheme_id", using: :btree
+
+  create_table "holidays", force: :cascade do |t|
+    t.date     "day"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "ot_types", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -119,20 +125,18 @@ ActiveRecord::Schema.define(version: 20150926134119) do
   add_index "payment_record_time_logs", ["payment_record_pay_scheme_id"], name: "index_payment_record_time_logs_on_payment_record_pay_scheme_id", using: :btree
 
   create_table "payment_records", force: :cascade do |t|
-    t.integer  "employee_id",                  limit: 4
-    t.float    "total_pay",                    limit: 24
-    t.float    "bonus",                        limit: 24
+    t.integer  "employee_id", limit: 4
+    t.float    "total_pay",   limit: 24
+    t.float    "bonus",       limit: 24
     t.datetime "paid_at"
-    t.datetime "created_at",                                              null: false
-    t.datetime "updated_at",                                              null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
     t.datetime "start_date"
     t.datetime "end_date"
-    t.boolean  "paid",                         limit: 1,  default: false
-    t.integer  "payment_record_pay_scheme_id", limit: 4
+    t.boolean  "paid",        limit: 1,  default: false
   end
 
   add_index "payment_records", ["employee_id"], name: "index_payment_records_on_employee_id", using: :btree
-  add_index "payment_records", ["payment_record_pay_scheme_id"], name: "index_payment_records_on_payment_record_pay_scheme_id", using: :btree
 
   create_table "public_holiday_types", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -169,7 +173,6 @@ ActiveRecord::Schema.define(version: 20150926134119) do
   add_foreign_key "payment_record_time_logs", "payment_record_pay_schemes"
   add_foreign_key "payment_record_time_logs", "payment_records"
   add_foreign_key "payment_records", "employees"
-  add_foreign_key "payment_records", "payment_record_pay_schemes"
   add_foreign_key "time_logs", "employees"
   add_foreign_key "time_logs", "pay_schemes"
   add_foreign_key "time_logs", "payment_records"

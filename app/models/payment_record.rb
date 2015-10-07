@@ -23,9 +23,7 @@ class PaymentRecord < ActiveRecord::Base
       pay_scheme = time_log.payment_record_pay_scheme
       shift_pay = 0.0
       # If hrly pay
-      byebug
       if pay_scheme.pay_type.name == 'Hourly'
-        byebug
         # Total Hours worked = endtime-starttime
         hours_worked = TimeDifference.between(time_log.date_time_in, time_log.date_time_out).in_hours
         hourly_normal_pay = pay_scheme.pay
@@ -42,9 +40,7 @@ class PaymentRecord < ActiveRecord::Base
           end
           # Check if start date is public holiday
         elsif is_public_holiday(time_log.date_time_in) && pay_scheme.public_holiday_type.name != 'None'
-          byebug
           if pay_scheme.public_holiday_type.name == 'PerHour'
-            byebug
             # calc by hours_work * public_holiday_pay
             shift_pay = hours_worked * pay_scheme.pay_public_holiday
           elsif pay_scheme.public_holiday_type.name == 'Multiplier'
