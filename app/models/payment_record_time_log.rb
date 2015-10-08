@@ -2,7 +2,7 @@ class PaymentRecordTimeLog < ActiveRecord::Base
   belongs_to :payment_record_pay_scheme
   belongs_to :payment_record
 
-  before_save :calculate_pay, if: payment_scheme_is_hourly_type?
+  before_save :calculate_pay, if: :payment_scheme_is_hourly_type?
 
   private
     def calculate_pay
@@ -24,7 +24,7 @@ class PaymentRecordTimeLog < ActiveRecord::Base
           shift_pay = hours_worked * pay_scheme.weekend_multiplier * hourly_normal_pay
         end
         # Check if start date is public holiday
-      elsif is_public_holiday(self.date_time_in) && pay_scheme.public_holiday_type.name != 'None'
+      elsif Holiday.new.public_holiday?(self.date_time_in) && pay_scheme.public_holiday_type.name != 'None'
         if pay_scheme.public_holiday_type.name == 'PerHour'
           # calc by hours_work * public_holiday_pay
           shift_pay = hours_worked * pay_scheme.pay_public_holiday
@@ -95,11 +95,11 @@ class PaymentRecordTimeLog < ActiveRecord::Base
           shift_pay = hours_worked * hourly_normal_pay
         end
       end
-      shift_pay
+      self.pay = shift_pay
     end
 
     def payment_scheme_is_hourly_type?
-      self.pay_scheme.hourly_type?
+      self.payment_record_pay_scheme.hourly_type?
     end
 
     def public_holiday?(date)

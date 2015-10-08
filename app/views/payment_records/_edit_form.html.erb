@@ -23,9 +23,10 @@
         <table>
           <thead>
           <tr>
-            <th>Date in</th>
-            <th>Date out</th>
-            <th>Pay scheme</th>
+            <th>Date In</th>
+            <th>Date Out</th>
+            <th>Pay Scheme</th>
+            <th>Session Pay(If any)</th>
             <th>Remarks</th>
           </tr>
           </thead>
@@ -36,6 +37,7 @@
                 <td><%= time_log.date_time_in.to_formatted_s(:long) %></td>
                 <td><%= time_log.date_time_out.to_formatted_s(:long) %></td>
                 <td><%= link_to  time_log.payment_record_pay_scheme.id, payment_record_pay_scheme_path(time_log.payment_record_pay_scheme.id) %> LINK TO THE PAYMENT RECORD PAY SCHEME</td>
+                <td><%= time_log.pay %></td>
                 <td> TO BE IMPLEMENTED (MAYBE)</td>
               </tr>
           <% end %>
