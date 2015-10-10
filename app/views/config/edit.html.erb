@@ -1,0 +1,17 @@
+<html>
+<head></head>
+<body>
+<%= form_tag config_update_path do %>
+    <% @workdays.each do |workday| %>
+        <%= fields_for "workdays[]", workday do |wf| %>
+            <%= wf.text_field :name %>
+            <%= wf.time_field :start_time_field %>
+            <%= wf.time_field :end_time_field %>
+            <%= wf.check_box :enabled %>
+            <%= wf.label :enabled %> <br/>
+        <% end %>
+    <% end %>
+    <%= submit_tag 'Save', class:"waves-effect waves-light btn" %>
+<% end %>
+</body>
+</html>

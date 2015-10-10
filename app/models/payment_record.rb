@@ -22,6 +22,7 @@ class PaymentRecord < ActiveRecord::Base
       # for every timelog, get hrs worked, get payscheme, calculate pay based on payscheme
       pay_scheme = time_log.payment_record_pay_scheme
       shift_pay = 0.0
+
       # If hrly pay
       if pay_scheme.pay_type.name == 'Hourly'
         # Total Hours worked = endtime-starttime
@@ -110,6 +111,7 @@ class PaymentRecord < ActiveRecord::Base
             shift_pay = hours_worked * hourly_normal_pay
           end
         end
+
       end
       shift_pay
     }.reduce(:+)
