@@ -8,7 +8,7 @@ class ConfigController < ApplicationController
   # PATCH/PUT /configs/
   def update
     respond_to do |format|
-      if 123workdays.update(config_params) # Complete this with workdays.update !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      if workdays.update(config_params)
         format.html { redirect_to @config, notice: 'config was successfully updated.' }
         format.json { render :show, status: :ok, location: @config }
       else

@@ -33,7 +33,7 @@
 
           <div class="row">
             <div class="col s6">
-              <%= f.association :ot_type, default: f.object.ot_type || 'None' %>
+              <%= f.association :ot_type, default: f.object.id.present? ? f.object.ot_type : 'None' %>
             </div>
             <div id="pay_scheme_ot_multiplier_div">
               <div class="col s6">
@@ -70,7 +70,7 @@
 
           <div class="row">
             <div class="col s6">
-              <%= f.association :public_holiday_type, default: f.object.public_holiday_type || 'None' %>
+              <%= f.association :public_holiday_type, default: f.object.id.present? ? f.object.public_holiday_type : 'None' %>
             </div>
             <div id="pay_scheme_ph_multiplier_div">
               <div class="col s6">
@@ -94,7 +94,7 @@
 
           <div class="row">
             <div class="col s6">
-              <%= f.association :weekend_type, default: f.object.weekend_type || 'None' %>
+              <%= f.association :weekend_type, default: f.object.id.present? ?  f.object.weekend_type : 'None' %>
             </div>
             <div id="pay_scheme_w_multiplier_div">
               <div class="col s6">
