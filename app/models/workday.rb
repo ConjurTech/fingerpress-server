@@ -1,30 +1,26 @@
 class Workday < ActiveRecord::Base
 
-  before_save :convert_to_seconds
-
-  def start_time_field
-    # Time.at(82800).utc.strftime("%I:%M%p")
-    Time.at(start_time_seconds).strftime("%H:%M %P") if self.start_time_seconds.present?
+  def start_time_seconds
+    return nil unless self[:start_time_seconds]
+    Time.at(self[:start_time_seconds]).utc.strftime('%I:%M%p')
   end
-
-  def end_time_field
-    Time.at(end_time_seconds).strftime("%H:%M %P") if self.end_time_seconds.present?
+  def end_time_seconds
+    return nil unless self[:end_time_seconds]
+    Time.at(self[:end_time_seconds]).utc.strftime('%I:%M%p')
   end
-
-  def start_time_field=(time)
-    # Change back to datetime friendly format
-    @start_time_field = Time.parse(time).strftime("%H:%M %P")
+  def start_time_seconds=(time)
+    if time.blank?
+      self[:start_time_seconds] = nil
+    else
+      self[:start_time_seconds] = Time.parse(time).seconds_since_midnight
+    end
   end
-
-  def end_time_field=(time)
-    # Change back to datetime friendly format
-    @end_time_field = Time.parse(time).strftime("%H:%M %P")
-  end
-
-  def convert_to_seconds
-    return true if @start_time_field.blank?
-    self.start_time_seconds = Time.parse("#{@start_time_field} ").seconds_since_midnight
-    self.end_time_seconds = Time.parse("#{@end_time_field} ").seconds_since_midnight
+  def end_time_seconds=(time)
+    if time.blank?
+      self[:end_time_seconds] = nil
+    else
+      self[:end_time_seconds] = Time.parse(time).seconds_since_midnight
+    end
   end
 
 end

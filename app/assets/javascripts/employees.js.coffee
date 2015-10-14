@@ -6,6 +6,10 @@ $(document).ready ->
     selectMonths: true
     selectYears: 100
 
-  $('.timepicker').pickatime
-
   $('select').material_select()
+  $('.clockpicker').clockpicker({
+    autoclose: true
+    twelvehour: true
+    donetext: 'Done'
+  });
+

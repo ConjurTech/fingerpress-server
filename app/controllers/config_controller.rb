@@ -8,8 +8,8 @@ class ConfigController < ApplicationController
   # PATCH/PUT /configs/
   def update
     respond_to do |format|
-      if workdays.update(config_params)
-        format.html { redirect_to @config, notice: 'config was successfully updated.' }
+      if Workday.update(params[:workdays].keys,params[:workdays].values)
+        format.html { redirect_to config_edit_path, notice: 'config was successfully updated.' }
         format.json { render :show, status: :ok, location: @config }
       else
         format.html { render :edit }
@@ -27,6 +27,7 @@ class ConfigController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def config_params
-    params.require(:workdays).permit(:name, :sex, :birthdate, :joindate, :leavedate, :bankdetails, :pay_scheme_id, :job)
+    byebug
+    params.require(:workdays).permit(workdays_attributes: [:id, :name, :start_time_seconds, :end_time_seconds, :enabled])
   end
 end

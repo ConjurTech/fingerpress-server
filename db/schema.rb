@@ -68,7 +68,7 @@ ActiveRecord::Schema.define(version: 20151010064153) do
     t.datetime "created_at",                            null: false
     t.datetime "updated_at",                            null: false
     t.string   "name",                      limit: 255
-    t.float    "ot_multiplier",             limit: 24
+    t.flo at    "ot_multiplier",             limit: 24
     t.time     "ot_time_range_start"
     t.time     "ot_time_range_end"
     t.float    "public_holiday_multiplier", limit: 24
