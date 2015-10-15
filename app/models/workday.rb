@@ -14,7 +14,7 @@ class Workday < ActiveRecord::Base
     if time.blank?
       self[:start_time_seconds] = nil
     else
-      self[:start_time_seconds] = Time.parse(time).seconds_since_midnight muthafarking error TypeError: no implicit conversion of Float into String
+      self[:start_time_seconds] = Time.parse(time.to_s).seconds_since_midnight
     end
   end
 
@@ -22,7 +22,7 @@ class Workday < ActiveRecord::Base
     if time.blank?
       self[:end_time_seconds] = nil
     else
-      self[:end_time_seconds] = Time.parse(time).seconds_since_midnight
+      self[:end_time_seconds] = Time.parse(time.to_s).seconds_since_midnight
     end
   end
 
