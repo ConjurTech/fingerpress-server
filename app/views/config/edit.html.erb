@@ -18,7 +18,12 @@
                       </span>
                     </div>
 
-                    <%= wf.text_field :end_time_seconds %>
+                    <div class="input-group clockpicker">
+                      <%= wf.text_field :end_time_seconds %>
+                      <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-time"></span>
+                      </span>
+                    </div>
 
                     <%= wf.check_box :enabled %>
                     <%= wf.label :enabled %> <br/>

@@ -1,4 +1,5 @@
 class Workday < ActiveRecord::Base
+  before_save :ensure_time_validity
 
   def start_time_seconds
     return nil unless self[:start_time_seconds]
@@ -37,4 +38,9 @@ class Workday < ActiveRecord::Base
   def self.find_work_days
     Workday.all.map { |workday| workday.enabled ? workday.name[0, 3].downcase : nil }.compact
   end
+
+  def ensure_time_validity
+    self[:start_time_seconds] < self[:end_time_seconds]
+  end
+
 end
