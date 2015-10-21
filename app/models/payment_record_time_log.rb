@@ -83,10 +83,10 @@ class PaymentRecordTimeLog < ActiveRecord::Base
             # see whether ot is multiplier or fixed
             # if multiplier
             if pay_scheme.ot_type.name == 'Multiplier'
-              shift_pay = normal_hours * normal_pay + ot_hours * (pay_scheme.ot_multiplier * hourly_normal_pay)
+              shift_pay = normal_hours * hourly_normal_pay + ot_hours * (pay_scheme.ot_multiplier * hourly_normal_pay)
               # else if fixed
             elsif pay_scheme.ot_type.name != 'PerHr'
-              shift_pay = normal_hours * normal_pay + ot_hours * pay_scheme.pay_ot
+              shift_pay = normal_hours * hourly_normal_pay + ot_hours * pay_scheme.pay_ot
             end
           end
 
