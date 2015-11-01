@@ -6,7 +6,8 @@ class TimeLog < ActiveRecord::Base
   before_save :convert_to_datetime
 
   def date_time_in_date_field
-    date_time_in.strftime("%d/%m/%Y") if date_time_in.present?
+    return nil unless self[:date_time_in]
+    date_time_in.strftime("%e %B, %Y") if date_time_in.present?
   end
 
   def date_time_in_time_field
@@ -24,7 +25,8 @@ class TimeLog < ActiveRecord::Base
   end
 
   def date_time_out_date_field
-    date_time_out.strftime("%d/%m/%Y") if date_time_out.present?
+    return nil unless self[:date_time_out]
+    date_time_out.strftime("%e %B, %Y") if date_time_out.present?
   end
 
   def date_time_out_time_field
@@ -43,7 +45,7 @@ class TimeLog < ActiveRecord::Base
 
   def convert_to_datetime
     return true if @date_time_in_date_field.blank? || @date_time_in_time_field.blank?
-    self.date_time_in = DateTime.parse("#{@date_time_in_date_field} #{@date_time_in_time_field}")
-    self.date_time_out = DateTime.parse("#{@date_time_out_date_field} #{@date_time_out_time_field}")
+    self.date_time_in = Time.zone.parse("#{@date_time_in_date_field} #{@date_time_in_time_field}")
+    self.date_time_out = Time.zone.parse("#{@date_time_out_date_field} #{@date_time_out_time_field}")
   end
 end
