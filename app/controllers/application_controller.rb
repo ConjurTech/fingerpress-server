@@ -25,12 +25,6 @@ class ApplicationController < ActionController::Base
     admin_signed_in? || authenticate_admin_from_token! || render_unauthorized
   end
 
-  def authenticate_token
-    authenticate_with_http_token do |token, options|
-      User.find_by(auth_token: token)
-    end
-  end
-
   def render_unauthorized
     self.headers['WWW-Authenticate'] = 'Token realm="Application"'
     if request.env['PATH_INFO'] != new_admin_session_path # to avoid redirect loop
