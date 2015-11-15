@@ -1,6 +1,6 @@
 class EmployeesController < ApplicationController
   before_action :set_employee, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_admin!
+
   # GET /employees
   # GET /employees.json
   def index
