@@ -128,18 +128,20 @@ ActiveRecord::Schema.define(version: 20151103124421) do
   add_index "payment_record_time_logs", ["payment_record_pay_scheme_id"], name: "index_payment_record_time_logs_on_payment_record_pay_scheme_id", using: :btree
 
   create_table "payment_records", force: :cascade do |t|
-    t.integer  "employee_id", limit: 4
-    t.float    "total_pay",   limit: 24
-    t.float    "bonus",       limit: 24
+    t.integer  "employee_id",                  limit: 4
+    t.float    "total_pay",                    limit: 24
+    t.float    "bonus",                        limit: 24
     t.datetime "paid_at"
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
+    t.datetime "created_at",                                              null: false
+    t.datetime "updated_at",                                              null: false
     t.datetime "start_date"
     t.datetime "end_date"
-    t.boolean  "paid",        limit: 1,  default: false
+    t.boolean  "paid",                         limit: 1,  default: false
+    t.integer  "payment_record_pay_scheme_id", limit: 4
   end
 
   add_index "payment_records", ["employee_id"], name: "index_payment_records_on_employee_id", using: :btree
+  add_index "payment_records", ["payment_record_pay_scheme_id"], name: "index_payment_records_on_payment_record_pay_scheme_id", using: :btree
 
   create_table "public_holiday_types", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -185,6 +187,7 @@ ActiveRecord::Schema.define(version: 20151103124421) do
   add_foreign_key "payment_record_time_logs", "payment_record_pay_schemes"
   add_foreign_key "payment_record_time_logs", "payment_records"
   add_foreign_key "payment_records", "employees"
+  add_foreign_key "payment_records", "payment_record_pay_schemes"
   add_foreign_key "time_logs", "employees"
   add_foreign_key "time_logs", "pay_schemes"
   add_foreign_key "time_logs", "payment_records"
