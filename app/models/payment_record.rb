@@ -14,6 +14,7 @@ class PaymentRecord < ActiveRecord::Base
   end
 
   def calculate_pay
+
     # get_employee
     # Get timelogs and their payschemes
     time_logs = self.payment_record_time_logs
