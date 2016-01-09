@@ -19,12 +19,14 @@ class PaymentRecordsController < ApplicationController
 
   # GET /payment_records/1/edit
   def edit
+    @payment_record.calculate_pay
   end
 
   # POST /payment_records
   # POST /payment_records.json
   def create
     @payment_record = PaymentRecord.new(payment_record_params)
+
     employee_time_logs = @payment_record.employee.time_logs_between(payment_record_params[:start_date].to_datetime, payment_record_params[:end_date].to_datetime)
     employee_time_logs.each do |employee_time_log|
       payment_record_pay_scheme = PaymentRecordPayScheme.new(pay_type: employee_time_log.pay_scheme.pay_type,

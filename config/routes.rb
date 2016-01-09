@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :employees
   resources :payment_records
   resources :payment_record_pay_schemes
+
   get 'config/edit' => 'config#edit'
   post 'config/update' => 'config#update'
   root 'employees#index'
