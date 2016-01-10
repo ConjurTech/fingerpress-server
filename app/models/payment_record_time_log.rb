@@ -144,14 +144,7 @@ class PaymentRecordTimeLog < ActiveRecord::Base
               normal_hours = TimeDifference.between(ot_end, tl_end).in_hours
             end
 
-            # else if according to specfied hours
-          elsif pay_scheme.hours_per_day.present?
-            # find ot hours worked
-            ot_hours = hours_worked - pay_scheme.hours_per_day
-            if ot_hours <= 0
-              ot_hours = 0
-            end
-            normal_hours = hours_worked - ot_hours
+
           end
 
           # see whether ot is multiplier or fixed
@@ -162,6 +155,25 @@ class PaymentRecordTimeLog < ActiveRecord::Base
           elsif pay_scheme.ot_type.name != 'PerHr'
             shift_pay = normal_hours * hourly_normal_pay + ot_hours * pay_scheme.pay_ot
           end
+
+          # else if according to specfied hours
+        elsif pay_scheme.hours_per_day.present?
+          # find ot hours worked
+          ot_hours = hours_worked - pay_scheme.hours_per_day
+          if ot_hours <= 0
+            ot_hours = 0
+          end
+          normal_hours = hours_worked - ot_hours
+
+          # see whether ot is multiplier or fixed
+          # if multiplier
+          if pay_scheme.ot_type.name == 'Multiplier'
+            shift_pay = normal_hours * hourly_normal_pay + ot_hours * (pay_scheme.ot_multiplier * hourly_normal_pay)
+            # else if fixed
+          elsif pay_scheme.ot_type.name != 'PerHr'
+            shift_pay = normal_hours * hourly_normal_pay + ot_hours * pay_scheme.pay_ot
+          end
+
         end
 
       else
