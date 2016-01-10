@@ -5,40 +5,38 @@ class TimeLog < ActiveRecord::Base
 
   before_save :convert_to_datetime
 
-  def date_time_in_date_field
-    return nil unless self[:date_time_in]
+  def time_in
     date_time_in.strftime("%e %B, %Y") if date_time_in.present?
   end
 
-  def date_time_in_time_field
+  def date_in
     date_time_in.strftime("%I:%M%p") if date_time_in.present?
   end
 
-  def date_time_in_date_field=(date)
-    # Change back to datetime friendly format
-    @date_time_in_date_field = Date.parse(date).strftime("%Y-%m-%d")
-  end
-
-  def date_time_in_time_field=(time)
+  def time_in=(time)
     # Change back to datetime friendly format
     @date_time_in_time_field = Time.parse(time).strftime("%H:%M:%S")
   end
 
-  def date_time_out_date_field
-    return nil unless self[:date_time_out]
+  def date_in=(date)
+    # Change back to datetime friendly format
+    @date_time_in_date_field = Date.parse(date).strftime("%Y-%m-%d")
+  end
+
+  def date_out
     date_time_out.strftime("%e %B, %Y") if date_time_out.present?
   end
 
-  def date_time_out_time_field
+  def time_out
     date_time_out.strftime("%I:%M%p") if date_time_out.present?
   end
 
-  def date_time_out_date_field=(date)
+  def date_out=(date)
     # Change back to datetime friendly format
     @date_time_out_date_field = Date.parse(date).strftime("%Y-%m-%d")
   end
 
-  def date_time_out_time_field=(time)
+  def time_out=(time)
     # Change back to datetime friendly format
     @date_time_out_time_field = Time.parse(time).strftime("%H:%M:%S")
   end

@@ -2,13 +2,13 @@
     <%= f.error_notification %>
 
     <div class="input-field">
-      <%= f.label :date_time_in_date_field, "Start Date" %>
-      <%= f.text_field :date_time_in_date_field, class: "datepicker" %>
+      <%= f.label :time_in, "Start Date" %>
+      <%= f.text_field :time_in, class: "datepicker" %>
     </div>
     <div class="input-field">
-      <%= f.label :date_time_in_time_field, "Start Time", class: 'active' %>
+      <%= f.label :date_in, "Start Time", class: 'active' %>
       <div class="input-group clockpicker">
-        <%= f.text_field :date_time_in_time_field %>
+        <%= f.text_field :date_in %>
         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-time"></span>
                       </span>
@@ -16,13 +16,13 @@
 
     </div>
     <div class="input-field">
-      <%= f.label :date_time_out_date_field, "End Date" %>
-      <%= f.text_field :date_time_out_date_field, class: "datepicker" %>
+      <%= f.label :date_out, "End Date" %>
+      <%= f.text_field :date_out, class: "datepicker" %>
     </div>
     <div class="input-field">
-      <%= f.label :date_time_out_time_field, "End Time", class: 'active' %>
+      <%= f.label :time_out, "End Time", class: 'active' %>
       <div class="input-group clockpicker">
-        <%= f.text_field :date_time_out_time_field %>
+        <%= f.text_field :time_out %>
         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-time"></span>
                       </span>
