@@ -6,6 +6,8 @@ class EmployeesControllerTest < ActionController::TestCase
   end
 
   test "should get index" do
+    @user = admins(:one)
+    sign_in @user
     get :index
     assert_response :success
     assert_not_nil assigns(:employees)
