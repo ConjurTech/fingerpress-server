@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate
-    admin_signed_in? || authenticate_admin_from_token! || render_unauthorized
+    admin_signed_in? || authenticate_admin_from_token! || devise_controller? || render_unauthorized
   end
 
   def render_unauthorized

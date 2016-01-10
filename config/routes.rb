@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  devise_for :admins, :controllers => {sessions: 'admins/sessions', registrations: 'admins/registrations'}
+
   resources :holidays
   resources :time_logs
   resources :pay_schemes
@@ -10,8 +12,6 @@ Rails.application.routes.draw do
   get 'config/edit' => 'config#edit'
   post 'config/update' => 'config#update'
   root 'employees#index'
-
-  devise_for :admins, :controllers => {sessions: 'sessions', registrations: 'registrations'}
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
