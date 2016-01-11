@@ -1,14 +1,15 @@
 <%= simple_form_for(@time_log) do |f| %>
     <%= f.error_notification %>
+    <div class="error-block"><%= @time_log.errors.full_messages.join(', ') if @time_log.errors.any? %></div>
 
     <div class="input-field">
-      <%= f.label :date_time_in_date_field, "Start Date" %>
-      <%= f.text_field :date_time_in_date_field, class: "datepicker" %>
+      <%= f.label :date_in, "Start Date", class: 'active' %>
+      <%= f.input :date_in, as: :string, label: false, input_html: {class: "datepicker"} %>
     </div>
     <div class="input-field">
-      <%= f.label :date_time_in_time_field, "Start Time", class: 'active' %>
+      <%= f.label :time_in, "Start Time", class: 'active' %>
       <div class="input-group clockpicker">
-        <%= f.text_field :date_time_in_time_field %>
+        <%= f.input :time_in, as: :string, label: false %>
         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-time"></span>
                       </span>
@@ -16,13 +17,13 @@
 
     </div>
     <div class="input-field">
-      <%= f.label :date_time_out_date_field, "End Date" %>
-      <%= f.text_field :date_time_out_date_field, class: "datepicker" %>
+      <%= f.label :date_out, "End Date", class: 'active' %>
+      <%= f.input :date_out, as: :string, label: false, input_html: {class: "datepicker"} %>
     </div>
     <div class="input-field">
-      <%= f.label :date_time_out_time_field, "End Time", class: 'active' %>
+      <%= f.label :time_out, "End Time", class: 'active' %>
       <div class="input-group clockpicker">
-        <%= f.text_field :date_time_out_time_field %>
+        <%= f.input :time_out, as: :string, label: false %>
         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-time"></span>
                       </span>

@@ -4,6 +4,6 @@ class Employee < ActiveRecord::Base
   belongs_to :pay_scheme
 
   def time_logs_between(start_date, end_date)
-    self.time_logs.where(date_time_in: start_date..end_date, payment_record: nil)
+    self.time_logs.where(date_time_in: start_date..(end_date+1), payment_record: nil)
   end
 end

@@ -16,6 +16,6 @@
 //= require materialize-sprockets
 //= require jquery_ujs
 //= require turbolinks
-//= require_tree .
 //= require chartkick
 //= require jquery-clockpicker
+//= require_tree .
