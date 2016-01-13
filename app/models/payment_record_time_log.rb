@@ -118,12 +118,27 @@ class PaymentRecordTimeLog < ActiveRecord::Base
         if pay_scheme.ot_time_range_start.present? && pay_scheme.ot_time_range_end.present?
 
           # find ot hours worked
-          ot_hours = 0
-          normal_hours = hours_worked
-          ot_start = pay_scheme.ot_time_range_start
-          ot_end = pay_scheme.ot_time_range_end
-          tl_start = self.date_time_in
-          tl_end = self.date_time_out
+          # ot_hours = 0
+          # normal_hours = hours_worked
+          # ot_start = pay_scheme.ot_time_range_start
+          # ot_end = pay_scheme.ot_time_range_end
+          # tl_start = self.date_time_in
+          # tl_end = self.date_time_out
+
+          ot_start_hr = pay_scheme.ot_time_range_start.strftime( "%H" )
+          ot_start_min = pay_scheme.ot_time_range_start.strftime( "%M" )
+          ot_end_hr = pay_scheme.ot_time_range_end.strftime( "%H" )
+          ot_end_min = pay_scheme.ot_time_range_end.strftime( "%M" )
+          tl_start_hr = self.date_time_in.strftime( "%H" )
+          tl_start_min = self.date_time_in.strftime( "%M" )
+          tl_end_hr = self.date_time_out.strftime( "%H" )
+          tl_end_min = self.date_time_out.strftime( "%M" )
+          
+          ot_start = Time.new(2000,1,1,ot_start_hr,ot_start_min)
+          ot_end = Time.new(2000,1,1,ot_end_hr,ot_end_min)
+          tl_start = Time.new(2000,1,1,tl_start_hr,tl_start_min)
+          tl_end = Time.new(2000,1,1,tl_end_hr,tl_end_min)
+
           # check if working time and ot time overlap
           if (tl_start..tl_end).overlaps?(ot_start..ot_end)
             # check if working hours is entirely inside ot range
@@ -144,14 +159,7 @@ class PaymentRecordTimeLog < ActiveRecord::Base
               normal_hours = TimeDifference.between(ot_end, tl_end).in_hours
             end
 
-            # else if according to specfied hours
-          elsif pay_scheme.hours_per_day.present?
-            # find ot hours worked
-            ot_hours = hours_worked - pay_scheme.hours_per_day
-            if ot_hours <= 0
-              ot_hours = 0
-            end
-            normal_hours = hours_worked - ot_hours
+
           end
 
           # see whether ot is multiplier or fixed
@@ -162,6 +170,25 @@ class PaymentRecordTimeLog < ActiveRecord::Base
           elsif pay_scheme.ot_type.name != 'PerHr'
             shift_pay = normal_hours * hourly_normal_pay + ot_hours * pay_scheme.pay_ot
           end
+
+          # else if according to specfied hours
+        elsif pay_scheme.hours_per_day.present?
+          # find ot hours worked
+          ot_hours = hours_worked - pay_scheme.hours_per_day
+          if ot_hours <= 0
+            ot_hours = 0
+          end
+          normal_hours = hours_worked - ot_hours
+
+          # see whether ot is multiplier or fixed
+          # if multiplier
+          if pay_scheme.ot_type.name == 'Multiplier'
+            shift_pay = normal_hours * hourly_normal_pay + ot_hours * (pay_scheme.ot_multiplier * hourly_normal_pay)
+            # else if fixed
+          elsif pay_scheme.ot_type.name != 'PerHr'
+            shift_pay = normal_hours * hourly_normal_pay + ot_hours * pay_scheme.pay_ot
+          end
+
         end
 
       else
