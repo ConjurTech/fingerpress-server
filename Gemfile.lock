@@ -136,6 +136,7 @@ GEM
     pg (0.18.4)
     pg (0.18.4-x64-mingw32)
     pg (0.18.4-x86-mingw32)
+    puma (2.15.3)
     quiet_assets (1.1.0)
       railties (>= 3.1, < 5.0)
     rack (1.6.4)
@@ -258,6 +259,7 @@ DEPENDENCIES
   mysql2 (~> 0.3.19)
   paranoia (~> 2.0)
   pg
+  puma
   quiet_assets
   railroady
   rails (= 4.2.1)
