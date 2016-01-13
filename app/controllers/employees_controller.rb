@@ -23,6 +23,26 @@ class EmployeesController < ApplicationController
   def edit
   end
 
+  def check_in
+    time_log = @employee.time_logs.create(date_time_in: Time.current)
+    if time_log.errors.empty?
+      render :show
+    else
+      render json: { errors: time_log.errors.full_messages }, status: :bad_request
+    end
+  end
+
+  def check_out
+    time_log = @employee.time_logs.where(date_time_out: nil).order(date_time_in: :desc).first
+    time_log ||= @employee.time_logs.new
+    time_log.date_time_out = Time.current
+    if time_log.save
+      render :show
+    else
+      render json: { errors: time_log.errors.full_messages }, status: :bad_request
+    end
+  end
+
   # POST /employees
   # POST /employees.json
   def create

@@ -5,7 +5,12 @@ Rails.application.routes.draw do
   resources :holidays
   resources :time_logs
   resources :pay_schemes
-  resources :employees
+  resources :employees do
+    member do
+      post :check_in
+      post :check_out
+    end
+  end
   resources :payment_records
   resources :payment_record_pay_schemes
 
