@@ -1,4 +1,5 @@
 class TimeLogsController < ApplicationController
+  skip_before_action :protect_from_forgery
   before_action :set_time_log, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_admin!
 

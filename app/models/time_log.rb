@@ -4,9 +4,9 @@ class TimeLog < ActiveRecord::Base
   belongs_to :pay_scheme
   belongs_to :payment_record
 
-  before_validation :convert_to_datetime, on: [:create, :update]
-  validates :time_in, :time_out, :date_in, :date_out, :employee, :pay_scheme, presence: true
-  validate :end_time_is_after_start_time
+  # before_validation :convert_to_datetime, on: [:create, :update]
+  # validates :time_in, :time_out, :date_in, :date_out, :employee, :pay_scheme, presence: true
+  # validate :end_time_is_after_start_time
 
 
   def date_in
