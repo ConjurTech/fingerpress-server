@@ -26,7 +26,7 @@ class EmployeesController < ApplicationController
   end
 
   def check_in
-    @employee.time_logs.create!(date_time_in: Time.at(params[:timestamp]))
+    @employee.time_logs.create!(date_time_in: Time.at(params[:timestamp].to_i))
     render :show
   end
 
@@ -37,7 +37,7 @@ class EmployeesController < ApplicationController
 
     timelog = @employee.time_logs.where('date_time_in > ?', last_valid_timelog.date_time_out).where(date_time_out: nil)
     timelog ||= @employee.time_logs.new
-    timelog.date_time_out = Time.at(params[:time_stamp])
+    timelog.date_time_out = Time.at(params[:timestamp].to_i)
     timelog.save!
 
     render :show
@@ -90,7 +90,7 @@ class EmployeesController < ApplicationController
     @employee = Employee.find_by(id: params[:id])
   end
 
-  def set_employee_fingerprint
+  def set_employee_by_fingerprint
     @employee = Employee.find_or_initialize_by(fingerprint_id: params[:id])
 
     if @employee.new_record?

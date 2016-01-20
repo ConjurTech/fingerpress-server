@@ -5,6 +5,7 @@ class TimeLog < ActiveRecord::Base
   belongs_to :payment_record
 
   before_validation :convert_to_datetime, on: [:create, :update]
+  before_validation :set_pay_scheme_from_employee, on: :create
   # validates :time_in, :time_out, :date_in, :date_out, :employee, :pay_scheme, presence: true
   validates :employee, :pay_scheme, presence: true
   # validate :end_time_is_after_start_time
@@ -81,5 +82,9 @@ class TimeLog < ActiveRecord::Base
       self.time_log_is_valid = false
     end
     true
+  end
+
+  def set_pay_scheme_from_employee
+    self.pay_scheme = self.employee.pay_scheme
   end
 end
