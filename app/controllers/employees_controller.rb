@@ -91,7 +91,7 @@ class EmployeesController < ApplicationController
   end
 
   def set_employee_fingerprint
-    @employee = Employee.find_initialize_by(fingerprint_id: params[:id])
+    @employee = Employee.find_or_initialize_by(fingerprint_id: params[:id])
 
     if @employee.new_record?
       @employee.pay_scheme = PayScheme.first
