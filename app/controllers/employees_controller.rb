@@ -1,6 +1,7 @@
 class EmployeesController < ApplicationController
   skip_before_action :protect_from_forgery, only: [:check_in, :check_out]
-  before_action :set_employee, only: [:show, :edit, :update, :destroy, :check_in, :check_out]
+  before_action :set_employee, only: [:show, :edit, :update, :destroy]
+  before_action :set_employee_by_fingerprint, only: [:check_in, :check_out]
 
   # GET /employees
   # GET /employees.json
@@ -25,28 +26,21 @@ class EmployeesController < ApplicationController
   end
 
   def check_in
-    fingerprint_id = params[:id]
-    @employee = Employee.find(2)
+    @employee.time_logs.create!(date_time_in: Time.at(params[:timestamp]))
     render :show
-    # time_log = @employee.time_logs.create(date_time_in: Time.current)
-    # if time_log.errors.empty?
-    #   render :show
-    # else
-    #   render json: { errors: time_log.errors.full_messages }, status: :bad_request
-    # end
   end
 
+  # Finds the timelog after the last valid timelog that does not have a date_time_out set yet and sets the checkout time on it.
+  # If none is found, creates a new timelog and sets the checkout time on it.
   def check_out
-    @employee = Employee.find(2)
+    last_valid_timelog = @employee.time_logs.where('date_time_in NOT NULL AND date_time_out NOT NULL').order(date_time_out: :desc).first
+
+    timelog = @employee.time_logs.where('date_time_in > ?', last_valid_timelog.date_time_out).where(date_time_out: nil)
+    timelog ||= @employee.time_logs.new
+    timelog.date_time_out = Time.at(params[:time_stamp])
+    timelog.save!
+
     render :show
-    # time_log = @employee.time_logs.where(date_time_out: nil).order(date_time_in: :desc).first
-    # time_log ||= @employee.time_logs.new
-    # time_log.date_time_out = Time.current
-    # if time_log.save
-    #   render :show
-    # else
-    #   render json: { errors: time_log.errors.full_messages }, status: :bad_request
-    # end
   end
 
   # POST /employees
@@ -90,13 +84,26 @@ class EmployeesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_employee
-      @employee = Employee.find_by(id: params[:id]) || Employee.first
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_employee
+    @employee = Employee.find_by(id: params[:id])
+  end
+
+  def set_employee_fingerprint
+    @employee = Employee.find_or_initialize_by(fingerprint_id: params[:id])
+
+    if @employee.new_record?
+      @employee.pay_scheme = PayScheme.first
+      @employee.name = "Unknown Employee"
+      @employee.save!
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def employee_params
-      params.require(:employee).permit(:fingerprint_id, :name, :sex, :birthdate, :joindate, :leavedate, :bankdetails, :pay_scheme_id, :job)
-    end
+    @employee
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def employee_params
+    params.require(:employee).permit(:fingerprint_id, :name, :sex, :birthdate, :joindate, :leavedate, :bankdetails, :pay_scheme_id, :job)
+  end
 end
