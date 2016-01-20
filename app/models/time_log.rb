@@ -51,19 +51,16 @@ class TimeLog < ActiveRecord::Base
   end
 
   def convert_to_datetime
-    if self.date_time_in.blank? && self.date_time_out.blank? && self.new_record?
-      if @date_time_in_date_field.blank? || @date_time_in_time_field.blank?
-        self.date_time_in = nil
-      else
+      if @date_time_in_date_field.present? && @date_time_in_time_field.present?
         self.date_time_in = Time.zone.parse("#{@date_time_in_date_field} #{@date_time_in_time_field}")
       end
-
-      if @date_time_out_date_field.blank? || @date_time_out_time_field.blank?
-        self.date_time_out = nil
-      else
+      if @date_time_out_date_field.present? && @date_time_out_time_field.present?
         self.date_time_out = Time.zone.parse("#{@date_time_out_date_field} #{@date_time_out_time_field}")
       end
-    end
+  end
+
+  def datetime_fields_present?
+    @date_time_in_date_field.present? && @date_time_in_time_field.present?
   end
 
   private

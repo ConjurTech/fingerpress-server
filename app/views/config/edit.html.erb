@@ -2,10 +2,11 @@
 <head></head>
 <body>
 <%= form_tag config_update_path do %>
-    <% @workdays.each do |workday| %>
-        <%= fields_for "workdays[]", workday do |wf| %>
-            <div class="row">
-              <div class="col s6 offset-s3">
+    <div class="row">
+      <% @workdays.each do |workday| %>
+          <%= fields_for "workdays[]", workday do |wf| %>
+
+              <div class="col s6">
                 <div class="card white darken-1">
                   <div class="card-content black-text">
 
@@ -31,9 +32,10 @@
                   </div>
                 </div>
               </div>
-            </div>
-        <% end %>
-    <% end %>
+
+          <% end %>
+      <% end %>
+    </div>
     <%= submit_tag 'Save', class: "waves-effect waves-light btn" %>
 <% end %>
 </body>

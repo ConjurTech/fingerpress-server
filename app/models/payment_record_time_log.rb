@@ -6,7 +6,7 @@ class PaymentRecordTimeLog < ActiveRecord::Base
   before_save :calculate_pay, if: :payment_scheme_is_hourly_type?
 
   def payment_scheme_is_hourly_type?
-    self.payment_record_pay_scheme.hourly_type?
+    self.payment_record_pay_scheme.hourly?
   end
 
   def weekend?
@@ -17,8 +17,12 @@ class PaymentRecordTimeLog < ActiveRecord::Base
     Holiday.public_holiday?(self.date_time_in)
   end
 
+  def has_ot?
+    ot_hours > 0 && !public_holiday? && !weekend?
+  end
+
   def set_remarks
-    self.remarks = "#{'[Public Holiday]' if public_holiday?}#{'[Weekend]' if weekend?}#{'[Has OT]' if ot_hours > 0}"
+    self.remarks = "#{'[Public Holiday]' if public_holiday?}#{'[Weekend]' if weekend?}#{'[Has OT]' if has_ot?}"
   end
 
   def calculate_pay
@@ -93,6 +97,7 @@ class PaymentRecordTimeLog < ActiveRecord::Base
   end
 
   def public_holiday_hours
+    puts public_holiday? ? worked_hours : 0
     public_holiday? ? worked_hours : 0
   end
 end

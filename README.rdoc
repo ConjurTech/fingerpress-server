@@ -1,3 +1,8 @@
+before deploy comment out business_time.rb
+deploy
+run seed to seed workdays
+uncomment business_time.rb and redeploy
+
 == README
 
 This README would normally document whatever steps are necessary to get the

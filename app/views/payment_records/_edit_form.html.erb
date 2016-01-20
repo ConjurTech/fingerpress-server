@@ -36,9 +36,9 @@
               <tr>
                 <td><%= time_log.date_time_in.to_formatted_s(:long) %></td>
                 <td><%= time_log.date_time_out.to_formatted_s(:long) %></td>
-                <td><%= link_to  time_log.payment_record_pay_scheme.id, payment_record_pay_scheme_path(time_log.payment_record_pay_scheme.id) %> LINK TO THE PAYMENT RECORD PAY SCHEME</td>
+                <td><%= link_to  time_log.payment_record_pay_scheme.id, payment_record_pay_scheme_path(time_log.payment_record_pay_scheme.id) %> </td>
                 <td><%= time_log.pay %></td>
-                <td> TO BE IMPLEMENTED (MAYBE)</td>
+                <td><%= time_log.remarks %></td>
               </tr>
           <% end %>
           </tbody>

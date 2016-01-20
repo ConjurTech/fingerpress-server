@@ -7,6 +7,7 @@
     <tr>
       <th>Date in</th>
       <th>Date out</th>
+      <th>Validity</th>
       <th>Employee</th>
       <th>Pay scheme</th>
       <th>Pay slip</th>
@@ -19,6 +20,7 @@
       <tr>
         <td><%= time_log.try(:date_time_in).try(:to_formatted_s, :long) %></td>
         <td><%= time_log.try(:date_time_out).try(:to_formatted_s, :long) %></td>
+        <td><%= time_log.time_log_is_valid? ? "Yes" : "No" %></td>
         <td><%= time_log.employee.name %></td>
         <td><%= time_log.try(:pay_scheme).try(:id) %></td>
         <td><%= time_log.payment_record.try(:id) %></td>

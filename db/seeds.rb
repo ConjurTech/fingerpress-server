@@ -6,46 +6,6 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-
-pay_type_attributes = [
-    { name: 'Monthly' },
-    { name: 'Hourly'}
-]
-
-pay_type_attributes.each do |attributes|
-  PayType.create(attributes) unless PayType.where(attributes).first
-end
-
-ot_type_attributes = [
-    { name: 'None' },
-    { name: 'PerHour'},
-    { name: 'Multiplier'}
-]
-
-ot_type_attributes.each do |attributes|
-  OtType.create(attributes) unless OtType.where(attributes).first
-end
-
-public_holiday_type_attributes = [
-    { name: 'None' },
-    { name: 'PerHour'},
-    { name: 'Multiplier'}
-]
-
-public_holiday_type_attributes.each do |attributes|
-  PublicHolidayType.create(attributes) unless PublicHolidayType.where(attributes).first
-end
-
-weekend_type_attributes = [
-    { name: 'None' },
-    { name: 'PerHour'},
-    { name: 'Multiplier'}
-]
-
-weekend_type_attributes.each do |attributes|
-  WeekendType.create(attributes) unless WeekendType.where(attributes).first
-end
-
 work_day_attributes = [
     { name: 'Monday', start_time_seconds: Time.parse('9:00').seconds_since_midnight, end_time_seconds: Time.parse('17:00').seconds_since_midnight, enabled: true },
     { name: 'Tuesday', start_time_seconds: Time.parse('9:00').seconds_since_midnight, end_time_seconds: Time.parse('17:00').seconds_since_midnight, enabled: true },
