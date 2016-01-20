@@ -12,7 +12,7 @@ class EmployeesController < ApplicationController
   # GET /employees/1
   # GET /employees/1.json
   def show
-    @time_logs = @employee.time_logs
+    @time_logs = @employee.time_logs.complete
     @hrs_logged = @time_logs.map{|tl| [tl.date_time_in, TimeDifference.between(tl.date_time_in, tl.date_time_out).in_hours]}
   end
 
@@ -33,7 +33,7 @@ class EmployeesController < ApplicationController
   # Finds the timelog after the last valid timelog that does not have a date_time_out set yet and sets the checkout time on it.
   # If none is found, creates a new timelog and sets the checkout time on it.
   def check_out
-    last_valid_timelog = @employee.time_logs.where('date_time_in NOT NULL AND date_time_out NOT NULL').order(date_time_out: :desc).first
+    last_valid_timelog = @employee.time_logs.complete.order(date_time_out: :desc).first
     time_must_be_after = last_valid_timelog.try(:date_time_out) || Time.at(0) # for the first record
 
     timelog = @employee.time_logs.where('date_time_in > ?', time_must_be_after).where(date_time_out: nil).first

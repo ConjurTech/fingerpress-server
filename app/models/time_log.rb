@@ -11,6 +11,8 @@ class TimeLog < ActiveRecord::Base
   # validate :end_time_is_after_start_time
   before_save :set_validity
 
+  scope :complete, -> { where('date_time_in IS NOT NULL AND date_time_out IS NOT NULL') }
+
   def date_in
     return nil unless self[:date_time_in]
     date_time_in.strftime("%e %B, %Y")
