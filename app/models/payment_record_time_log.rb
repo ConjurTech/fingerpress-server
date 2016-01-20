@@ -22,7 +22,7 @@ class PaymentRecordTimeLog < ActiveRecord::Base
   end
 
   def calculate_pay
-
+    self.pay = total_pay
   end
 
   # Calculate pay functions
@@ -35,25 +35,43 @@ class PaymentRecordTimeLog < ActiveRecord::Base
   end
 
   def ot_pay
-    ot_hours * self.payment_record_pay_scheme.pay_ot
+    case self.payment_record_pay_scheme.weekend_type
+      when 'same_as_normal'
+        ot_hours * self.payment_record_pay_scheme.pay
+      when 'per_hour'
+        ot_hours * self.payment_record_pay_scheme.pay_ot
+      when 'multiplier'
+        ot_hours * self.payment_record_pay_scheme.pay * self.payment_record_pay_scheme.ot_multiplier
+      else
+        0
+    end
   end
 
   def weekend_pay
-    weekend_hours * self.payment_record_pay_scheme.pay_weekend
-    # weekend_pay = case self.payment_record_pay_scheme.weekend_type
-    #                   when 'same_as_normal'
-    #
-    #                   when 'per_hour'
-    #                     worked_hours
-    #                   when 'multiplier'
-    #
-    #                   else
-    #                     0
-    #                 end
+    case self.payment_record_pay_scheme.weekend_type
+      when 'same_as_normal'
+        weekend_hours * self.payment_record_pay_scheme.pay
+      when 'per_hour'
+        weekend_hours * self.payment_record_pay_scheme.pay_weekend
+      when 'multiplier'
+        weekend_hours * self.payment_record_pay_scheme.pay * self.payment_record_pay_scheme.weekend_multiplier
+      else
+        0
+    end
   end
 
   def public_holiday_pay
     public_holiday_hours * self.payment_record_pay_scheme.pay_public_holiday
+    case self.payment_record_pay_scheme.weekend_type
+      when 'same_as_normal'
+        public_holiday_hours * self.payment_record_pay_scheme.pay
+      when 'per_hour'
+        public_holiday_hours * self.payment_record_pay_scheme.pay_public_holiday
+      when 'multiplier'
+        public_holiday_hours * self.payment_record_pay_scheme.pay * self.payment_record_pay_scheme.public_holiday_multiplier
+      else
+        0
+    end
   end
 
   def worked_hours
@@ -71,7 +89,7 @@ class PaymentRecordTimeLog < ActiveRecord::Base
   end
 
   def weekend_hours
-    weekend? ? worked_hours : 0
+    (weekend? && !public_holiday?) ? worked_hours : 0
   end
 
   def public_holiday_hours

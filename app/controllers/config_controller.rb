@@ -27,7 +27,6 @@ class ConfigController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def config_params
-    byebug
     params.require(:workdays).permit(workdays_attributes: [:id, :name, :start_time_seconds, :end_time_seconds, :enabled])
   end
 end
