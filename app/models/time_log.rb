@@ -4,7 +4,7 @@ class TimeLog < ActiveRecord::Base
   belongs_to :pay_scheme
   belongs_to :payment_record
 
-  # before_validation :convert_to_datetime, on: [:create, :update]
+  before_validation :convert_to_datetime, on: [:create, :update]
   # validates :time_in, :time_out, :date_in, :date_out, :employee, :pay_scheme, presence: true
   validates :employee, :pay_scheme, presence: true
   # validate :end_time_is_after_start_time
@@ -51,19 +51,20 @@ class TimeLog < ActiveRecord::Base
   end
 
   def convert_to_datetime
-    if @date_time_in_date_field.blank? || @date_time_in_time_field.blank?
-      self.date_time_in = nil
-    else
-      self.date_time_in = Time.zone.parse("#{@date_time_in_date_field} #{@date_time_in_time_field}")
-    end
+    if self.date_time_in.blank? && self.date_time_out.blank? && self.new_record?
+      if @date_time_in_date_field.blank? || @date_time_in_time_field.blank?
+        self.date_time_in = nil
+      else
+        self.date_time_in = Time.zone.parse("#{@date_time_in_date_field} #{@date_time_in_time_field}")
+      end
 
-    if @date_time_out_date_field.blank? || @date_time_out_time_field.blank?
-      self.date_time_out = nil
-    else
-      self.date_time_out = Time.zone.parse("#{@date_time_out_date_field} #{@date_time_out_time_field}")
+      if @date_time_out_date_field.blank? || @date_time_out_time_field.blank?
+        self.date_time_out = nil
+      else
+        self.date_time_out = Time.zone.parse("#{@date_time_out_date_field} #{@date_time_out_time_field}")
+      end
     end
   end
-
 
   private
   def end_time_is_after_start_time
