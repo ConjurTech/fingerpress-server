@@ -7,12 +7,8 @@ class PaymentRecord < ActiveRecord::Base
   accepts_nested_attributes_for :employee, reject_if: :all_blank, allow_destroy: false
   before_save :set_paid_at, :calculate_pay
 
-  def paid?
-    self.paid_at.present?
-  end
-
   def set_paid_at
-    self.paid_at = Time.zone.now
+    self.paid_at = Time.zone.now if self.paid?
   end
 
   def calculate_pay
@@ -22,9 +18,10 @@ class PaymentRecord < ActiveRecord::Base
     total_ot_pay = 0
     self.payment_record_time_logs.each do |payment_record_time_log|
       #total_ot_hours += payment_record_time_log.ot_hours
-      total_ot_pay += payment_record_time_log.ot_hours * payment_record_time_log.payment_record_pay_scheme.pay_ot
+      total_ot_pay += payment_record_time_log.total_pay
       #* self.payment_record_pay_scheme.pay_ot
     end
+    self.total_pay = total_ot_pay
     # if self.payment_record_pay_scheme.name == 'Monthly'
     #   # get months in between time period
     #   number_of_months(self.start_date, self.end_date)

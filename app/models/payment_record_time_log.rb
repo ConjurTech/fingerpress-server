@@ -65,8 +65,7 @@ class PaymentRecordTimeLog < ActiveRecord::Base
   end
 
   def public_holiday_pay
-    public_holiday_hours * self.payment_record_pay_scheme.pay_public_holiday
-    case self.payment_record_pay_scheme.weekend_type
+    case self.payment_record_pay_scheme.public_holiday_type
       when 'same_as_normal'
         public_holiday_hours * self.payment_record_pay_scheme.pay
       when 'per_hour'
