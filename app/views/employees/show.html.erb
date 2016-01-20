@@ -21,20 +21,17 @@
 
     <p>
       <strong>Birthdate:</strong>
-      <%= @employee.birthdate.to_formatted_s(:long) %>
+      <%= @employee.try(:birthdate).try(:to_formatted_s, :long) %>
     </p>
 
     <p>
       <strong>Joindate:</strong>
-      <%= @employee.joindate.to_formatted_s(:long) %>
+      <%= @employee.try(:joindate).try(:to_formatted_s, :long) %>
     </p>
 
     <p>
       <strong>Leavedate:</strong>
-      <% if @employee.leavedate.nil? %>
-      <% else %>
-          <%= @employee.leavedate.to_formatted_s(:long) %>
-      <% end %>
+      <%= @employee.try(:leavedate).try(:to_formatted_s, :long) %>
     </p>
 
     <p>

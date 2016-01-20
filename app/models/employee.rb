@@ -4,7 +4,7 @@ class Employee < ActiveRecord::Base
   belongs_to :pay_scheme
   validates :pay_scheme, presence: true
 
-  def time_logs_between(start_date, end_date)
-    self.time_logs.where(date_time_in: start_date..(end_date+1), payment_record: nil)
+  def valid_time_logs_between(start_date, end_date)
+    self.time_logs.where(date_time_in: start_date..(end_date+1), payment_record: nil, time_log_is_valid: true)
   end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160120085750) do
+ActiveRecord::Schema.define(version: 20160120103416) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
@@ -33,17 +33,18 @@ ActiveRecord::Schema.define(version: 20160120085750) do
   add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true, using: :btree
 
   create_table "employees", force: :cascade do |t|
-    t.string   "name",          limit: 255
-    t.string   "sex",           limit: 255
+    t.string   "name",           limit: 255
+    t.string   "sex",            limit: 255
     t.datetime "birthdate"
     t.datetime "joindate"
     t.datetime "leavedate"
-    t.string   "bankdetails",   limit: 255
+    t.string   "bankdetails",    limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "deleted_at"
-    t.integer  "pay_scheme_id", limit: 4
-    t.string   "job",           limit: 255
+    t.integer  "pay_scheme_id",  limit: 4
+    t.string   "job",            limit: 255
+    t.integer  "fingerprint_id", limit: 4
   end
 
   add_index "employees", ["deleted_at"], name: "index_employees_on_deleted_at", using: :btree
@@ -127,9 +128,10 @@ ActiveRecord::Schema.define(version: 20160120085750) do
     t.datetime "date_time_out"
     t.integer  "employee_id",       limit: 4
     t.integer  "pay_scheme_id",     limit: 4
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
     t.integer  "payment_record_id", limit: 4
+    t.boolean  "time_log_is_valid", limit: 1, default: false
   end
 
   add_index "time_logs", ["employee_id"], name: "index_time_logs_on_employee_id", using: :btree

@@ -6,8 +6,9 @@ class TimeLog < ActiveRecord::Base
 
   # before_validation :convert_to_datetime, on: [:create, :update]
   # validates :time_in, :time_out, :date_in, :date_out, :employee, :pay_scheme, presence: true
+  validates :employee, :pay_scheme, presence: true
   # validate :end_time_is_after_start_time
-
+  before_save :set_validity
 
   def date_in
     return nil unless self[:date_time_in]
@@ -73,5 +74,14 @@ class TimeLog < ActiveRecord::Base
       errors.add(:base, "End date/time cannot be BEFORE the start date/time")
       false
     end
+  end
+
+  def set_validity
+    if self.date_time_in.present? && self.date_time_out.present?
+      self.time_log_is_valid = true
+    else
+      self.time_log_is_valid = false
+    end
+    true
   end
 end

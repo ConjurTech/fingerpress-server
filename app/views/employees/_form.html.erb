@@ -45,7 +45,8 @@
     </div>
 
     <div class="input-field">
-      <%= f.association :pay_scheme %>
+      <%= f.label :pay_scheme, class: 'active' %>
+      <%= f.association :pay_scheme, label: false %>
     </div>
 
     <div class="input-field">

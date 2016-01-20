@@ -21,13 +21,9 @@
         <td class="wrapped"><%= employee.name %></td>
         <td><%= employee.sex %></td>
         <td><%= employee.job %></td>
-        <td><%= employee.birthdate.to_formatted_s(:long) %></td>
-        <td><%= employee.joindate.to_formatted_s(:long) %></td>
-        <% if employee.leavedate.nil? %>
-        <td></td>
-        <% else %>
-            <td><%= employee.leavedate.to_formatted_s(:long) %></td>
-        <% end %>
+        <td><%= employee.try(:birthdate).try(:to_formatted_s, :long) %></td>
+        <td><%= employee.try(:joindate).try(:to_formatted_s, :long) %></td>
+        <td><%= employee.try(:leavedate).try(:to_formatted_s, :long) %></td>
         <td class="wrapped"><%= employee.try(:pay_scheme).try(:name) %></td>
         <td class="wrapped"><%= employee.bankdetails %></td>
         <td>

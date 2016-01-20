@@ -6,8 +6,12 @@ class PayScheme < ActiveRecord::Base
   validates :name, :pay_type, :pay, presence: true
   validates :pay, :pay_ot, :pay_weekend, :pay_public_holiday, numericality: { greater_than_or_equal_to: 0 }
 
-  def hourly_type?
-    pay_type == :hourly
+  def hourly?
+    pay_type == 'hourly'
+  end
+
+  def monthly?
+    pay_type == 'monthly'
   end
 
   private
