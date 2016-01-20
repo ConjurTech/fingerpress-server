@@ -47,18 +47,18 @@
             </div>
           </div>
 
-          <div id="pay_scheme_ot_time_div">
-            <div class="row">
-              <div class="col s6">
-                <%= f.label :ot_time_range_start, "Ot Start Time", class: 'active' %>
-                <%= f.time_field :ot_time_range_start, :class => "timepicker" %>
-              </div>
-              <div class="col s6">
-                <%= f.label :ot_time_range_end, "Ot End Time", class: 'active' %>
-                <%= f.time_field :ot_time_range_end, :class => "timepicker" %>
-              </div>
-            </div>
-          </div>
+          <!--Uncomment when pay scheme supports ot time ranges-->
+          <!--<div id="pay_scheme_ot_time_div">-->
+            <!--If you have a specific time range that you use as OT, Please specify. If not leave this blank.-->
+            <!--<div class="row">-->
+              <!--<div class="col s6">-->
+                <!--<%= f.input :ot_time_range_start, label: "Ot Start Time", as: :string, input_html: {class: "timepicker", value: f.object.try(:ot_time_range_start).try(:strftime, "%I:%M %p") || ""} %>-->
+              <!--</div>-->
+              <!--<div class="col s6">-->
+                <!--<%= f.input :ot_time_range_end, label: "Ot End Time", as: :string, input_html: {class: "timepicker", value: f.object.try(:ot_time_range_end).try(:strftime, "%I:%M %p") || ""} %>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
 
         </div>
       </div>
@@ -94,7 +94,7 @@
 
           <div class="row">
             <div class="col s6">
-              <%= f.association :weekend_type, default: f.object.id.present? ?  f.object.weekend_type : 'None' %>
+              <%= f.association :weekend_type, default: f.object.id.present? ? f.object.weekend_type : 'None' %>
             </div>
             <div id="pay_scheme_w_multiplier_div">
               <div class="col s6">

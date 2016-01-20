@@ -18,4 +18,5 @@
 //= require turbolinks
 //= require chartkick
 //= require jquery-clockpicker
+//= require pickadate/picker.time
 //= require_tree .
