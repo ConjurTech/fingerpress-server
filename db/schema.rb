@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160120103416) do
+ActiveRecord::Schema.define(version: 20160120112027) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
@@ -101,9 +101,10 @@ ActiveRecord::Schema.define(version: 20160120103416) do
     t.datetime "date_time_out"
     t.integer  "payment_record_pay_scheme_id", limit: 4
     t.integer  "payment_record_id",            limit: 4
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
     t.float    "pay",                          limit: 24
+    t.string   "remarks",                      limit: 255
   end
 
   add_index "payment_record_time_logs", ["payment_record_id"], name: "index_payment_record_time_logs_on_payment_record_id", using: :btree

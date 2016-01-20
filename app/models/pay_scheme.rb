@@ -3,7 +3,7 @@ class PayScheme < ActiveRecord::Base
 
   after_initialize :init
 
-  validates :name, :pay_type, :pay, presence: true
+  validates :name, :pay_type, :pay, :hours_per_day, presence: true
   validates :pay, :pay_ot, :pay_weekend, :pay_public_holiday, numericality: { greater_than_or_equal_to: 0 }
 
   def hourly?
