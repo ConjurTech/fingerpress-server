@@ -7,7 +7,7 @@
 
           <div class="row">
             <div class="col s6">
-              <%= f.input :name, :required => true %>
+              <%= f.input :name %>
             </div>
             <div class="col s6">
               <%= f.input :hours_per_day %>
@@ -16,7 +16,7 @@
 
           <div class="row">
             <div class="col s6">
-              <%= f.association :pay_type %>
+              <%= f.input :pay_type, collection: [["Hourly", "hourly"], ["Monthly", "monthly"]] %>
             </div>
             <div class="col s6">
               <%= f.input :pay %>
@@ -33,7 +33,7 @@
 
           <div class="row">
             <div class="col s6">
-              <%= f.association :ot_type, default: f.object.id.present? ? f.object.ot_type : 'None' %>
+              <%= f.input :ot_type, collection: [['Per Hour', 'per_hour'], ['Multiplier', 'multiplier'], ['Same As Normal', 'same_as_normal']] %>
             </div>
             <div id="pay_scheme_ot_multiplier_div">
               <div class="col s6">
@@ -49,20 +49,42 @@
 
           <!--Uncomment when pay scheme supports ot time ranges-->
           <!--<div id="pay_scheme_ot_time_div">-->
-            <!--If you have a specific time range that you use as OT, Please specify. If not leave this blank.-->
-            <!--<div class="row">-->
-              <!--<div class="col s6">-->
-                <!--<%= f.input :ot_time_range_start, label: "Ot Start Time", as: :string, input_html: {class: "timepicker", value: f.object.try(:ot_time_range_start).try(:strftime, "%I:%M %p") || ""} %>-->
-              <!--</div>-->
-              <!--<div class="col s6">-->
-                <!--<%= f.input :ot_time_range_end, label: "Ot End Time", as: :string, input_html: {class: "timepicker", value: f.object.try(:ot_time_range_end).try(:strftime, "%I:%M %p") || ""} %>-->
-              <!--</div>-->
-            <!--</div>-->
+          <!--If you have a specific time range that you use as OT, Please specify. If not leave this blank.-->
+          <!--<div class="row">-->
+          <!--<div class="col s6">-->
+          <!--<%= f.input :ot_time_range_start, label: "Ot Start Time", as: :string, input_html: {class: "timepicker", value: f.object.try(:ot_time_range_start).try(:strftime, "%I:%M %p") || ""} %>-->
+          <!--</div>-->
+          <!--<div class="col s6">-->
+          <!--<%= f.input :ot_time_range_end, label: "Ot End Time", as: :string, input_html: {class: "timepicker", value: f.object.try(:ot_time_range_end).try(:strftime, "%I:%M %p") || ""} %>-->
+          <!--</div>-->
+          <!--</div>-->
           <!--</div>-->
 
         </div>
       </div>
 
+      <div class="card white darken-1">
+        <div class="card-content black-text black-text">
+          <span class="card-title black-text">Weekend Pay Details</span>
+
+          <div class="row">
+            <div class="col s6">
+              <%= f.input :weekend_type, collection: [['Per Hour', 'per_hour'], ['Multiplier', 'multiplier'], ['Same As Normal', 'same_as_normal']] %>
+            </div>
+            <div id="pay_scheme_w_multiplier_div">
+              <div class="col s6">
+                <%= f.input :weekend_multiplier %>
+              </div>
+            </div>
+            <div id="pay_scheme_pay_w_div">
+              <div class="col s6">
+                <%= f.input :pay_weekend %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
       <div class="card white darken-1">
         <div class="card-content black-text black-text">
@@ -70,7 +92,7 @@
 
           <div class="row">
             <div class="col s6">
-              <%= f.association :public_holiday_type, default: f.object.id.present? ? f.object.public_holiday_type : 'None' %>
+              <%= f.input :public_holiday_type, collection: [['Per Hour', 'per_hour'], ['Multiplier', 'multiplier'], ['Same As Normal', 'same_as_normal']] %>
             </div>
             <div id="pay_scheme_ph_multiplier_div">
               <div class="col s6">
@@ -87,29 +109,6 @@
         </div>
       </div>
 
-
-      <div class="card white darken-1">
-        <div class="card-content black-text black-text">
-          <span class="card-title black-text">Weekend Pay Details</span>
-
-          <div class="row">
-            <div class="col s6">
-              <%= f.association :weekend_type, default: f.object.id.present? ? f.object.weekend_type : 'None' %>
-            </div>
-            <div id="pay_scheme_w_multiplier_div">
-              <div class="col s6">
-                <%= f.input :weekend_multiplier %>
-              </div>
-            </div>
-            <div id="pay_scheme_pay_w_div">
-              <div class="col s6">
-                <%= f.input :pay_weekend %>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <div class="form-actions">
       <%= f.button :submit %>

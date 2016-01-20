@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160120071022) do
+ActiveRecord::Schema.define(version: 20160120085750) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
@@ -59,8 +59,8 @@ ActiveRecord::Schema.define(version: 20160120071022) do
     t.float    "pay",                       limit: 24
     t.float    "pay_ot",                    limit: 24
     t.float    "pay_public_holiday",        limit: 24
-    t.datetime "created_at",                                                       null: false
-    t.datetime "updated_at",                                                       null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
     t.string   "name",                      limit: 255
     t.float    "ot_multiplier",             limit: 24
     t.time     "ot_time_range_start"
@@ -69,18 +69,18 @@ ActiveRecord::Schema.define(version: 20160120071022) do
     t.float    "pay_weekend",               limit: 24
     t.float    "weekend_multiplier",        limit: 24
     t.float    "hours_per_day",             limit: 24
-    t.string   "pay_type",                  limit: 255, default: "hourly"
-    t.string   "ot_type",                   limit: 255, default: "hourly"
-    t.string   "weekend_type",              limit: 255, default: "same_as_normal"
-    t.string   "public_holiday_type",       limit: 255, default: "same_as_normal"
+    t.string   "pay_type",                  limit: 255
+    t.string   "ot_type",                   limit: 255
+    t.string   "weekend_type",              limit: 255
+    t.string   "public_holiday_type",       limit: 255
   end
 
   create_table "payment_record_pay_schemes", force: :cascade do |t|
     t.float    "pay",                       limit: 24
     t.float    "pay_ot",                    limit: 24
     t.float    "pay_public_holiday",        limit: 24
-    t.datetime "created_at",                                                       null: false
-    t.datetime "updated_at",                                                       null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
     t.string   "name",                      limit: 255
     t.float    "ot_multiplier",             limit: 24
     t.time     "ot_time_range_start"
@@ -89,10 +89,10 @@ ActiveRecord::Schema.define(version: 20160120071022) do
     t.float    "pay_weekend",               limit: 24
     t.float    "weekend_multiplier",        limit: 24
     t.float    "hours_per_day",             limit: 24
-    t.string   "pay_type",                  limit: 255, default: "hourly"
-    t.string   "ot_type",                   limit: 255, default: "hourly"
-    t.string   "weekend_type",              limit: 255, default: "same_as_normal"
-    t.string   "public_holiday_type",       limit: 255, default: "same_as_normal"
+    t.string   "pay_type",                  limit: 255
+    t.string   "ot_type",                   limit: 255
+    t.string   "weekend_type",              limit: 255
+    t.string   "public_holiday_type",       limit: 255
   end
 
   create_table "payment_record_time_logs", force: :cascade do |t|

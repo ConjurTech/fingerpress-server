@@ -63,13 +63,16 @@ class PaySchemesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_pay_scheme
-      @pay_scheme = PayScheme.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_pay_scheme
+    @pay_scheme = PayScheme.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def pay_scheme_params
-      params.require(:pay_scheme).permit(:pay_type_id, :pay, :pay_ot, :pay_public_holiday, :pay_weekend, :name, :ot_type_id, :public_holiday_type_id, :weekend_type_id, :ot_multiplier, :weekend_multiplier, :public_holiday_multiplier, :hours_per_day, :ot_time_range_start, :ot_time_range_end)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def pay_scheme_params
+    params.require(:pay_scheme).permit(:pay_type, :ot_type, :public_holiday_type, :weekend_type,
+                                       :pay, :pay_ot, :pay_public_holiday, :pay_weekend,
+                                       :name, :ot_multiplier, :weekend_multiplier, :public_holiday_multiplier,
+                                       :hours_per_day, :ot_time_range_start, :ot_time_range_end)
+  end
 end
