@@ -34,8 +34,9 @@ class EmployeesController < ApplicationController
   # If none is found, creates a new timelog and sets the checkout time on it.
   def check_out
     last_valid_timelog = @employee.time_logs.where('date_time_in NOT NULL AND date_time_out NOT NULL').order(date_time_out: :desc).first
+    time_must_be_after = last_valid_timelog.try(:date_time_out) || Time.at(0) # for the first record
 
-    timelog = @employee.time_logs.where('date_time_in > ?', last_valid_timelog.date_time_out).where(date_time_out: nil)
+    timelog = @employee.time_logs.where('date_time_in > ?', time_must_be_after).where(date_time_out: nil).first
     timelog ||= @employee.time_logs.new
     timelog.date_time_out = Time.at(params[:timestamp].to_i)
     timelog.save!
