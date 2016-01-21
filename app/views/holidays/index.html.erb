@@ -16,9 +16,21 @@
       <tr>
         <td><%= holiday.name %></td>
         <td><%= holiday.day %></td>
-        <td><%= link_to 'Show', holiday %></td>
-        <td><%= link_to 'Edit', edit_holiday_path(holiday) %></td>
-        <td><%= link_to 'Destroy', holiday, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <%= link_to holiday do %>
+              <i class="material-icons">pageview</i>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to edit_holiday_path(holiday) do %>
+              <i class="material-icons">edit</i>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to holiday, method: :delete, data: {confirm: 'Are you sure?'} do %>
+              <i class="material-icons">delete</i>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>
@@ -26,4 +38,4 @@
 
 <br>
 
-<%= link_to 'New Holiday', new_holiday_path %>
+<%= link_to 'New Holiday', new_holiday_path, class: 'btn' %>

@@ -15,8 +15,10 @@ $(document).ready ->
 
 # For fade in fade out effect between pages
 $(document).on 'page:fetch', ->
-  $('.container').fadeOut 'slow'
+  $('.container').fadeOut 'fast'
+  $('.cssload-preloader').show()
 
 $(document).on 'page:change', ->
   $('.container').hide()
   $('.container').fadeIn 'slow'
+  $('.cssload-preloader').hide()
