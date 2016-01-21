@@ -1,4 +1,5 @@
 class StatisticsController < ApplicationController
+  before_action :authenticate_admin!
   def show
     @employees = Employee.all
     @time_logs = @employee.time_logs

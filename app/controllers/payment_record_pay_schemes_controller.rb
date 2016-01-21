@@ -1,5 +1,6 @@
 class PaymentRecordPaySchemesController < ApplicationController
   before_action :set_payment_record_pay_scheme, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_admin!
 
   # GET /payment_record_pay_schemes
   # GET /payment_record_pay_schemes.json

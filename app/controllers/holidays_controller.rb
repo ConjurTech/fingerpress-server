@@ -1,5 +1,6 @@
 class HolidaysController < ApplicationController
   before_action :set_holiday, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_admin!
 
   # GET /holidays
   # GET /holidays.json

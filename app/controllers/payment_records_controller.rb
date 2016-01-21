@@ -1,5 +1,6 @@
 class PaymentRecordsController < ApplicationController
   before_action :set_payment_record, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_admin!
 
   # GET /payment_records
   # GET /payment_records.json
