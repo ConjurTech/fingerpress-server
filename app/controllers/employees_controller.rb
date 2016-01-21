@@ -1,6 +1,6 @@
 class EmployeesController < ApplicationController
   skip_before_action :protect_from_forgery, only: [:check_in, :check_out]
-  before_action :set_employee, only: [:show, :edit, :update, :destroy]
+  before_action :set_employee, only: [:show, :edit, :update, :destroy, :register]
   before_action :set_employee_by_fingerprint, only: [:check_in, :check_out]
 
   # GET /employees
@@ -27,6 +27,12 @@ class EmployeesController < ApplicationController
 
   def check_in
     @employee.time_logs.create!(date_time_in: Time.at(params[:timestamp].to_i))
+    render :show
+  end
+
+  def register
+    @employee.fingerprint_id = params[:fingerprint_id]
+    @employee.save
     render :show
   end
 

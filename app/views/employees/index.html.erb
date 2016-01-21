@@ -3,7 +3,9 @@
 <table>
   <thead>
   <tr>
+    <th>ID</th>
     <th>Name</th>
+    <th>Fingerprint ID</th>
     <th>Sex</th>
     <th>Job</th>
     <th>Birthdate</th>
@@ -18,7 +20,9 @@
   <tbody>
   <% @employees.each do |employee| %>
       <tr>
+        <td><%= employee.id %></td>
         <td class="wrapped"><%= employee.name %></td>
+        <td><%= employee.fingerprint_id %></td>
         <td><%= employee.sex %></td>
         <td><%= employee.job %></td>
         <td><%= employee.try(:birthdate).try(:to_formatted_s, :long) %></td>

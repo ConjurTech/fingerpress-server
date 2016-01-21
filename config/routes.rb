@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     member do
       post :check_in
       post :check_out
+      post :register
     end
   end
   resources :payment_records
