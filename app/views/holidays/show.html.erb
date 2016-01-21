@@ -1,18 +1,22 @@
-<p id="notice"><%= notice %></p>
-
-<div class="card">
-  <div class="card-content">
-    <p>
-      <strong>Day:</strong>
-      <%= @holiday.day %>
-    </p>
-
-    <p>
-      <strong>Name:</strong>
-      <%= @holiday.name %>
-    </p>
+<h1>Holiday Details</h1>
+<div class="row">
+  <div class="right">
+    <%= link_to 'Edit', edit_holiday_path(@holiday), class: 'btn' %>
+    <%= link_to 'Back', holidays_path, class: 'btn' %>
   </div>
 </div>
+<div class="row">
+  <div class="card">
+    <div class="card-content">
+      <p>
+        <strong>Day:</strong>
+        <%= @holiday.day %>
+      </p>
 
-<%= link_to 'Edit', edit_holiday_path(@holiday) %> |
-<%= link_to 'Back', holidays_path %>
+      <p>
+        <strong>Name:</strong>
+        <%= @holiday.name %>
+      </p>
+    </div>
+  </div>
+</div>

@@ -12,8 +12,8 @@ class EmployeesController < ApplicationController
   # GET /employees/1
   # GET /employees/1.json
   def show
-    @time_logs = @employee.time_logs.complete
-    @hrs_logged = @time_logs.map{|tl| [tl.date_time_in, TimeDifference.between(tl.date_time_in, tl.date_time_out).in_hours]}
+    @time_logs = @employee.time_logs.complete.page(params[:page]).per(5)
+    @hrs_logged = @time_logs.map{|tl| [tl.date_time_in.to_formatted_s(:short), TimeDifference.between(tl.date_time_in, tl.date_time_out).in_hours]}
   end
 
   # GET /employees/new

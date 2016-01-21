@@ -1,103 +1,108 @@
 <h1>Pay Scheme</h1>
-<div class="card blue-grey darken-1">
-  <div class="card-content white-text">
-    <span class="card-title">Details</span>
 
-    <p id="notice"><%= notice %></p>
-
-    <p>
-      <strong>Name:</strong>
-      <%= @pay_scheme.name %>
-    </p>
-
-    <p>
-      <strong>Type:</strong>
-      <%= @pay_scheme.pay_type.try(:titleize) %>
-    </p>
-
-    <p>
-      <strong>Pay:</strong>
-      <%= @pay_scheme.pay %>
-    </p>
-
-    <p>
-      <strong>Work Hours:</strong>
-      <%= @pay_scheme.hours_per_day %> hrs per day
-    </p>
-
-    <div class="card blue-grey darken-1">
-      <div class="card-content">
-        <div class="card-title">OT</div>
-        <p>
-          <strong>Pay Type:</strong>
-          <%= @pay_scheme.ot_type.try(:titleize) %>
-        </p>
-
-        <% if @pay_scheme.ot_type == 'per_hour' %>
-            <p>
-              <strong>Pay ot:</strong>
-              <%= @pay_scheme.pay_ot %>
-            </p>
-        <% end %>
-
-        <% if @pay_scheme.ot_type == 'multiplier' %>
-            <p>
-              <strong>Pay ot multiplier:</strong>
-              <%= @pay_scheme.ot_multiplier %> X
-            </p>
-        <% end %>
-
-      </div>
-    </div>
-
-    <div class="card blue-grey darken-1">
-      <div class="card-content">
-        <div class="card-title">Weekend</div>
-        <p>
-          <strong>Pay Type: </strong>
-          <%= @pay_scheme.weekend_type.try(:titleize) %>
-        </p>
-
-        <% if @pay_scheme.weekend_type == 'per_hour' %>
-            <p>
-              <strong>Pay Weekend:</strong>
-              <%= @pay_scheme.pay_weekend %>
-            </p>
-        <% end %>
-        <% if @pay_scheme.weekend_type == 'multiplier' %>
-            <p>
-              <strong>Weekend Pay Multiplier:</strong>
-              <%= @pay_scheme.weekend_multiplier %> X
-            </p>
-        <% end %>
-
-      </div>
-    </div>
-
-    <div class="card blue-grey darken-1">
-      <div class="card-content">
-        <div class="card-title">Public Holiday</div>
-        <p>
-          <strong>Pay Type: </strong>
-          <%= @pay_scheme.public_holiday_type.try(:titleize) %>
-        </p>
-
-        <% if @pay_scheme.public_holiday_type == 'per_hour' %>
-            <p>
-              <strong>Pay public holiday:</strong>
-              <%= @pay_scheme.pay_public_holiday %>
-            </p>
-        <% end %>
-        <% if @pay_scheme.public_holiday_type == 'multiplier' %>
-            <p>
-              <strong>Pay Public Holiday Multiplier:</strong>
-              <%= @pay_scheme.public_holiday_multiplier %> X
-            </p>
-        <% end %>
-      </div>
-    </div>
-
+<div class="row">
+  <div class="right">
+    <%= link_to 'Edit', edit_pay_scheme_path(@pay_scheme), class: 'btn' %>
+    <%= link_to 'Back', pay_schemes_path, class: 'btn' %>
   </div>
 </div>
-<%= link_to 'Edit', edit_pay_scheme_path(@pay_scheme) %> |
-<%= link_to 'Back', pay_schemes_path %>
+<div class="row">
+  <div class="card">
+    <div class="card-content">
+      <span class="card-title">Details</span>
+
+      <p>
+        <strong>Name:</strong>
+        <%= @pay_scheme.name %>
+      </p>
+
+      <p>
+        <strong>Type:</strong>
+        <%= @pay_scheme.pay_type.try(:titleize) %>
+      </p>
+
+      <p>
+        <strong>Pay:</strong>
+        <%= @pay_scheme.pay %>
+      </p>
+
+      <p>
+        <strong>Work Hours:</strong>
+        <%= @pay_scheme.hours_per_day %> hrs per day
+      </p>
+
+      <div class="card">
+        <div class="card-content">
+          <div class="card-title">OT</div>
+          <p>
+            <strong>Pay Type:</strong>
+            <%= @pay_scheme.ot_type.try(:titleize) %>
+          </p>
+
+          <% if @pay_scheme.ot_type == 'per_hour' %>
+              <p>
+                <strong>Pay ot:</strong>
+                $<%= @pay_scheme.pay_ot %>
+              </p>
+          <% end %>
+
+          <% if @pay_scheme.ot_type == 'multiplier' %>
+              <p>
+                <strong>Pay ot multiplier:</strong>
+                <%= @pay_scheme.ot_multiplier %> X
+              </p>
+          <% end %>
+
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-content">
+          <div class="card-title">Weekend</div>
+          <p>
+            <span>Pay Type: </span>
+            <%= @pay_scheme.weekend_type.try(:titleize) %>
+          </p>
+
+          <% if @pay_scheme.weekend_type == 'per_hour' %>
+              <p>
+                <strong>Pay Weekend:</strong>
+                $<%= @pay_scheme.pay_weekend %>
+              </p>
+          <% end %>
+          <% if @pay_scheme.weekend_type == 'multiplier' %>
+              <p>
+                <strong>Weekend Pay Multiplier:</strong>
+                <%= @pay_scheme.weekend_multiplier %> X
+              </p>
+          <% end %>
+
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-content">
+          <div class="card-title">Public Holiday</div>
+          <p>
+            <strong>Pay Type: </strong>
+            <%= @pay_scheme.public_holiday_type.try(:titleize) %>
+          </p>
+
+          <% if @pay_scheme.public_holiday_type == 'per_hour' %>
+              <p>
+                <strong>Pay public holiday:</strong>
+                $<%= @pay_scheme.pay_public_holiday %>
+              </p>
+          <% end %>
+          <% if @pay_scheme.public_holiday_type == 'multiplier' %>
+              <p>
+                <strong>Pay Public Holiday Multiplier:</strong>
+                <%= @pay_scheme.public_holiday_multiplier %> X
+              </p>
+          <% end %>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
