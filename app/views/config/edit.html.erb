@@ -1,3 +1,4 @@
+<h1>Set Workdays</h1>
 <body>
 <%= form_tag config_update_path do %>
     <div class="row">
@@ -8,7 +9,7 @@
                 <div class="card white darken-1">
                   <div class="card-content black-text">
 
-                    <%= wf.text_field :name %>
+                    <span class="card-title"><%= workday.name %></span>
 
                     <div class="input-group clockpicker">
                       <%= wf.text_field :start_time_seconds %>

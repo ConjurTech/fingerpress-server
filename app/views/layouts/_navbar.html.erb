@@ -1,6 +1,10 @@
 <nav class="">
   <div class="nav-wrapper">
-    <a href="#" class="brand-logo">Logo</a>
+    <div class="brand-logo">
+
+    </div>
+    <a href="/" class="brand-logo"><%= image_tag 'logo.png', class: 'brand-image' %></a>
+
     <ul id="nav-mobile" class="right hide-on-med-and-down">
       <li><%= active_link_to 'Employees', employees_path, wrap_tag: :li %></li>
       <li><%= active_link_to 'Pay Slips', payment_records_path, wrap_tag: :li %></li>
@@ -12,8 +16,4 @@
 
     </ul>
   </div>
-
-
-
-
 </nav>

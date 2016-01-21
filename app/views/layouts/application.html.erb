@@ -15,6 +15,7 @@
     <%= render 'layouts/navbar_unauthenticated' %>
 <% end %>
 <div class="container">
+  <%= flash_messages %>
   <%= yield %>
 </div>
 <div class="cssload-preloader">
