@@ -1,8 +1,12 @@
 <p id="notice"><%= notice %></p>
-
+<div class="fixed-action-btn">
+  <%= link_to new_pay_scheme_path, class: "btn-floating btn-large" do %>
+      <i class="material-icons tooltipped" data-position="top" data-delay="50" data-tooltip="New Pay scheme">add</i>
+  <% end %>
+</div>
 <h1>Listing Pay Schemes</h1>
 
-<table>
+<table class="striped bordered highlight">
   <thead>
   <tr>
     <th>Name</th>
@@ -46,7 +50,3 @@
   <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Pay scheme', new_pay_scheme_path, class: "waves-effect waves-light btn" %>

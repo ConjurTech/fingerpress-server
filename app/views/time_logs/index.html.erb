@@ -1,8 +1,17 @@
 <p id="notice"><%= notice %></p>
+<div class="fixed-action-btn">
+  <%= link_to new_time_log_path, class: "btn-floating btn-large" do %>
+      <i class="material-icons tooltipped" data-position="top" data-delay="50" data-tooltip="New Time log">add</i>
+  <% end %>
+</div>
 
 <h1>Listing Time Logs</h1>
 
-<table>
+<div class="right">
+  <%= paginate @time_logs %>
+</div>
+<br>
+<table class="striped bordered highlight">
   <thead>
   <tr>
     <th>Date in</th>
@@ -47,5 +56,3 @@
   <%= paginate @time_logs %>
 </div>
 <br>
-
-<%= link_to 'New Time log', new_time_log_path, class: "waves-effect waves-light btn" %>

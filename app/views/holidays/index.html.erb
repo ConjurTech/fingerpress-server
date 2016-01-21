@@ -1,8 +1,12 @@
 <p id="notice"><%= notice %></p>
-
+<div class="fixed-action-btn">
+  <%= link_to new_holiday_path, class: "btn-floating btn-large" do %>
+      <i class="material-icons tooltipped" data-position="top" data-delay="50" data-tooltip="New Holiday">add</i>
+  <% end %>
+</div>
 <h1>Listing Holidays</h1>
 
-<table>
+<table class="striped bordered highlight">
   <thead>
     <tr>
       <th>Name</th>
@@ -35,7 +39,3 @@
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Holiday', new_holiday_path, class: 'btn' %>

@@ -1,6 +1,11 @@
+<div class="fixed-action-btn">
+  <%= link_to new_employee_path, class: "btn-floating btn-large" do %>
+      <i class="material-icons tooltipped" data-position="top" data-delay="50" data-tooltip="Add Employee">add</i>
+  <% end %>
+</div>
 <h1>Listing employees</h1>
 
-<table>
+<table class="striped bordered highlight">
   <thead>
   <tr>
     <th>ID</th>
@@ -49,7 +54,3 @@
   <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'Add Employee', new_employee_path, class: "waves-effect waves-light btn" %>
