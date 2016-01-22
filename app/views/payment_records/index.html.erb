@@ -12,7 +12,7 @@
   <tr>
     <th>ID</th>
     <th>Employee Name</th>
-    <th>Created Date</th>
+    <th>Date Range Selected</th>
     <th>Sessions</th>
     <th>Status</th>
     <th>Amount ($)</th>
@@ -25,7 +25,7 @@
       <tr>
         <td><%= payment_record.id %></td>
         <td><%= payment_record.try(:employee).try(:name) %></td>
-        <td><%= payment_record.created_at.to_formatted_s :short %></td>
+        <td><%= payment_record.date_range_selected %></td>
         <td><%= payment_record.payment_record_time_logs.count %></td>
         <td><%== payment_record.paid ? "<span class=\"yes\">Paid on: #{payment_record.paid_at.to_formatted_s(:long)}</span>" : "<span class=\"no\">Unpaid</span>" %></td>
         <td><%= payment_record.total_pay %></td>

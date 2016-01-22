@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   # protect_from_forgery with: :exception
   protect_from_forgery with: :null_session
   # This is our new function that comes before Devise's one
-  before_filter :authenticate
+  # before_action :authenticate
 
   private
 

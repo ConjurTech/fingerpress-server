@@ -17,7 +17,7 @@ Rails.application.routes.draw do
 
   get 'config/edit' => 'config#edit'
   post 'config/update' => 'config#update'
-  root 'employees#index'
+  root 'time_logs#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
