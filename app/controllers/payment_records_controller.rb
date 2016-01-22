@@ -1,11 +1,10 @@
 class PaymentRecordsController < ApplicationController
   before_action :set_payment_record, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_admin!
 
   # GET /payment_records
   # GET /payment_records.json
   def index
-    @payment_records = PaymentRecord.all
+    @payment_records = PaymentRecord.all.page(params[:page]).per(10)
   end
 
   # GET /payment_records/1
@@ -20,7 +19,6 @@ class PaymentRecordsController < ApplicationController
 
   # GET /payment_records/1/edit
   def edit
-    @payment_record.calculate_pay
   end
 
   # POST /payment_records

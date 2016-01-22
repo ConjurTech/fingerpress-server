@@ -86,28 +86,28 @@
       </div>
     </div>
 
-      <div class="card white darken-1">
-        <div class="card-content black-text black-text">
-          <span class="card-title black-text">Public Holiday Pay Details</span>
+    <div class="card white darken-1">
+      <div class="card-content black-text black-text">
+        <span class="card-title black-text">Public Holiday Pay Details</span>
 
-          <div class="row">
+        <div class="row">
+          <div class="col s6">
+            <%= f.input :public_holiday_type, collection: [['Per Hour', 'per_hour'], ['Multiplier', 'multiplier'], ['Same As Normal', 'same_as_normal']] %>
+          </div>
+          <div id="pay_scheme_ph_multiplier_div">
             <div class="col s6">
-              <%= f.input :public_holiday_type, collection: [['Per Hour', 'per_hour'], ['Multiplier', 'multiplier'], ['Same As Normal', 'same_as_normal']] %>
-            </div>
-            <div id="pay_scheme_ph_multiplier_div">
-              <div class="col s6">
-                <%= f.input :public_holiday_multiplier %>
-              </div>
-            </div>
-            <div id="pay_scheme_pay_ph_div">
-              <div class="col s6">
-                <%= f.input :pay_public_holiday %>
-              </div>
+              <%= f.input :public_holiday_multiplier %>
             </div>
           </div>
-
+          <div id="pay_scheme_pay_ph_div">
+            <div class="col s6">
+              <%= f.input :pay_public_holiday %>
+            </div>
+          </div>
         </div>
+
       </div>
+    </div>
 
 
     <div class="form-actions">

@@ -29,8 +29,8 @@
         <tr>
           <th>Date in</th>
           <th>Date out</th>
-          <th>Employee</th>
           <th>Pay scheme</th>
+          <th>Pay Slip</th>
         </tr>
         </thead>
 
@@ -39,8 +39,8 @@
             <tr>
               <td><%= time_log.date_time_in.to_formatted_s(:long) %></td>
               <td><%= time_log.date_time_out.to_formatted_s(:long) %></td>
-              <td><%= time_log.payment_record_pay_scheme %></td>
-              <td><%= time_log.payment_record %></td>
+              <td><%= time_log.payment_record_pay_scheme.name %></td>
+              <td><%= time_log.payment_record.id %></td>
             </tr>
         <% end %>
         </tbody>

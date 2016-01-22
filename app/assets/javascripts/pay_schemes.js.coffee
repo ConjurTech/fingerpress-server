@@ -10,18 +10,21 @@ $(document).ready ->
   $('#pay_scheme_w_multiplier_div').hide()
   $('#pay_scheme_pay_w_div').hide()
   ShowOrHideOtDivs()
-  ShowOrHidePhDivs()
   ShowOrHideWDivs()
+  ShowOrHidePhDivs()
 
 jQuery ->
   $('#pay_scheme_ot_type.select').change ->
     ShowOrHideOtDivs()
 
+  $('#pay_scheme_weekend_type.select').change ->
+    ShowOrHideWDivs()
+
   $('#pay_scheme_public_holiday_type.select').change ->
     ShowOrHidePhDivs()
 
-  $('#pay_scheme_weekend_type.select').change ->
-    ShowOrHideWDivs()
+  $('#pay_scheme_pay_type.select').change ->
+    ShowOrHidePayDivs()
 
 
 ShowOrHideOtDivs = ->
@@ -78,3 +81,20 @@ ShowOrHideWDivs = ->
     $('#pay_scheme_pay_w_div').hide()
     $('#pay_scheme_pay_weekend').val('')
     $('#pay_scheme_weekend_multiplier').val('')
+
+ShowOrHidePayDivs = ->
+#  if $('#pay_scheme_pay_type.select option:selected').text() == "Hourly"
+#    $('#pay_scheme_w_multiplier_div').hide()
+#    $('#pay_scheme_pay_w_div').show()
+#    $('#pay_scheme_weekend_multiplier').val('')
+
+#  else if $('#pay_scheme_pay_type.select option:selected').text() == "Monthly"
+#    $('#pay_scheme_w_multiplier_div').show()
+#    $('#pay_scheme_pay_w_div').hide()
+#    $('#pay_scheme_pay_weekend').val('')
+#
+#  else if $('#pay_scheme_pay_type.select option:selected').text() == "Monthly + OT"
+#    $('#pay_scheme_w_multiplier_div').hide()
+#    $('#pay_scheme_pay_w_div').hide()
+#    $('#pay_scheme_pay_weekend').val('')
+#    $('#pay_scheme_weekend_multiplier').val('')
