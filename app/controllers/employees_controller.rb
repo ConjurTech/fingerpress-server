@@ -2,6 +2,7 @@ class EmployeesController < ApplicationController
   skip_before_action :protect_from_forgery, only: [:check_in, :check_out, :index, :register]
   skip_before_action :authenticate_admin!, only: [:check_in, :check_out, :index, :register]
   before_action :set_employee_by_fingerprint, only: [:check_in, :check_out]
+  before_action :set_employee, only: [:show, :edit, :update, :destroy, :register]
   before_action :authenticate_admin!, only: [:destroy]
 
   # GET /employees
