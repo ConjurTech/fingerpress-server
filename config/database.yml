@@ -15,11 +15,7 @@ default: &default
   pool: 5
 
 development:
-  adapter: mysql2
-  encoding: utf8
-  pool: 5
-  username: root
-  password: mysql
+  <<: *default
   database: finger_press_development
 
 # Warning: The database defined as "test" will be erased and
@@ -27,11 +23,6 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  adapter: mysql2
-  encoding: utf8
-  pool: 5
-  username: root
-  password: mysql
   database: finger_press_test
 
 # As with config/secrets.yml, you never want to store sensitive information,

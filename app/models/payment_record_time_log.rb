@@ -1,5 +1,5 @@
 class PaymentRecordTimeLog < ActiveRecord::Base
-  belongs_to :payment_record_pay_scheme
+  belongs_to :payment_record_pay_scheme, dependent: :destroy
   belongs_to :payment_record
 
   before_save :set_remarks
@@ -87,7 +87,7 @@ class PaymentRecordTimeLog < ActiveRecord::Base
   end
 
   def ot_hours
-    ot_hours = worked_hours - self.payment_record_pay_scheme.hours_per_day
+    ot_hours = worked_hours - (self.payment_record_pay_scheme.hours_per_day || 0) #TODO: change to whatever is in config
     (ot_hours < 0) ? 0 : ot_hours
   end
 

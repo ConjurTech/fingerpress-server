@@ -3,6 +3,7 @@ class PaymentRecord < ActiveRecord::Base
   has_many :payment_record_time_logs, dependent: :destroy
   has_many :time_logs, dependent: :nullify
   belongs_to :payment_record_pay_scheme
+  belongs_to :pay_roll
 
   validates :employee, :start_date, :end_date, presence: true
 

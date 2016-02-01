@@ -72,7 +72,9 @@ gem 'pickadate-rails'
 
 gem 'kaminari'
 
-gem 'whenever', :require => false
+gem 'whenever', require: false
+
+gem 'selectize-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -90,6 +92,6 @@ group :development, :test do
   # If you would like to use Better Errors' advanced features (REPL, local/instance variable inspection, pretty stack frame names), you need to add the binding_of_caller gem
   gem "binding_of_caller"
 
-  gem 'brakeman', :require => false
+  gem 'brakeman', require: false
 
 end

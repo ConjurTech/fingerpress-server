@@ -30,9 +30,6 @@ Workday.find_work_days.each do |wd|
 end
 BusinessTime::Config.work_hours = @work_hours_list
 
-
-
-
 # BusinessTime::Config.work_hours = {
 #     :mon => [Workday.find(1).twentyfour_hr_start_time, Workday.find(1).twentyfour_hr_end_time],
 #     :tue => [Workday.find(2).twentyfour_hr_start_time, Workday.find(2).twentyfour_hr_end_time],

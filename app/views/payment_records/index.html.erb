@@ -3,7 +3,7 @@
     <i class="large material-icons">add</i>
   </a>
   <ul>
-    <li><%= link_to new_payment_record_path, class: "btn-floating grey" do %>
+    <li><%= link_to new_pay_roll_payment_records_path, class: "btn-floating grey" do %>
           <i class="material-icons tooltipped" data-position="left" data-delay="50" data-tooltip="Generate Multiple">playlist_add</i>
       <% end %></li>
     <li><%= link_to new_payment_record_path, class: "btn-floating grey" do %>
@@ -19,6 +19,7 @@
   <thead>
   <tr>
     <th>ID</th>
+    <th>Pay Roll ID</th>
     <th>Employee Name</th>
     <th>Date Range Selected</th>
     <th>Sessions</th>
@@ -32,6 +33,7 @@
   <% @payment_records.each do |payment_record| %>
       <tr>
         <td><%= payment_record.id %></td>
+        <td><%= payment_record.pay_roll_id %></td>
         <td><%= payment_record.try(:employee).try(:name) %></td>
         <td><%= payment_record.date_range_selected %></td>
         <td><%= payment_record.payment_record_time_logs.count %></td>

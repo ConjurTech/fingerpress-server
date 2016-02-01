@@ -12,7 +12,12 @@ Rails.application.routes.draw do
       post :register
     end
   end
-  resources :payment_records
+  resources :payment_records do
+    collection do
+      get :new_pay_roll
+      post :create_pay_roll
+    end
+  end
   resources :payment_record_pay_schemes
 
   get 'config/edit' => 'config#edit'

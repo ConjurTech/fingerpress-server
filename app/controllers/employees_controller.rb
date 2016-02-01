@@ -8,14 +8,18 @@ class EmployeesController < ApplicationController
   # GET /employees
   # GET /employees.json
   def index
-    @employees = Employee.all
+    if params[:pay_scheme_id]
+      @employees = Employee.where pay_scheme_id: params[:pay_scheme_id]
+    else
+      @employees = Employee.all
+    end
   end
 
   # GET /employees/1
   # GET /employees/1.json
   def show
     @time_logs = @employee.time_logs.complete.page(params[:page]).per(5)
-    @hrs_logged = @time_logs.map{|tl| [tl.date_time_in.to_formatted_s(:short), TimeDifference.between(tl.date_time_in, tl.date_time_out).in_hours]}
+    @hrs_logged = @time_logs.map { |tl| [tl.date_time_in.to_formatted_s(:short), TimeDifference.between(tl.date_time_in, tl.date_time_out).in_hours] }
   end
 
   # GET /employees/new

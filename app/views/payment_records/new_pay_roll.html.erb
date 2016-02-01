@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="col s12">
+    <h1 class="title">Generate multiple pay slips</h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col s12">
+    <%= simple_form_for @pay_roll, url: create_pay_roll_payment_records_path do |f| %>
+        <%= f.error_notification %>
+        <div class="input-field">
+          <%= f.label 'Based on Pay Scheme Type', class: 'active' %>
+          <%= select_tag "fuc", options_for_select(PayScheme.all.collect { |p| [p.name, p.id] }), class: 'pay_scheme_dropdown browser-default' %>
+        </div>
+        <div class="input-field">
+          <%= f.label :employees, class: 'active' %>
+          <%= f.association :employees, collection: Employee.where("deleted_at is NULL"), label: false, input_html: {class: ''} %>
+          <%= content_tag :a, 'Select All Employees', class: 'btn-flat select-all-employees-btn' %>
+        </div>
+        <div class="input-field">
+          <%= f.input :start_date, as: :string, input_html: {class: "datepicker"} %>
+        </div>
+        <div class="input-field">
+          <%= f.input :end_date, as: :string, input_html: {class: "datepicker"} %>
+        </div>
+        <div class="form-actions">
+          <%= f.button :submit, 'Generate all' %>
+        </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col s12">
+    <%= link_to 'Back', payment_records_path, class: 'btn' %>
+  </div>
+</div>

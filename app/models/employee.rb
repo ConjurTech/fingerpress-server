@@ -1,6 +1,8 @@
 class Employee < ActiveRecord::Base
   acts_as_paranoid
   has_many :time_logs
+  has_many :employee_pay_rolls
+  has_many :pay_rolls, through: :employee_pay_rolls
   belongs_to :pay_scheme
   validates :pay_scheme, presence: true
 

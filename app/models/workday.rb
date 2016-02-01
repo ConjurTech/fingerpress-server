@@ -1,30 +1,21 @@
 class Workday < ActiveRecord::Base
   before_save :ensure_time_validity
+  attr_accessor :start_time, :end_time
 
-  def start_time_seconds
-    return nil unless self[:start_time_seconds]
-    Time.at(self[:start_time_seconds]).utc.strftime('%I:%M%p')
+  def start_time
+    Time.at(self[:start_time_seconds]).utc.strftime('%I:%M%p') unless self.start_time_seconds.blank?
   end
 
-  def end_time_seconds
-    return nil unless self[:end_time_seconds]
-    Time.at(self[:end_time_seconds]).utc.strftime('%I:%M%p')
+  def end_time
+    Time.at(self[:end_time_seconds]).utc.strftime('%I:%M%p') unless self.end_time_seconds.blank?
   end
 
-  def start_time_seconds=(time)
-    if time.blank?
-      self[:start_time_seconds] = nil
-    else
-      self[:start_time_seconds] = Time.parse(time.to_s).seconds_since_midnight
-    end
+  def start_time=(time)
+    self.start_time_seconds = Time.zone.parse(time).seconds_since_midnight
   end
 
-  def end_time_seconds=(time)
-    if time.blank?
-      self[:end_time_seconds] = nil
-    else
-      self[:end_time_seconds] = Time.parse(time.to_s).seconds_since_midnight
-    end
+  def end_time=(time)
+    self.end_time_seconds = Time.zone.parse(time).seconds_since_midnight
   end
 
   def twentyfour_hr_start_time
@@ -42,5 +33,4 @@ class Workday < ActiveRecord::Base
   def ensure_time_validity
     self[:start_time_seconds] < self[:end_time_seconds]
   end
-
 end

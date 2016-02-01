@@ -1,9 +1,10 @@
 $(document).ready ->
   $('.datepicker').pickadate
     selectMonths: true
-    selectYears: 100
+    selectYears: 50
 
   $('select').material_select()
+
   $('.clockpicker').clockpicker({
     autoclose: false
     twelvehour: true

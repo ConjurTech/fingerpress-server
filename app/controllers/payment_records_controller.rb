@@ -1,4 +1,5 @@
 class PaymentRecordsController < ApplicationController
+  before_action :authenticate_admin!
   before_action :set_payment_record, only: [:show, :edit, :update, :destroy]
 
   # GET /payment_records
@@ -10,6 +11,51 @@ class PaymentRecordsController < ApplicationController
   # GET /payment_records/1
   # GET /payment_records/1.json
   def show
+  end
+
+  # GET /payment_records/new_pay_roll
+  def new_pay_roll
+    @pay_roll = PayRoll.new
+  end
+
+  # POST /payment_records/create_pay_roll
+  def create_pay_roll
+    #TODO: logic to create all payslips and add it to group :D :D:D:D
+    @pay_roll = PayRoll.new(pay_roll_params)
+    @pay_roll.save
+    employees = Employee.where(id: pay_roll_params[:employee_ids])
+    start_date = pay_roll_params[:start_date]
+    end_date = pay_roll_params[:end_date]
+
+    #build payment record params of each employee
+    employees.each do |e|
+      pay_slip = PaymentRecord.new(employee_id: e.id, start_date: start_date, end_date: end_date, pay_roll_id: @pay_roll.id)
+      pay_slip.save
+      employee_time_logs = pay_slip.employee.valid_time_logs_between(start_date.to_datetime, end_date.to_datetime)
+      employee_time_logs.each do |employee_time_log|
+        # save a permanent copy of pay scheme in case it gets deleted in the future
+        payment_record_pay_scheme = PaymentRecordPayScheme.new_from_pay_scheme(employee_time_log.pay_scheme)
+        payment_record_pay_scheme.save
+        # save a permanent copy of time log in case it gets deleted in the future
+        PaymentRecordTimeLog.create(date_time_in: employee_time_log.date_time_in,
+                                 date_time_out: employee_time_log.date_time_out,
+                                 payment_record_pay_scheme: payment_record_pay_scheme,
+                                 payment_record: pay_slip
+        )
+        # set the normal time log that user sees to point to this record
+        employee_time_log.payment_record = pay_slip
+        employee_time_log.save
+      end
+    end
+    respond_to do |format|
+      if @pay_roll.errors.blank?
+        format.html { redirect_to payment_records_path(pay_roll_id: @pay_roll.id), notice: 'Payment record was successfully created.' }
+        format.json { render :show, status: :created, location: @payment_record }
+      else
+        format.html { render :new }
+        format.json { render json: @payment_record.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   # GET /payment_records/new
@@ -28,28 +74,16 @@ class PaymentRecordsController < ApplicationController
 
     employee_time_logs = @payment_record.employee.valid_time_logs_between(payment_record_params[:start_date].to_datetime, payment_record_params[:end_date].to_datetime)
     employee_time_logs.each do |employee_time_log|
-      payment_record_pay_scheme = PaymentRecordPayScheme.new(pay_type: employee_time_log.pay_scheme.pay_type,
-                                                             pay: employee_time_log.pay_scheme.pay,
-                                                             pay_ot: employee_time_log.pay_scheme.pay_ot,
-                                                             pay_public_holiday: employee_time_log.pay_scheme.pay_public_holiday,
-                                                             name: employee_time_log.pay_scheme.name,
-                                                             ot_multiplier: employee_time_log.pay_scheme.ot_multiplier,
-                                                             ot_time_range_start: employee_time_log.pay_scheme.ot_time_range_start,
-                                                             ot_time_range_end: employee_time_log.pay_scheme.ot_time_range_end,
-                                                             public_holiday_multiplier: employee_time_log.pay_scheme.public_holiday_multiplier,
-                                                             pay_weekend: employee_time_log.pay_scheme.pay_weekend,
-                                                             weekend_multiplier: employee_time_log.pay_scheme.weekend_multiplier,
-                                                             ot_type: employee_time_log.pay_scheme.ot_type,
-                                                             public_holiday_type: employee_time_log.pay_scheme.public_holiday_type,
-                                                             weekend_type: employee_time_log.pay_scheme.weekend_type,
-                                                              hours_per_day: employee_time_log.pay_scheme.hours_per_day)
-
+      # save a permanent copy of pay scheme in case it gets deleted in the future
+      payment_record_pay_scheme = PaymentRecordPayScheme.new_from_pay_scheme(employee_time_log.pay_scheme)
       payment_record_pay_scheme.save
+      # save a permanent copy of time log in case it gets deleted in the future
       PaymentRecordTimeLog.new(date_time_in: employee_time_log.date_time_in,
                                date_time_out: employee_time_log.date_time_out,
                                payment_record_pay_scheme: payment_record_pay_scheme,
                                payment_record: @payment_record
-                               ).save
+      ).save
+      # set the normal time log that user sees to point to this record
       employee_time_log.payment_record = @payment_record
       employee_time_log.save
     end
@@ -90,13 +124,18 @@ class PaymentRecordsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_payment_record
-      @payment_record = PaymentRecord.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_payment_record
+    @payment_record = PaymentRecord.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def payment_record_params
-      params.require(:payment_record).permit(:start_date, :end_date, :total_pay, :bonus, :paid_at, :employee_id, :paid)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def payment_record_params
+    params.require(:payment_record).permit(:start_date, :end_date, :total_pay, :bonus, :paid_at, :employee_id, :paid)
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def pay_roll_params
+    params.require(:pay_roll).permit(:start_date, :end_date, employee_ids: [])
+  end
 end

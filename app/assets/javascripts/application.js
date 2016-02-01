@@ -19,4 +19,5 @@
 //= require chartkick
 //= require jquery-clockpicker
 //= require pickadate/picker.time
+//= require selectize
 //= require_tree .
