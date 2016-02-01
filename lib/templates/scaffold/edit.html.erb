@@ -1,0 +1,15 @@
+<h1>Editing <%= singular_table_name.titleize %></h1>
+
+<div class="row">
+  <div class="col s12">
+    <div id="new-<%= singular_table_name %>-container">
+      <%%= render 'form' %>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col s12">
+    <%%= link_to 'Back', <%= index_helper %>_path, class: 'btn waves-effect grey lighten-1' %>
+  </div>
+</div>

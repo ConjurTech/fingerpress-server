@@ -1,0 +1,19 @@
+<%%= simple_form_for(@<%= singular_table_name %>) do |f| %>
+  <%%= f.error_notification %>
+  <div class="fixed-action-btn">
+    <%%= button_tag type: :submit, class: "btn-floating btn-large" do %>
+        <i class="material-icons tooltipped" data-position="top" data-delay="50" data-tooltip="Save">insert_drive_file</i>
+    <%% end %>
+  </div>
+
+  <div class="form-inputs">
+    <div class="card">
+      <div class="card-content">
+      <div class="card-title">Details</div>
+      <%- attributes.each do |attribute| -%>
+          <%%= f.<%= attribute.reference? ? :association : :input %> :<%= attribute.name %> %>
+      <%- end -%>
+      </div>
+    </div>
+  </div>
+<%% end %>

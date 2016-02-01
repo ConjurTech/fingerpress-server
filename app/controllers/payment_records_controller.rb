@@ -20,7 +20,6 @@ class PaymentRecordsController < ApplicationController
 
   # POST /payment_records/create_pay_roll
   def create_pay_roll
-    #TODO: logic to create all payslips and add it to group :D :D:D:D
     @pay_roll = PayRoll.new(pay_roll_params)
     @pay_roll.save
     employees = Employee.where(id: pay_roll_params[:employee_ids])

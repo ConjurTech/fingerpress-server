@@ -1,0 +1,21 @@
+<h1><%= plural_table_name.titleize %> List</h1>
+
+<div class="fixed-action-btn">
+  <%%= link_to new_<%= singular_table_name %>_path, class: "btn-floating btn-large" do %>
+  <i class="material-icons tooltipped" data-position="top" data-delay="50" data-tooltip="New <%= human_name %>">add</i>
+  <%% end %>
+</div>
+
+<div id="<%= plural_table_name %>-container">
+  <div class="row">
+    <div class="col s12">
+      <div class="hide-on-med-and-down">
+        <%%= render partial: 'table' %>
+      </div>
+
+      <div class="show-on-med hide-on-large-only">
+        <%%= render partial: 'mobile_table' %>
+      </div>
+    </div>
+  </div>
+</div>

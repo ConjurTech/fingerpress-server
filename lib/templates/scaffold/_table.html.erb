@@ -1,0 +1,31 @@
+<table id="<%= plural_table_name %>-table" class="table striped bordered highlight">
+  <thead>
+  <tr>
+    <% attributes.reject(&:password_digest?).each do |attribute| -%>
+  <th><%= attribute.human_name.titleize %></th>
+    <% end -%>
+    <th></th>
+  </tr>
+  </thead>
+
+  <tbody>
+    <%% @<%= plural_table_name %>.each do |<%= singular_table_name %>| %>
+    <tr>
+      <% attributes.reject(&:password_digest?).each do |attribute| -%>
+      <td><%%= <%= singular_table_name %>.<%= attribute.name %> %></td>
+      <% end -%>
+      <td class="row">
+        <%%= link_to <%= singular_table_name %>, method: :delete, data: {confirm: 'Are you sure?'} do %>
+            <i class="material-icons right">delete</i>
+        <%% end %>
+        <%%= link_to edit_<%= singular_table_name %>_path(<%= singular_table_name %>) do %>
+            <i class="material-icons right">edit</i>
+        <%% end %>
+        <%%= link_to <%= singular_table_name %> do %>
+            <i class="material-icons right">pageview</i>
+        <%% end %>
+      </td>
+    </tr>
+    <%% end %>
+  </tbody>
+</table>
