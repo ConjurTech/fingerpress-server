@@ -1,0 +1,74 @@
+<h1>Pay Roll</h1>
+<div class="row">
+  <div class="right">
+    <%= link_to 'Back', pay_rolls_path, class: 'btn' %>
+    <%= link_to 'Mark All As Paid (Not Done)', pay_rolls_path, class: 'btn red' %>
+  </div>
+</div>
+<div class="row">
+  <p>
+    <strong>Start date:</strong>
+    <%= @pay_roll.start_date %>
+  </p>
+
+  <p>
+    <strong>End date:</strong>
+    <%= @pay_roll.end_date %>
+  </p>
+  <p>
+    <strong>ID:</strong>
+    <%= @pay_roll.id %>
+  </p>
+
+  <div class="card">
+    <div class="card-content">
+      <div class="card-title">Pay Slips</div>
+      <div class="right">
+        <%= paginate @payment_records %>
+      </div>
+      <table class="striped bordered highlight">
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Employee Name</th>
+          <th>Date Range Selected</th>
+          <th>Sessions</th>
+          <th>Status</th>
+          <th>Amount ($)</th>
+          <th colspan="3"></th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <% @payment_records.each do |payment_record| %>
+            <tr>
+              <td><%= payment_record.id %></td>
+              <td><%= payment_record.try(:employee).try(:name) %></td>
+              <td><%= payment_record.date_range_selected %></td>
+              <td><%= payment_record.payment_record_time_logs.count %></td>
+              <td><%== payment_record.paid ? "<span class=\"yes\">Paid on: #{payment_record.paid_at.to_formatted_s(:long)}</span>" : "<span class=\"no\">Unpaid</span>" %></td>
+              <td><%= payment_record.total_pay %></td>
+              <td>
+                <%= link_to payment_record do %>
+                    <i class="material-icons">pageview</i>
+                <% end %>
+              </td>
+              <td>
+                <%= link_to edit_payment_record_path(payment_record) do %>
+                    <i class="material-icons">edit</i>
+                <% end %>
+              </td>
+              <td><%= link_to payment_record, method: :delete, data: {confirm: 'Are you sure?'} do %>
+                    <i class="material-icons">delete</i>
+                <% end %>
+              </td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+      <div class="right">
+        <%= paginate @payment_records %>
+      </div>
+    </div>
+  </div>
+</div>

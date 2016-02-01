@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :pay_rolls
   devise_for :admins, :controllers => {sessions: 'admins/sessions', registrations: 'admins/registrations'}
 
   resources :holidays
@@ -12,6 +13,7 @@ Rails.application.routes.draw do
       post :register
     end
   end
+  resources :pay_rolls
   resources :payment_records do
     collection do
       get :new_pay_roll
