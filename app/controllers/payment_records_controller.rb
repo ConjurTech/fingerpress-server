@@ -31,20 +31,25 @@ class PaymentRecordsController < ApplicationController
       pay_slip = PaymentRecord.new(employee_id: e.id, start_date: start_date, end_date: end_date, pay_roll_id: @pay_roll.id)
       pay_slip.save
       employee_time_logs = pay_slip.employee.valid_time_logs_between(start_date.to_datetime, end_date.to_datetime)
+      perm_time_logs = []
       employee_time_logs.each do |employee_time_log|
         # save a permanent copy of pay scheme in case it gets deleted in the future
         payment_record_pay_scheme = PaymentRecordPayScheme.new_from_pay_scheme(employee_time_log.pay_scheme)
         payment_record_pay_scheme.save
         # save a permanent copy of time log in case it gets deleted in the future
-        PaymentRecordTimeLog.create(date_time_in: employee_time_log.date_time_in,
+        perm_time_log = PaymentRecordTimeLog.new(date_time_in: employee_time_log.date_time_in,
                                  date_time_out: employee_time_log.date_time_out,
                                  payment_record_pay_scheme: payment_record_pay_scheme,
                                  payment_record: pay_slip
         )
+        perm_time_log.save
+        perm_time_logs << perm_time_log
         # set the normal time log that user sees to point to this record
         employee_time_log.payment_record = pay_slip
         employee_time_log.save
       end
+      pay_slip.payment_record_time_logs = perm_time_logs
+      pay_slip.save
     end
     respond_to do |format|
       if @pay_roll.errors.blank?

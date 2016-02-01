@@ -1,3 +1,4 @@
+<h1>Payment Slip Details</h1>
 <div class="row">
   <div class="right">
     <%= link_to 'Edit', edit_payment_record_path(@payment_record), class: 'btn' %>
@@ -30,7 +31,8 @@
           <th>Date in</th>
           <th>Date out</th>
           <th>Pay scheme</th>
-          <th>Pay Slip</th>
+          <th>Session Pay</th>
+          <th>Remarks</th>
         </tr>
         </thead>
 
@@ -40,7 +42,8 @@
               <td><%= time_log.date_time_in.to_formatted_s(:long) %></td>
               <td><%= time_log.date_time_out.to_formatted_s(:long) %></td>
               <td><%= time_log.payment_record_pay_scheme.name %></td>
-              <td><%= time_log.payment_record.id %></td>
+              <td><%= number_to_currency time_log.pay%></td>
+              <td><%= time_log.remarks %></td>
             </tr>
         <% end %>
         </tbody>

@@ -87,8 +87,8 @@ class PaymentRecordTimeLog < ActiveRecord::Base
   end
 
   def ot_hours
-    ot_hours = worked_hours - (self.payment_record_pay_scheme.hours_per_day || 0) #TODO: change to whatever is in config
-    (ot_hours < 0) ? 0 : ot_hours
+    ot_hours = Workday.ot_hours(self.date_time_in, self.date_time_out)
+    (weekend? || public_holiday?) ? 0 : ot_hours
   end
 
   def weekend_hours

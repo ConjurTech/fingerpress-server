@@ -38,7 +38,7 @@
               <tr>
                 <td><%= time_log.date_time_in.to_formatted_s(:long) %></td>
                 <td><%= time_log.date_time_out.to_formatted_s(:long) %></td>
-                <td><%= link_to  time_log.payment_record_pay_scheme.id, payment_record_pay_scheme_path(time_log.payment_record_pay_scheme.id) %> </td>
+                <td><%= link_to time_log.payment_record_pay_scheme.id, payment_record_pay_scheme_path(time_log.payment_record_pay_scheme.id) %> </td>
                 <td><%= time_log.pay %></td>
                 <td><%= time_log.remarks %></td>
               </tr>
@@ -67,8 +67,10 @@
     <!--t.datetime "updated_at",                    null: false-->
     <!--end-->
 
-    <div class="form-actions">
-      <%= link_to 'Back', payment_records_path, class: 'btn' %>
-      <%= f.button :submit %>
+    <div class="row">
+      <div class="form-actions">
+        <%= link_to 'Back', payment_records_path, class: 'btn' %>
+        <%= f.button :submit %>
+      </div>
     </div>
 <% end %>
