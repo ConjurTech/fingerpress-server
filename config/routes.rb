@@ -13,7 +13,11 @@ Rails.application.routes.draw do
       post :register
     end
   end
-  resources :pay_rolls
+  resources :pay_rolls, except: [:edit] do
+    member do
+      post :mark_all_paid
+    end
+  end
   resources :payment_records do
     collection do
       get :new_pay_roll

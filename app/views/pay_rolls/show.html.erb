@@ -1,35 +1,60 @@
 <h1>Pay Roll</h1>
+<div class="divider"></div>
+
+<div class="fixed-action-btn">
+  <a class="btn-floating btn-large red">
+    <i class="large material-icons">mode_edit</i>
+  </a>
+  <ul>
+    <li><%= link_to pay_roll_path(@pay_roll), method: :delete, data: {confirm: 'Are you sure?'}, class: "btn-floating grey" do %>
+          <i class="material-icons tooltipped" data-position="left" data-delay="50" data-tooltip="Delete Pay Roll">delete</i>
+      <% end %></li>
+    <li><%= link_to edit_pay_roll_path(@pay_roll), class: "btn-floating" do %>
+          <i class="material-icons tooltipped" data-position="left" data-delay="50" data-tooltip="Edit Pay Roll">mode_edit</i>
+      <% end %></li>
+  </ul>
+</div>
+
 <div class="row">
-  <div class="right">
-    <%= link_to 'Back', pay_rolls_path, class: 'btn' %>
-    <%= link_to 'Mark All As Paid (Not Done)', pay_rolls_path, class: 'btn red' %>
+  <div class="col s12">
+    <div class="right">
+      <%= link_to 'Create Another Pay Roll', new_pay_roll_path, class: 'btn waves-effect' %>
+      <%= link_to 'Mark all as paid', mark_all_paid_pay_roll_path, method: :post, class: 'btn waves-effect green', data: {confirm: 'Are you sure?'} %>
+      <%= link_to 'Back', pay_rolls_path, class: 'btn waves-effect white' %>
+    </div>
   </div>
 </div>
-<div class="row">
-  <p>
-    <strong>Start date:</strong>
-    <%= @pay_roll.start_date %>
-  </p>
 
-  <p>
-    <strong>End date:</strong>
-    <%= @pay_roll.end_date %>
-  </p>
-  <p>
-    <strong>ID:</strong>
-    <%= @pay_roll.id %>
-  </p>
-
+<div id="edit-pay_roll-container">
+  <div class="card">
+    <div class="card-content">
+      <div class="card-title">Details</div>
+      <p>
+        <strong>Employees: </strong>
+        <%= @pay_roll.employees.pluck(:name).join ', ' %>
+      </p>
+      <p>
+        <strong>Start date: </strong>
+        <%= @pay_roll.start_date %>
+      </p>
+      <p>
+        <strong>End date: </strong>
+        <%= @pay_roll.end_date %>
+      </p>
+      <p>
+        <strong>End date: </strong>
+        <%= @pay_roll.end_date %>
+      </p>
+    </div>
+  </div>
   <div class="card">
     <div class="card-content">
       <div class="card-title">Pay Slips</div>
-      <div class="right">
-        <%= paginate @payment_records %>
-      </div>
       <table class="striped bordered highlight">
         <thead>
         <tr>
           <th>ID</th>
+          <th>Pay Roll ID</th>
           <th>Employee Name</th>
           <th>Date Range Selected</th>
           <th>Sessions</th>
@@ -43,6 +68,7 @@
         <% @payment_records.each do |payment_record| %>
             <tr>
               <td><%= payment_record.id %></td>
+              <td><%= payment_record.pay_roll_id %></td>
               <td><%= payment_record.try(:employee).try(:name) %></td>
               <td><%= payment_record.date_range_selected %></td>
               <td><%= payment_record.payment_record_time_logs.count %></td>
@@ -66,9 +92,14 @@
         <% end %>
         </tbody>
       </table>
-      <div class="right">
-        <%= paginate @payment_records %>
-      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col s12">
+    <div class="left">
+      <%= link_to 'Back', pay_rolls_path, class: 'btn waves-effect white' %>
     </div>
   </div>
 </div>

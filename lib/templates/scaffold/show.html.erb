@@ -1,17 +1,29 @@
 <h1><%= singular_table_name.titleize %></h1>
+<div class="divider"></div>
+
 <div class="fixed-action-btn">
   <a class="btn-floating btn-large red">
     <i class="large material-icons">mode_edit</i>
   </a>
   <ul>
     <li><%%= link_to <%= singular_table_name %>_path(@<%= singular_table_name %>), method: :delete, data: {confirm: 'Are you sure?'}, class: "btn-floating grey" do %>
-          <i class="material-icons">delete</i>
+          <i class="material-icons tooltipped" data-position="left" data-delay="50" data-tooltip="Delete <%= singular_table_name.titleize %>">delete</i>
       <%% end %></li>
-    <li><%%= link_to edit_<%= singular_table_name %>_path(@<%= singular_table_name %>), class: "btn-floating teal" do %>
-          <i class="material-icons">mode_edit</i>
+    <li><%%= link_to edit_<%= singular_table_name %>_path(@<%= singular_table_name %>), class: "btn-floating" do %>
+          <i class="material-icons tooltipped" data-position="left" data-delay="50" data-tooltip="Edit <%= singular_table_name.titleize %>">mode_edit</i>
       <%% end %></li>
   </ul>
 </div>
+
+<div class="row">
+  <div class="col s12">
+    <div class="right">
+      <%%= link_to 'Create Another <%= singular_table_name.titleize %>', new_<%= singular_table_name %>_path, class: 'btn waves-effect' %>
+      <%%= link_to 'Back', <%= index_helper %>_path, class: 'btn waves-effect white' %>
+    </div>
+  </div>
+</div>
+
 <div id="edit-<%= singular_table_name %>-container">
   <div class="card">
     <div class="card-content">
@@ -28,6 +40,8 @@
 
 <div class="row">
   <div class="col s12">
-    <%%= link_to 'Back', <%= index_helper %>_path, class: 'btn waves-effect grey lighten-1' %>
+    <div class="left">
+      <%%= link_to 'Back', <%= index_helper %>_path, class: 'btn waves-effect white' %>
+    </div>
   </div>
 </div>

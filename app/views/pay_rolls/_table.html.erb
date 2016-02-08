@@ -1,0 +1,30 @@
+<table id="pay_rolls-table" class="table striped bordered highlight">
+  <thead>
+  <tr>
+    <th>Employees</th>
+    <th>Start Date</th>
+    <th>End Date</th>
+    <th>All Paid?</th>
+    <th></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @pay_rolls.each do |pay_roll| %>
+      <tr>
+        <td><%= pay_roll.employees.pluck(:name).join ', ' %></td>
+        <td><%= pay_roll.start_date %></td>
+        <td><%= pay_roll.end_date %></td>
+        <td><%= boolean_to_yes_no pay_roll.all_paid? %></td>
+        <td class="row">
+          <%= link_to pay_roll, method: :delete, data: {confirm: 'Are you sure?'} do %>
+              <i class="material-icons right">delete</i>
+          <% end %>
+          <%= link_to pay_roll do %>
+              <i class="material-icons right">pageview</i>
+          <% end %>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

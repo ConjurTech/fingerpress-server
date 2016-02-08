@@ -1,5 +1,26 @@
 <h1>New Pay Roll</h1>
+<div class="divider"></div>
 
-<%= render 'form' %>
+<div class="row">
+  <div class="col s12">
+    <div class="right">
+      <%= link_to 'Back', pay_rolls_path, class: 'btn waves-effect white' %>
+    </div>
+  </div>
+</div>
 
-<%= link_to 'Back', pay_rolls_path %>
+<div class="row">
+  <div class="col s12">
+    <div id="edit-pay_roll-container">
+      <%= render 'form' %>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col s12">
+    <div class="left">
+      <%= link_to 'Back', pay_rolls_path, class: 'btn waves-effect white' %>
+    </div>
+  </div>
+</div>

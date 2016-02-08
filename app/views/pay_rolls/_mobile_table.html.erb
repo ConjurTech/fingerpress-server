@@ -1,0 +1,24 @@
+<% @pay_rolls.each do |pay_roll| %>
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title grey-text text-darken-4"><%= pay_roll.id %></span>
+        <div class="right">
+          <span class="card-title activator grey-text text-darken-4"><i class="material-icons">more_vert</i></span>
+        </div>
+        <strong>Employees</strong>: <%= pay_roll.employees.pluck(:name).join ', ' %>
+        <strong>Start date</strong>: <%= pay_roll.start_date %>
+        <strong>End date</strong>: <%= pay_roll.end_date %>
+        <strong>All Paid?</strong>: <%= boolean_to_yes_no pay_roll.all_paid? %>
+      </div>
+      <div class="card-reveal">
+        <span class="card-title grey-text text-darken-4">Action<i class="material-icons right">close</i></span>
+
+        <%= link_to pay_roll, method: :delete, data: {confirm: 'Are you sure?'} do %>
+            <i class="material-icons right">delete</i>
+        <% end %>
+        <%= link_to pay_roll do %>
+            <i class="material-icons right">pageview</i>
+        <% end %>
+      </div>
+    </div>
+<% end %>

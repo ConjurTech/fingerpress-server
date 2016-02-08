@@ -1,11 +1,5 @@
 <div class="row">
   <div class="col s12">
-    <h1 class="title">Generate multiple pay slips</h1>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col s12">
     <%= simple_form_for @pay_roll, url: create_pay_roll_payment_records_path do |f| %>
         <%= f.error_notification %>
         <div class="input-field">
@@ -27,11 +21,5 @@
           <%= f.button :submit, 'Generate all' %>
         </div>
     <% end %>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col s12">
-    <%= link_to 'Back', payment_records_path, class: 'btn' %>
   </div>
 </div>

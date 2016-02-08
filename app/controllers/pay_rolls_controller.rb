@@ -1,5 +1,6 @@
 class PayRollsController < ApplicationController
-  before_action :set_pay_roll, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_admin!
+  before_action :set_pay_roll, only: [:show, :edit, :update, :destroy, :mark_all_paid]
 
   # GET /pay_rolls
   # GET /pay_rolls.json
@@ -58,6 +59,14 @@ class PayRollsController < ApplicationController
     @pay_roll.destroy
     respond_to do |format|
       format.html { redirect_to pay_rolls_url, notice: 'Pay roll was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
+  def mark_all_paid
+    @pay_roll.mark_all_paid
+    respond_to do |format|
+      format.html { redirect_to pay_rolls_url, notice: 'Pay roll was successfully updated.' }
       format.json { head :no_content }
     end
   end

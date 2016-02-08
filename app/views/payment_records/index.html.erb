@@ -33,7 +33,7 @@
   <% @payment_records.each do |payment_record| %>
       <tr>
         <td><%= payment_record.id %></td>
-        <td><%= payment_record.pay_roll_id %></td>
+        <td><%= link_to payment_record.pay_roll_id, pay_roll_path(payment_record.pay_roll) if payment_record.pay_roll.present? %></td>
         <td><%= payment_record.try(:employee).try(:name) %></td>
         <td><%= payment_record.date_range_selected %></td>
         <td><%= payment_record.payment_record_time_logs.count %></td>

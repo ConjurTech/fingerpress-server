@@ -21,5 +21,10 @@ module FingerPress
     config.to_prepare do
       DeviseController.respond_to :html, :json
     end
+
+    Rails.application.config.generators do |g|
+      g.template_engine :all
+      g.fallbacks[:all] = :erb # or haml/slim etc
+    end
   end
 end

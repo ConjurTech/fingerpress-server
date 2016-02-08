@@ -11,4 +11,8 @@ module ApplicationHelper
     end
     nil
   end
+
+  def boolean_to_yes_no(bool)
+    bool ? '<span class="yes">Yes</span>'.html_safe : '<span class="no">No</span>'.html_safe
+  end
 end
