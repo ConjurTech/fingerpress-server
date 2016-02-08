@@ -1,11 +1,57 @@
-<p id="notice"><%= notice %></p>
 <div class="fixed-action-btn">
   <%= link_to new_time_log_path, class: "btn-floating btn-large" do %>
       <i class="material-icons tooltipped" data-position="top" data-delay="50" data-tooltip="New Time log">add</i>
   <% end %>
 </div>
 
-<h1>Listing Time Logs</h1>
+<% if @invalid_time_logs.present? %>
+    <div class="card red lighten-2">
+      <div class="card-content">
+        <div class="card-title">Invalid Time Logs</div>
+        <table class="bordered">
+          <thead>
+          <tr>
+            <th>Date in</th>
+            <th>Date out</th>
+            <th>Employee</th>
+            <th>Pay scheme</th>
+            <th>Age</th>
+            <th colspan="3"></th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <% @invalid_time_logs.each do |time_log| %>
+              <tr>
+                <td><%= time_log.try(:date_time_in).try(:to_formatted_s, :long) %></td>
+                <td><%= time_log.try(:date_time_out).try(:to_formatted_s, :long) %></td>
+                <td><%= time_log.employee.name %></td>
+                <td><%= time_log.try(:pay_scheme).try(:id) %></td>
+                <td><%= time_log.age %> hours</td>
+                <td>
+                  <%= link_to time_log do %>
+                      <i class="material-icons">pageview</i>
+                  <% end %>
+                </td>
+                <td>
+                  <%= link_to edit_time_log_path(time_log) do %>
+                      <i class="material-icons">edit</i>
+                  <% end %>
+                </td>
+                <td>
+                  <%= link_to time_log, method: :delete, data: {confirm: 'Are you sure?'} do %>
+                      <i class="material-icons">delete</i>
+                  <% end %>
+                </td>
+              </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+<% end %>
+
+<h1>All Time Logs</h1>
 
 <div class="right">
   <%= paginate @time_logs %>
@@ -30,8 +76,16 @@
       <tr>
         <td><%= time_log.try(:date_time_in).try(:to_formatted_s, :long) %></td>
         <td><%= time_log.try(:date_time_out).try(:to_formatted_s, :long) %></td>
-        <td>Total:<%= time_log.worked_hours %>,normal:<%= time_log.normal_hours %>,ot:<%= time_log.ot_hours %>,weekend:<%= time_log.weekend_hours %>,public hol:<%= time_log.public_holiday_hours %></td>
-        <td><%= time_log.time_log_is_valid? ? "Yes" : "No" %></td>
+        <td>
+          <% if time_log.time_log_is_valid? %>
+              Total:<%= time_log.worked_hours %>,
+              normal:<%= time_log.normal_hours %>,
+              ot:<%= time_log.ot_hours %>,
+              weekend:<%= time_log.weekend_hours %>,
+              public hol:<%= time_log.public_holiday_hours %>
+          <% end %>
+        </td>
+        <td><%= boolean_to_yes_no time_log.time_log_is_valid? %></td>
         <td><%= time_log.employee.name %></td>
         <td><%= time_log.try(:pay_scheme).try(:id) %></td>
         <td><%= time_log.payment_record.try(:id) %></td>

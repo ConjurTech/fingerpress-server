@@ -13,6 +13,10 @@ class TimeLog < ActiveRecord::Base
 
   scope :complete, -> { where('date_time_in IS NOT NULL AND date_time_out IS NOT NULL') }
 
+  def age
+    TimeDifference.between(self.date_time_in, DateTime.now).in_hours || 0
+  end
+
   def date_in
     return nil unless self[:date_time_in]
     date_time_in.strftime("%e %B, %Y")
@@ -54,12 +58,12 @@ class TimeLog < ActiveRecord::Base
   end
 
   def convert_to_datetime
-      if @date_time_in_date_field.present? && @date_time_in_time_field.present?
-        self.date_time_in = Time.zone.parse("#{@date_time_in_date_field} #{@date_time_in_time_field}")
-      end
-      if @date_time_out_date_field.present? && @date_time_out_time_field.present?
-        self.date_time_out = Time.zone.parse("#{@date_time_out_date_field} #{@date_time_out_time_field}")
-      end
+    if @date_time_in_date_field.present? && @date_time_in_time_field.present?
+      self.date_time_in = Time.zone.parse("#{@date_time_in_date_field} #{@date_time_in_time_field}")
+    end
+    if @date_time_out_date_field.present? && @date_time_out_time_field.present?
+      self.date_time_out = Time.zone.parse("#{@date_time_out_date_field} #{@date_time_out_time_field}")
+    end
   end
 
   def datetime_fields_present?
@@ -177,11 +181,7 @@ class TimeLog < ActiveRecord::Base
   end
 
   def set_validity
-    if self.date_time_in.present? && self.date_time_out.present?
-      self.time_log_is_valid = true
-    else
-      self.time_log_is_valid = false
-    end
+    self.time_log_is_valid = self.date_time_in.present? && self.date_time_out.present? && TimeDifference.between(self.date_time_in, self.date_time_out).in_hours <= 24
     true
   end
 
