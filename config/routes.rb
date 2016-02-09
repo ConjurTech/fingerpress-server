@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-
+  namespace :api do
+    namespace :v1 do
+      resources :employees, only: [:index, :create, :show, :update, :destroy]
+    end
+  end
   resources :pay_rolls
   devise_for :admins, :controllers => {sessions: 'admins/sessions', registrations: 'admins/registrations'}
 

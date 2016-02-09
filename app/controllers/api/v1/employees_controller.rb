@@ -1,10 +1,9 @@
-class EmployeesController < ApplicationController
+class Api::V1::EmployeesController < Api::V1::BaseController
   before_action :set_employee_by_fingerprint, only: [:check_in, :check_out]
   before_action :set_employee, only: [:show, :edit, :update, :destroy, :register]
-  before_action :authenticate_admin!
 
-  # GET /employees
-  # GET /employees.json
+  # GET api/v1/employees
+  # GET api/v1/employees.json
   def index
     if params[:pay_scheme_id]
       @employees = Employee.where pay_scheme_id: params[:pay_scheme_id]
@@ -13,19 +12,19 @@ class EmployeesController < ApplicationController
     end
   end
 
-  # GET /employees/1
-  # GET /employees/1.json
+  # GET api/v1/employees/1
+  # GET api/v1/employees/1.json
   def show
     @time_logs = @employee.time_logs.complete.page(params[:page]).per(5)
     @hrs_logged = @time_logs.map { |tl| [tl.date_time_in.to_formatted_s(:short), TimeDifference.between(tl.date_time_in, tl.date_time_out).in_hours] }
   end
 
-  # GET /employees/new
+  # GET api/v1/employees/new
   def new
     @employee = Employee.new
   end
 
-  # GET /employees/1/edit
+  # GET api/v1/employees/1/edit
   def edit
   end
 
@@ -54,8 +53,8 @@ class EmployeesController < ApplicationController
     render :show
   end
 
-  # POST /employees
-  # POST /employees.json
+  # POST api/v1/employees
+  # POST api/v1/employees.json
   def create
     @employee = Employee.new(employee_params)
 
@@ -70,8 +69,8 @@ class EmployeesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /employees/1
-  # PATCH/PUT /employees/1.json
+  # PATCH/PUT api/v1/employees/1
+  # PATCH/PUT api/v1/employees/1.json
   def update
     respond_to do |format|
       if @employee.update(employee_params)
@@ -84,8 +83,8 @@ class EmployeesController < ApplicationController
     end
   end
 
-  # DELETE /employees/1
-  # DELETE /employees/1.json
+  # DELETE api/v1/employees/1
+  # DELETE api/v1/employees/1.json
   def destroy
     @employee.destroy
     respond_to do |format|
