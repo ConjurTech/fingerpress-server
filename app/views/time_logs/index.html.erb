@@ -63,6 +63,7 @@
     <th>Date in</th>
     <th>Date out</th>
     <th>Breakdown</th>
+    <th>Remarks</th>
     <th>Validity</th>
     <th>Employee</th>
     <th>Pay scheme</th>
@@ -85,6 +86,7 @@
               public hol:<%= time_log.public_holiday_hours %>
           <% end %>
         </td>
+        <td><%= time_log.remarks %></td>
         <td><%= boolean_to_yes_no time_log.time_log_is_valid? %></td>
         <td><%= time_log.employee.name %></td>
         <td><%= time_log.try(:pay_scheme).try(:id) %></td>

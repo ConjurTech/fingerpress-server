@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160201084316) do
+ActiveRecord::Schema.define(version: 20160212171642) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -118,10 +118,14 @@ ActiveRecord::Schema.define(version: 20160201084316) do
     t.datetime "date_time_out"
     t.integer  "payment_record_pay_scheme_id"
     t.integer  "payment_record_id"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
     t.float    "pay"
     t.string   "remarks"
+    t.boolean  "workday",                      default: false
+    t.boolean  "public_holiday",               default: false
+    t.string   "public_holiday_name"
+    t.float    "ot_hours",                     default: 0.0
   end
 
   add_index "payment_record_time_logs", ["payment_record_id"], name: "index_payment_record_time_logs_on_payment_record_id", using: :btree

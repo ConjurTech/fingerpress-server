@@ -84,12 +84,20 @@ class TimeLog < ActiveRecord::Base
     Holiday.public_holiday?(self.date_time_in)
   end
 
+  def workday?
+    Workday.workday?(self.date_time_in)
+  end
+
   def has_ot?
     ot_hours > 0 && !public_holiday? && !weekend?
   end
 
-  def set_remarks
-    self.remarks = "#{'[Public Holiday]' if public_holiday?}#{'[Weekend]' if weekend?}#{'[Has OT]' if has_ot?}"
+  def public_holiday_name
+    Holiday.public_holiday_name(self.date_time_in)
+  end
+
+  def remarks
+    "#{'[Public Holiday (' + public_holiday_name + ')]' if public_holiday?}#{'[Weekend]' if weekend?}#{'[Has OT]' if has_ot?}"
   end
 
   def calculate_pay
@@ -155,12 +163,12 @@ class TimeLog < ActiveRecord::Base
   end
 
   def ot_hours
-    ot_hours = Workday.ot_hours(self.date_time_in, self.date_time_out)
-    (weekend? || public_holiday?) ? 0 : ot_hours
+    hours = Workday.ot_hours(self.date_time_in, self.date_time_out)
+    (weekend? || public_holiday?) ? 0 : hours
   end
 
   def weekend_hours
-    (weekend? && !public_holiday? && !Workday.workday?(self.date_time_in)) ? worked_hours : 0
+    (weekend? && !public_holiday? && !workday?) ? worked_hours : 0
   end
 
   def public_holiday_hours

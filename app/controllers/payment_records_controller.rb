@@ -39,6 +39,11 @@ class PaymentRecordsController < ApplicationController
         # save a permanent copy of time log in case it gets deleted in the future
         perm_time_log = PaymentRecordTimeLog.new(date_time_in: employee_time_log.date_time_in,
                                  date_time_out: employee_time_log.date_time_out,
+                                 workday: employee_time_log.workday?,
+                                 public_holiday: employee_time_log.public_holiday?,
+                                 ot_hours: employee_time_log.ot_hours,
+                                 remarks: employee_time_log.remarks,
+                                 public_holiday_name: employee_time_log.public_holiday_name,
                                  payment_record_pay_scheme: payment_record_pay_scheme,
                                  payment_record: pay_slip
         )
