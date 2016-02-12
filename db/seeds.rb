@@ -21,7 +21,6 @@ work_day_attributes = [
 ]
 work_day_attributes.each do |attributes|
   puts attributes
-  puts Time.zone.parse('9:00').seconds_since_midnight
   puts Workday.where(attributes).first.present?
   Workday.create!(attributes) unless Workday.where(attributes).first
 end

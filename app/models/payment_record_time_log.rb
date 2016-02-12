@@ -96,7 +96,6 @@ class PaymentRecordTimeLog < ActiveRecord::Base
   end
 
   def public_holiday_hours
-    puts public_holiday? ? worked_hours : 0
     public_holiday? ? worked_hours : 0
   end
 end
