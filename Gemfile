@@ -76,6 +76,11 @@ gem 'whenever', require: false
 
 gem 'selectize-rails'
 
+# The Exception Notification gem provides a set of notifiers for sending notifications when errors occur in a Rack/Rails application.
+gem 'exception_notification'
+# For sending Exception Notifiers to slack for this app
+gem 'slack-notifier'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
