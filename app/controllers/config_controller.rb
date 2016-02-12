@@ -1,6 +1,12 @@
 class ConfigController < ApplicationController
   before_action :set_config, only: [:edit, :update]
   before_action :authenticate_admin!
+
+  # GET /config/show_api_key
+  def show_api_key
+
+  end
+
   # GET /configs/edit
   def edit
   end

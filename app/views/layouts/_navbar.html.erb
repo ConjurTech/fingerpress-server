@@ -1,3 +1,7 @@
+<ul id="dropdown1" class="dropdown-content">
+  <%= active_link_to 'Logout', destroy_admin_session_path, method: :delete, wrap_tag: :li %>
+  <%= active_link_to 'API KEY', config_show_api_key_path, wrap_tag: :li %>
+</ul>
 <nav class="">
   <div class="nav-wrapper">
     <div class="brand-logo">
@@ -13,8 +17,7 @@
       <li><%= active_link_to 'Pay Schemes', pay_schemes_path, wrap_tag: :li %></li>
       <li><%= active_link_to 'Set Holidays', holidays_path, wrap_tag: :li %></li>
       <li><%= active_link_to 'Set Workdays', config_edit_path, wrap_tag: :li %></li>
-      <li><%= active_link_to 'Logout', destroy_admin_session_path, method: :delete, wrap_tag: :li %></li>
-
+      <li><a class="dropdown-button" href="#!" data-activates="dropdown1"><%= current_admin.email %><i class="material-icons right">arrow_drop_down</i></a></li>
     </ul>
   </div>
 </nav>

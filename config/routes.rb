@@ -32,6 +32,7 @@ Rails.application.routes.draw do
 
   get 'config/edit' => 'config#edit'
   post 'config/update' => 'config#update'
+  get 'config/show_api_key' => 'config#show_api_key'
   root 'time_logs#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
