@@ -35,7 +35,7 @@ class Workday < ActiveRecord::Base
   end
 
   def self.workday?(date)
-    time.strftime("%A")
+    Workday.where(name: date.strftime("%A"), enabled: true).first.present?
   end
 
   # return the number of ot hours based on the time range specified by workdays config and the timing inputted

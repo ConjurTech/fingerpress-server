@@ -160,7 +160,7 @@ class TimeLog < ActiveRecord::Base
   end
 
   def weekend_hours
-    (weekend? && !public_holiday?) ? worked_hours : 0
+    (weekend? && !public_holiday? && !Workday.workday?(self.date_time_in)) ? worked_hours : 0
   end
 
   def public_holiday_hours
