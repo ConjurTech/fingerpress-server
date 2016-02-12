@@ -4,7 +4,6 @@ class ConfigController < ApplicationController
 
   # GET /config/show_api_key
   def show_api_key
-
   end
 
   # GET /configs/edit
