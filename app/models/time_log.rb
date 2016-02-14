@@ -5,11 +5,10 @@ class TimeLog < ActiveRecord::Base
   belongs_to :payment_record
 
   before_validation :convert_to_datetime, on: [:create, :update]
-  before_validation :set_pay_scheme_from_employee, on: :create
   # validates :time_in, :time_out, :date_in, :date_out, :employee, :pay_scheme, presence: true
-  validates :employee, :pay_scheme, presence: true
+  validates :employee, presence: true
   # validate :end_time_is_after_start_time
-  before_save :set_validity
+  before_save :set_validity, :set_pay_scheme_from_employee
 
   scope :complete, -> { where('date_time_in IS NOT NULL AND date_time_out IS NOT NULL') }
 
@@ -97,7 +96,11 @@ class TimeLog < ActiveRecord::Base
   end
 
   def remarks
-    "#{'[Public Holiday (' + public_holiday_name + ')]' if public_holiday?}#{'[Weekend]' if weekend?}#{'[Has OT]' if has_ot?}"
+    if time_log_is_valid
+      "#{'[Public Holiday (' + public_holiday_name + ')]' if public_holiday?}#{'[Weekend]' if weekend?}#{'[Has OT]' if has_ot?}"
+    else
+      "Invalid"
+    end
   end
 
   def calculate_pay

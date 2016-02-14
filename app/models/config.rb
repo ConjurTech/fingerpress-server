@@ -1,5 +1,5 @@
 class Config < ActiveRecord::Base
-  has_many :workdays
+  has_many :workdays, -> { order(:id) }
   accepts_nested_attributes_for :workdays
 
   # return the number of ot hours based on the time range specified by workdays config and the timing inputted
@@ -26,7 +26,7 @@ class Config < ActiveRecord::Base
     self.workdays.where(name: date.strftime("%A"), enabled: true).first.present?
   end
 
-  def self.find_work_days
+  def find_work_days
     self.workdays.map { |workday| workday.enabled ? workday.name[0, 3].downcase : nil }.compact
   end
 end

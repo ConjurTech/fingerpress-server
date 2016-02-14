@@ -1,6 +1,6 @@
 <h1>Configure Workdays</h1>
 
-<div class="row">
+<div class="row config-edit-form">
   <%= simple_form_for(@config) do |f| %>
       <%= f.error_notification %>
       <div class="fixed-action-btn">
@@ -14,8 +14,8 @@
           <div class="card">
             <div class="card-content group-card">
               <div class="card-title">Config</div>
-              <%= f.input :ignore_early_check_in %>
               <%= f.input :auto_adjust_to_workday %>
+              <!--<%= f.input :ignore_early_check_in %>-->
               <div class="row">
                 <p class="range-field col s12 m6 l6">
                   <%= f.input :lower_timing_tolerance, wrapper: false, label: 'if early by (minutes)', collection: 0..59, selected: f.object.lower_timing_tolerance %>
