@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160212171642) do
+ActiveRecord::Schema.define(version: 20160214144716) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,15 @@ ActiveRecord::Schema.define(version: 20160212171642) do
 
   add_index "admins", ["email"], name: "index_admins_on_email", unique: true, using: :btree
   add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true, using: :btree
+
+  create_table "configs", force: :cascade do |t|
+    t.integer  "lower_timing_tolerance", default: 15
+    t.integer  "upper_timing_tolerance", default: 15
+    t.boolean  "ignore_early_check_in",  default: true
+    t.boolean  "auto_adjust_to_workday", default: true
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+  end
 
   create_table "employee_pay_rolls", force: :cascade do |t|
     t.integer "employee_id"
@@ -171,7 +180,10 @@ ActiveRecord::Schema.define(version: 20160212171642) do
     t.boolean  "enabled",            default: false
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
+    t.integer  "config_id"
   end
+
+  add_index "workdays", ["config_id"], name: "index_workdays_on_config_id", using: :btree
 
   add_foreign_key "employee_pay_rolls", "employees"
   add_foreign_key "employee_pay_rolls", "pay_rolls"
@@ -184,4 +196,5 @@ ActiveRecord::Schema.define(version: 20160212171642) do
   add_foreign_key "time_logs", "employees"
   add_foreign_key "time_logs", "pay_schemes"
   add_foreign_key "time_logs", "payment_records"
+  add_foreign_key "workdays", "configs"
 end

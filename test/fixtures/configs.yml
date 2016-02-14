@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  lower_timing_tolerance: 1
+  upper_timing_tolerance: 1
+  ignore_early_check_in: false
+
+two:
+  lower_timing_tolerance: 1
+  upper_timing_tolerance: 1
+  ignore_early_check_in: false

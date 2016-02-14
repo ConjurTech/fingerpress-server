@@ -35,7 +35,7 @@ Rails.application.routes.draw do
     end
   end
   resources :payment_record_pay_schemes
-
+  resources :config, except: [:index, :new, :create, :show]
   get 'config/edit' => 'config#edit'
   post 'config/update' => 'config#update'
   get 'config/show_api_key' => 'config#show_api_key'

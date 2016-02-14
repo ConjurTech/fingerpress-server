@@ -85,7 +85,7 @@ class TimeLog < ActiveRecord::Base
   end
 
   def workday?
-    Workday.workday?(self.date_time_in)
+    Config.first.workday?(self.date_time_in)
   end
 
   def has_ot?
@@ -163,7 +163,7 @@ class TimeLog < ActiveRecord::Base
   end
 
   def ot_hours
-    hours = Workday.ot_hours(self.date_time_in, self.date_time_out)
+    hours = Config.first.ot_hours(self.date_time_in, self.date_time_out)
     (weekend? || public_holiday?) ? 0 : hours
   end
 

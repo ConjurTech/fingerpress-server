@@ -1,43 +1,35 @@
-<h1>Set Workdays</h1>
-<body>
-<%= form_tag config_update_path do %>
-    <div class="row">
-      <% @workdays.each do |workday| %>
-          <%= fields_for "workdays[]", workday do |wf| %>
+<h1>Configure Workdays</h1>
 
-              <div class="col s6">
-                <div class="card white darken-1">
-                  <div class="card-content black-text">
+<div class="row">
+  <%= simple_form_for(@config) do |f| %>
+      <%= f.error_notification %>
+      <div class="fixed-action-btn">
+        <%= button_tag type: :submit, class: "btn-floating btn-large red lighten-1", data: {disable_with: "Wait"} do %>
+            <i class="material-icons tooltipped" data-position="top" data-delay="50" data-tooltip="Save">insert_drive_file</i>
+        <% end %>
+      </div>
 
-                    <span class="card-title"><%= workday.name %></span>
-
-                    <div class="input-group clockpicker">
-                      <%= wf.text_field :start_time %>
-                      <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-time"></span>
-                      </span>
-                    </div>
-
-                    <div class="input-group clockpicker">
-                      <%= wf.text_field :end_time %>
-                      <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-time"></span>
-                      </span>
-                    </div>
-
-                    <%= wf.check_box :enabled %>
-                    <%= wf.label :enabled %> <br/>
-
-                  </div>
-                </div>
+      <div>
+        <div class="form-inputs">
+          <div class="card">
+            <div class="card-content group-card">
+              <div class="card-title">Config</div>
+              <%= f.input :ignore_early_check_in %>
+              <%= f.input :auto_adjust_to_workday %>
+              <div class="row">
+                <p class="range-field col s12 m6 l6">
+                  <%= f.input :lower_timing_tolerance, wrapper: false, label: 'if early by (minutes)', collection: 0..59, selected: f.object.lower_timing_tolerance %>
+                </p>
+                <p class="range-field col s12 m6 l6">
+                  <%= f.input :upper_timing_tolerance, wrapper: false, label: 'if late by (minutes)', collection: 0..59, selected: f.object.upper_timing_tolerance %>
+                </p>
               </div>
-
+            </div>
+          </div>
+          <%= f.simple_fields_for :workdays do |workday| %>
+              <%= render 'workday_fields', f: workday %>
           <% end %>
-      <% end %>
-    </div>
-    <div class="fixed-action-btn">
-      <%= button_tag type: :submit, class: "btn-floating btn-large" do %>
-          <i class="material-icons tooltipped" data-position="top" data-delay="50" data-tooltip="Save Work Days">save</i>
-      <% end %>
-    </div>
-<% end %>
+        </div>
+      </div>
+  <% end %>
+</div>
