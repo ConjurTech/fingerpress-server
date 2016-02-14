@@ -29,4 +29,35 @@ class Config < ActiveRecord::Base
   def find_work_days
     self.workdays.map { |workday| workday.enabled ? workday.name[0, 3].downcase : nil }.compact
   end
+
+  def config_adjusted_start_time(time_in)
+    wd = self.workdays.where(name: time_in.strftime("%A"), enabled: true).first
+    return time_in if wd.blank? || !self.auto_adjust_start_time?
+    wd_start = DateTime.civil_from_format(:local, time_in.year, time_in.month, time_in.day) + wd.start_time_seconds.seconds
+    difference = TimeDifference.between(wd_start, time_in).in_minutes
+
+    if time_in < wd_start && difference <= self.start_time_lower_tolerance
+      wd_start
+    elsif time_in > wd_start && difference <= self.start_time_upper_tolerance
+      wd_start
+    else
+      time_in
+    end
+  end
+
+  def config_adjusted_end_time(time_in, time_out)
+    wd = self.workdays.where(name: time_in.strftime("%A"), enabled: true).first
+    return time_out if wd.blank? || !self.auto_adjust_end_time?
+    wd_end = DateTime.civil_from_format(:local, time_in.year, time_in.month, time_in.day) + wd.end_time_seconds.seconds
+
+    difference = TimeDifference.between(wd_end, time_out).in_minutes
+
+    if time_out < wd_end && difference <= self.end_time_lower_tolerance
+      wd_end
+    elsif time_out > wd_end && difference <= self.end_time_upper_tolerance
+      wd_end
+    else
+      time_out
+    end
+  end
 end

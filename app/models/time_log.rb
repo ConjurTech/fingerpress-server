@@ -8,7 +8,7 @@ class TimeLog < ActiveRecord::Base
   # validates :time_in, :time_out, :date_in, :date_out, :employee, :pay_scheme, presence: true
   validates :employee, presence: true
   # validate :end_time_is_after_start_time
-  before_save :set_validity, :set_pay_scheme_from_employee
+  before_save :adjust_based_on_config, :set_validity, :set_pay_scheme_from_employee
 
   scope :complete, -> { where('date_time_in IS NOT NULL AND date_time_out IS NOT NULL') }
 
@@ -198,5 +198,10 @@ class TimeLog < ActiveRecord::Base
 
   def set_pay_scheme_from_employee
     self.pay_scheme = self.employee.pay_scheme
+  end
+
+  def adjust_based_on_config
+    self.date_time_in = Config.first.config_adjusted_start_time(self.date_time_in) if self.date_time_in.present?
+    self.date_time_out = Config.first.config_adjusted_end_time(self.date_time_in, self.date_time_out) if self.date_time_out.present?
   end
 end

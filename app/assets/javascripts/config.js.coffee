@@ -3,14 +3,23 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 $(document).ready ->
   if $('.config-edit-form')[0]
-    checked = $('#config_auto_adjust_to_workday')[0].checked
-    disable_other_configs(!checked)
-    $('#config_auto_adjust_to_workday').click ->
-      disable_other_configs(!@checked)
+    adjust_start_time_checked = $('#config_auto_adjust_start_time')[0].checked
+    adjust_end_time_checked = $('#config_auto_adjust_end_time')[0].checked
+    disable_check_in_configs(!adjust_start_time_checked)
+    disable_check_out_configs(!adjust_end_time_checked)
+    $('#config_auto_adjust_start_time').click ->
+      disable_check_in_configs(!@checked)
+    $('#config_auto_adjust_end_time').click ->
+      disable_check_out_configs(!@checked)
 
-disable_other_configs = (bool) ->
-  $('#config_lower_timing_tolerance').attr 'disabled', bool
-  $('#config_lower_timing_tolerance').material_select()
-  $('#config_upper_timing_tolerance').attr 'disabled', bool
-  $('#config_upper_timing_tolerance').material_select()
-  $('#config_ignore_early_check_in').attr 'disabled', bool
+disable_check_in_configs = (bool) ->
+  $('#config_start_time_lower_tolerance').attr 'disabled', bool
+  $('#config_start_time_lower_tolerance').material_select()
+  $('#config_start_time_upper_tolerance').attr 'disabled', bool
+  $('#config_start_time_upper_tolerance').material_select()
+
+disable_check_out_configs = (bool) ->
+  $('#config_end_time_lower_tolerance').attr 'disabled', bool
+  $('#config_end_time_lower_tolerance').material_select()
+  $('#config_end_time_upper_tolerance').attr 'disabled', bool
+  $('#config_end_time_upper_tolerance').material_select()

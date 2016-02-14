@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  lower_timing_tolerance: 1
-  upper_timing_tolerance: 1
-  ignore_early_check_in: false
+  start_time_lower_tolerance: 1
+  start_time_upper_tolerance: 1
+  auto_adjust_end_time: false
 
 two:
-  lower_timing_tolerance: 1
-  upper_timing_tolerance: 1
-  ignore_early_check_in: false
+  start_time_lower_tolerance: 1
+  start_time_upper_tolerance: 1
+  auto_adjust_end_time: false

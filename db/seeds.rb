@@ -11,7 +11,7 @@
 
 # Config
 config_attributes = [
-    {lower_timing_tolerance: 15, upper_timing_tolerance: 15, ignore_early_check_in: true, auto_adjust_to_workday: true}
+    {start_time_lower_tolerance: 15, start_time_upper_tolerance: 15, end_time_lower_tolerance: 15, end_time_upper_tolerance: 15, auto_adjust_end_time: true, auto_adjust_start_time: true}
 ]
 
 config_attributes.each do |attributes|

@@ -33,7 +33,8 @@ class ConfigController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def config_params
-    params.require(:config).permit(:lower_timing_tolerance, :upper_timing_tolerance, :ignore_early_check_in, :auto_adjust_to_workday,
+    params.require(:config).permit(:start_time_lower_tolerance, :start_time_upper_tolerance, :end_time_lower_tolerance, :end_time_upper_tolerance,
+                                   :auto_adjust_end_time, :auto_adjust_start_time,
                                    workdays_attributes: [:id, :name, :start_time_seconds, :end_time_seconds, :start_time, :end_time, :enabled])
   end
 end

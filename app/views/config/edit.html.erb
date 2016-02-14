@@ -14,15 +14,23 @@
           <div class="card">
             <div class="card-content group-card">
               <div class="card-title">Config</div>
-              <%= f.input :auto_adjust_to_workday %>
-              <!--<%= f.input :ignore_early_check_in %>-->
+              <%= f.input :auto_adjust_start_time %>
               <div class="row">
-                <p class="range-field col s12 m6 l6">
-                  <%= f.input :lower_timing_tolerance, wrapper: false, label: 'if early by (minutes)', collection: 0..59, selected: f.object.lower_timing_tolerance %>
-                </p>
-                <p class="range-field col s12 m6 l6">
-                  <%= f.input :upper_timing_tolerance, wrapper: false, label: 'if late by (minutes)', collection: 0..59, selected: f.object.upper_timing_tolerance %>
-                </p>
+                <div class="range-field col s12 m6 l6">
+                  <%= f.input :start_time_lower_tolerance, wrapper: false, label: 'if early by (minutes)', collection: 0..59, selected: f.object.start_time_lower_tolerance %>
+                </div>
+                <div class="range-field col s12 m6 l6">
+                  <%= f.input :start_time_upper_tolerance, wrapper: false, label: 'if late by (minutes)', collection: 0..59, selected: f.object.start_time_upper_tolerance %>
+                </div>
+              </div>
+              <%= f.input :auto_adjust_end_time %>
+              <div class="row">
+                <div class="range-field col s12 m6 l6">
+                  <%= f.input :end_time_lower_tolerance, wrapper: false, label: 'if early by (minutes)', collection: 0..59, selected: f.object.end_time_lower_tolerance %>
+                </div>
+                <div class="range-field col s12 m6 l6">
+                  <%= f.input :end_time_upper_tolerance, wrapper: false, label: 'if late by (minutes)', collection: 0..59, selected: f.object.end_time_upper_tolerance %>
+                </div>
               </div>
             </div>
           </div>

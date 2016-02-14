@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160214144716) do
+ActiveRecord::Schema.define(version: 20160214202310) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,12 +36,14 @@ ActiveRecord::Schema.define(version: 20160214144716) do
   add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true, using: :btree
 
   create_table "configs", force: :cascade do |t|
-    t.integer  "lower_timing_tolerance", default: 15
-    t.integer  "upper_timing_tolerance", default: 15
-    t.boolean  "ignore_early_check_in",  default: true
-    t.boolean  "auto_adjust_to_workday", default: true
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
+    t.integer  "start_time_lower_tolerance", default: 15
+    t.integer  "start_time_upper_tolerance", default: 15
+    t.boolean  "auto_adjust_end_time",       default: true
+    t.boolean  "auto_adjust_start_time",     default: true
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
+    t.integer  "end_time_lower_tolerance",   default: 15
+    t.integer  "end_time_upper_tolerance",   default: 15
   end
 
   create_table "employee_pay_rolls", force: :cascade do |t|
