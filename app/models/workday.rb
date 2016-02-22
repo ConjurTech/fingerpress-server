@@ -1,6 +1,6 @@
 class Workday < ActiveRecord::Base
   before_save :ensure_time_validity
-  belongs_to :config
+  belongs_to :time_log_config
   attr_accessor :start_time, :end_time
 
   def start_time

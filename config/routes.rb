@@ -35,10 +35,10 @@ Rails.application.routes.draw do
     end
   end
   resources :payment_record_pay_schemes
-  resources :config, except: [:index, :new, :create, :show]
-  get 'config/edit' => 'config#edit'
-  post 'config/update' => 'config#update'
-  get 'config/show_api_key' => 'config#show_api_key'
+  resources :time_log_configs, except: [:index, :new, :create, :show]
+  get 'time_log_config/edit' => 'time_log_configs#edit'
+  post 'time_log_config/update' => 'time_log_configs#update'
+  get 'time_log_config/show_api_key' => 'time_log_configs#show_api_key'
   root 'time_logs#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -16,12 +16,12 @@ config_attributes = [
 
 config_attributes.each do |attributes|
   puts attributes
-  puts Config.where(attributes).first.present?
-  Config.create!(attributes) unless Config.where(attributes).first
+  puts TimeLogConfig.where(attributes).first.present?
+  TimeLogConfig.create!(attributes) unless TimeLogConfig.where(attributes).first
 end
 
 # Workdays
-config = Config.first
+config = TimeLogConfig.first
 work_day_attributes = [
     {config_id: config.id, name: 'Monday', start_time_seconds: Time.zone.parse('9:00').seconds_since_midnight, end_time_seconds: Time.zone.parse('17:00').seconds_since_midnight, enabled: true},
     {config_id: config.id, name: 'Tuesday', start_time_seconds: Time.zone.parse('9:00').seconds_since_midnight, end_time_seconds: Time.zone.parse('17:00').seconds_since_midnight, enabled: true},

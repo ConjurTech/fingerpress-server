@@ -84,7 +84,7 @@ class TimeLog < ActiveRecord::Base
   end
 
   def workday?
-    Config.first.workday?(self.date_time_in)
+    TimeLogConfig.first.workday?(self.date_time_in)
   end
 
   def has_ot?
@@ -166,7 +166,7 @@ class TimeLog < ActiveRecord::Base
   end
 
   def ot_hours
-    hours = Config.first.ot_hours(self.date_time_in, self.date_time_out)
+    hours = TimeLogConfig.first.ot_hours(self.date_time_in, self.date_time_out)
     (weekend? || public_holiday?) ? 0 : hours
   end
 
@@ -201,7 +201,7 @@ class TimeLog < ActiveRecord::Base
   end
 
   def adjust_based_on_config
-    self.date_time_in = Config.first.config_adjusted_start_time(self.date_time_in) if self.date_time_in.present?
-    self.date_time_out = Config.first.config_adjusted_end_time(self.date_time_in, self.date_time_out) if self.date_time_out.present?
+    self.date_time_in = TimeLogConfig.first.config_adjusted_start_time(self.date_time_in) if self.date_time_in.present?
+    self.date_time_out = TimeLogConfig.first.config_adjusted_end_time(self.date_time_in, self.date_time_out) if self.date_time_out.present?
   end
 end

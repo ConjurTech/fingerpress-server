@@ -1,4 +1,4 @@
-class Config < ActiveRecord::Base
+class TimeLogConfig < ActiveRecord::Base
   has_many :workdays, -> { order(:id) }
   accepts_nested_attributes_for :workdays
 

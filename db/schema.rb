@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160214202310) do
+ActiveRecord::Schema.define(version: 20160222081952) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,17 +34,6 @@ ActiveRecord::Schema.define(version: 20160214202310) do
 
   add_index "admins", ["email"], name: "index_admins_on_email", unique: true, using: :btree
   add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true, using: :btree
-
-  create_table "configs", force: :cascade do |t|
-    t.integer  "start_time_lower_tolerance", default: 15
-    t.integer  "start_time_upper_tolerance", default: 15
-    t.boolean  "auto_adjust_end_time",       default: true
-    t.boolean  "auto_adjust_start_time",     default: true
-    t.datetime "created_at",                                null: false
-    t.datetime "updated_at",                                null: false
-    t.integer  "end_time_lower_tolerance",   default: 15
-    t.integer  "end_time_upper_tolerance",   default: 15
-  end
 
   create_table "employee_pay_rolls", force: :cascade do |t|
     t.integer "employee_id"
@@ -160,6 +149,17 @@ ActiveRecord::Schema.define(version: 20160214202310) do
   add_index "payment_records", ["pay_roll_id"], name: "index_payment_records_on_pay_roll_id", using: :btree
   add_index "payment_records", ["payment_record_pay_scheme_id"], name: "index_payment_records_on_payment_record_pay_scheme_id", using: :btree
 
+  create_table "time_log_configs", force: :cascade do |t|
+    t.integer  "start_time_lower_tolerance", default: 15
+    t.integer  "start_time_upper_tolerance", default: 15
+    t.boolean  "auto_adjust_end_time",       default: true
+    t.boolean  "auto_adjust_start_time",     default: true
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
+    t.integer  "end_time_lower_tolerance",   default: 15
+    t.integer  "end_time_upper_tolerance",   default: 15
+  end
+
   create_table "time_logs", force: :cascade do |t|
     t.datetime "date_time_in"
     t.datetime "date_time_out"
@@ -182,10 +182,8 @@ ActiveRecord::Schema.define(version: 20160214202310) do
     t.boolean  "enabled",            default: false
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
-    t.integer  "config_id"
+    t.integer  "time_log_config_id"
   end
-
-  add_index "workdays", ["config_id"], name: "index_workdays_on_config_id", using: :btree
 
   add_foreign_key "employee_pay_rolls", "employees"
   add_foreign_key "employee_pay_rolls", "pay_rolls"
@@ -198,5 +196,5 @@ ActiveRecord::Schema.define(version: 20160214202310) do
   add_foreign_key "time_logs", "employees"
   add_foreign_key "time_logs", "pay_schemes"
   add_foreign_key "time_logs", "payment_records"
-  add_foreign_key "workdays", "configs"
+  add_foreign_key "workdays", "time_log_configs"
 end

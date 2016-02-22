@@ -58,7 +58,7 @@ class PaymentRecordsController < ApplicationController
     end
     respond_to do |format|
       if @pay_roll.errors.blank?
-        format.html { redirect_to payment_records_path(pay_roll_id: @pay_roll.id), notice: 'Payment record was successfully created.' }
+        format.html { redirect_to @pay_roll, notice: 'Payment record was successfully created.' }
         format.json { render :show, status: :created, location: @payment_record }
       else
         format.html { render :new }
