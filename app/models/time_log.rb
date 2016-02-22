@@ -118,7 +118,7 @@ class TimeLog < ActiveRecord::Base
   end
 
   def ot_pay
-    case self.payment_record_pay_scheme.weekend_type
+    case self.pay_scheme.ot_type
       when 'same_as_normal'
         ot_hours * self.pay_scheme.pay
       when 'per_hour'
@@ -131,13 +131,13 @@ class TimeLog < ActiveRecord::Base
   end
 
   def weekend_pay
-    case self.payment_record_pay_scheme.weekend_type
+    case self.pay_scheme.weekend_type
       when 'same_as_normal'
         weekend_hours * self.pay_scheme.pay
       when 'per_hour'
         weekend_hours * self.pay_scheme.pay_weekend
       when 'multiplier'
-        weekend_hours * self.pay_scheme.pay * self.payment_record_pay_scheme.weekend_multiplier
+        weekend_hours * self.pay_scheme.pay * self.pay_scheme.weekend_multiplier
       else
         0
     end
