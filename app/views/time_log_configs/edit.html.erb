@@ -1,7 +1,7 @@
 <h1>Configure Workdays</h1>
 
 <div class="row time_log_config-edit-form">
-  <%= simple_form_for(@time_log_config) do |f| %>
+  <%= simple_form_for(@time_log_config, url: time_log_config_update_path, method: :post) do |f| %>
       <%= f.error_notification %>
       <div class="fixed-action-btn">
         <%= button_tag type: :submit, class: "btn-floating btn-large red lighten-1", data: {disable_with: "Wait"} do %>

@@ -23,13 +23,13 @@ end
 # Workdays
 config = TimeLogConfig.first
 work_day_attributes = [
-    {config_id: config.id, name: 'Monday', start_time_seconds: Time.zone.parse('9:00').seconds_since_midnight, end_time_seconds: Time.zone.parse('17:00').seconds_since_midnight, enabled: true},
-    {config_id: config.id, name: 'Tuesday', start_time_seconds: Time.zone.parse('9:00').seconds_since_midnight, end_time_seconds: Time.zone.parse('17:00').seconds_since_midnight, enabled: true},
-    {config_id: config.id, name: 'Wednesday', start_time_seconds: Time.zone.parse('9:00').seconds_since_midnight, end_time_seconds: Time.zone.parse('17:00').seconds_since_midnight, enabled: true},
-    {config_id: config.id, name: 'Thursday', start_time_seconds: Time.zone.parse('9:00').seconds_since_midnight, end_time_seconds: Time.zone.parse('17:00').seconds_since_midnight, enabled: true},
-    {config_id: config.id, name: 'Friday', start_time_seconds: Time.zone.parse('9:00').seconds_since_midnight, end_time_seconds: Time.zone.parse('17:00').seconds_since_midnight, enabled: true},
-    {config_id: config.id, name: 'Saturday', start_time_seconds: Time.zone.parse('9:00').seconds_since_midnight, end_time_seconds: Time.zone.parse('17:00').seconds_since_midnight, enabled: false},
-    {config_id: config.id, name: 'Sunday', start_time_seconds: Time.zone.parse('9:00').seconds_since_midnight, end_time_seconds: Time.zone.parse('17:00').seconds_since_midnight, enabled: false}
+    {time_log_config_id: config.id, name: 'Monday', start_time_seconds: Time.zone.parse('9:00').seconds_since_midnight, end_time_seconds: Time.zone.parse('17:00').seconds_since_midnight, enabled: true},
+    {time_log_config_id: config.id, name: 'Tuesday', start_time_seconds: Time.zone.parse('9:00').seconds_since_midnight, end_time_seconds: Time.zone.parse('17:00').seconds_since_midnight, enabled: true},
+    {time_log_config_id: config.id, name: 'Wednesday', start_time_seconds: Time.zone.parse('9:00').seconds_since_midnight, end_time_seconds: Time.zone.parse('17:00').seconds_since_midnight, enabled: true},
+    {time_log_config_id: config.id, name: 'Thursday', start_time_seconds: Time.zone.parse('9:00').seconds_since_midnight, end_time_seconds: Time.zone.parse('17:00').seconds_since_midnight, enabled: true},
+    {time_log_config_id: config.id, name: 'Friday', start_time_seconds: Time.zone.parse('9:00').seconds_since_midnight, end_time_seconds: Time.zone.parse('17:00').seconds_since_midnight, enabled: true},
+    {time_log_config_id: config.id, name: 'Saturday', start_time_seconds: Time.zone.parse('9:00').seconds_since_midnight, end_time_seconds: Time.zone.parse('17:00').seconds_since_midnight, enabled: false},
+    {time_log_config_id: config.id, name: 'Sunday', start_time_seconds: Time.zone.parse('9:00').seconds_since_midnight, end_time_seconds: Time.zone.parse('17:00').seconds_since_midnight, enabled: false}
 ]
 work_day_attributes.each do |attributes|
   puts attributes
