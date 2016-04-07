@@ -4,7 +4,6 @@ class Admin < ActiveRecord::Base
   devise :database_authenticatable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  # You likely have this before callback set up for the token.
   before_save :ensure_authentication_token
 
   def ensure_authentication_token

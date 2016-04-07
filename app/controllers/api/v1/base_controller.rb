@@ -7,15 +7,15 @@ class Api::V1::BaseController < ApplicationController
   private
 
   def authenticate_admin_from_token!
-    admin_email = request.headers["HTTP_ADMIN_EMAIL"].presence
+    admin_email = params[:admin_email]
     admin = admin_email && Admin.find_by_email(admin_email)
     # Notice how we use Devise.secure_compare to compare the token
     # in the database with the token given in the params, mitigating
     # timing attacks.
-    if admin && Devise.secure_compare(admin.authentication_token, request.headers["HTTP_AUTH_TOKEN"])
+    if admin && Devise.secure_compare(admin.authentication_token, params[:auth_token])
       sign_in admin, store: false
     else
-      false
+      render_unauthorized
     end
   end
 

@@ -1,47 +1,23 @@
 class Api::V1::EmployeesController < Api::V1::BaseController
-  before_action :set_employee_by_fingerprint, only: [:check_in, :check_out]
-  before_action :set_employee, only: [:show, :edit, :update, :destroy, :register]
+  before_action :set_employee_by_fingerprint, only: [:fingerprint_check_in, :fingerprint_check_out]
+  before_action :set_employee, only: [:fingerprint_register]
 
-  # GET api/v1/employees
-  # GET api/v1/employees.json
-  def index
-    if params[:pay_scheme_id]
-      @employees = Employee.where pay_scheme_id: params[:pay_scheme_id]
-    else
-      @employees = Employee.all
-    end
+  # GET api/v1/fingerprint_employees
+  # GET api/v1/fingerprint_employees.json
+  def fingerprint_employees
+    @employees = Employee.all
   end
 
-  # GET api/v1/employees/1
-  # GET api/v1/employees/1.json
-  def show
-    @time_logs = @employee.time_logs.complete.page(params[:page]).per(5)
-    @hrs_logged = @time_logs.map { |tl| [tl.date_time_in.to_formatted_s(:short), TimeDifference.between(tl.date_time_in, tl.date_time_out).in_hours] }
-  end
-
-  # GET api/v1/employees/new
-  def new
-    @employee = Employee.new
-  end
-
-  # GET api/v1/employees/1/edit
-  def edit
-  end
-
-  def check_in
+  # check in employee
+  def fingerprint_check_in
     @employee.time_logs.create!(date_time_in: Time.at(params[:timestamp].to_i))
     render :show
   end
 
-  def register
-    @employee.fingerprint_id = params[:fingerprint_id]
-    @employee.save
-    render :show
-  end
-
+  # check out employee
   # Finds the timelog after the last valid timelog that does not have a date_time_out set yet and sets the checkout time on it.
   # If none is found, creates a new timelog and sets the checkout time on it.
-  def check_out
+  def fingerprint_check_out
     last_valid_timelog = @employee.time_logs.complete.order(date_time_out: :desc).first
     time_must_be_after = last_valid_timelog.try(:date_time_out) || Time.at(0) # for the first record
 
@@ -53,55 +29,22 @@ class Api::V1::EmployeesController < Api::V1::BaseController
     render :show
   end
 
-  # POST api/v1/employees
-  # POST api/v1/employees.json
-  def create
-    @employee = Employee.new(employee_params)
-
-    respond_to do |format|
-      if @employee.save
-        format.html { redirect_to @employee, notice: 'Employee was successfully created.' }
-        format.json { render :show, status: :created, location: @employee }
-      else
-        format.html { render :new }
-        format.json { render json: @employee.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT api/v1/employees/1
-  # PATCH/PUT api/v1/employees/1.json
-  def update
-    respond_to do |format|
-      if @employee.update(employee_params)
-        format.html { redirect_to @employee, notice: 'Employee was successfully updated.' }
-        format.json { render :show, status: :ok, location: @employee }
-      else
-        format.html { render :edit }
-        format.json { render json: @employee.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE api/v1/employees/1
-  # DELETE api/v1/employees/1.json
-  def destroy
-    @employee.destroy
-    respond_to do |format|
-      format.html { redirect_to employees_url, notice: 'Employee was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+  def fingerprint_register
+    @employee.fingerprint_id = params[:fingerprint_id]
+    @employee.save
+    render :show
   end
 
   private
 
   # Use callbacks to share common setup or constraints between actions.
   def set_employee
-    @employee = Employee.find_by(id: params[:id])
+    @employee = Employee.find_by(id: params[:employee_id])
   end
 
+  # use fingerprint id and scanner uuid to set employee
   def set_employee_by_fingerprint
-    @employee = Employee.find_or_initialize_by(fingerprint_id: params[:id])
+    @employee = Employee.find_or_initialize_by(fingerprint_id: params[:fingerprint_id])
 
     if @employee.new_record?
       @employee.pay_scheme = PayScheme.first
@@ -114,6 +57,6 @@ class Api::V1::EmployeesController < Api::V1::BaseController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def employee_params
-    params.require(:employee).permit(:fingerprint_id, :name, :sex, :birthdate, :joindate, :leavedate, :bankdetails, :pay_scheme_id, :job)
+    params.require(:employee).permit(:fingerprint_id, :employee_id, :scanner_uuid)
   end
 end
