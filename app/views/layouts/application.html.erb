@@ -15,18 +15,24 @@
     <%= render 'layouts/navbar_unauthenticated' %>
 <% end %>
 <div class="container">
+  <div class="materialize-preloader center-align">
+    <div class="preloader-wrapper big active">
+      <div class="spinner-layer spinner-blue-only">
+        <div class="circle-clipper left">
+          <div class="circle"></div>
+        </div>
+        <div class="gap-patch">
+          <div class="circle"></div>
+        </div>
+        <div class="circle-clipper right">
+          <div class="circle"></div>
+        </div>
+      </div>
+    </div>
+  </div>
   <%= flash_messages %>
   <%= yield %>
 </div>
-<div class="cssload-preloader">
-  <span>L</span>
-  <span>o</span>
-  <span>a</span>
-  <span>d</span>
-  <span>i</span>
-  <span>n</span>
-  <span>g</span>
 
-</div>
 </body>
 </html>

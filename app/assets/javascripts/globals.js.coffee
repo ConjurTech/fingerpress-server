@@ -17,9 +17,9 @@ $(document).ready ->
 # For fade in fade out effect between pages
 $(document).on 'page:fetch', ->
   $('.container').fadeOut 'fast'
-  $('.cssload-preloader').show()
+  $('.materialize-preloader').show()
 
 $(document).on 'page:change', ->
   $('.container').hide()
   $('.container').fadeIn 'slow'
-  $('.cssload-preloader').hide()
+  $('.materialize-preloader').hide()
