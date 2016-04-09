@@ -7,8 +7,8 @@ class TimeLogConfig < ActiveRecord::Base
     wd = self.workdays.where(name: date_time_in.strftime("%A"), enabled: true).first
     return TimeDifference.between(date_time_in, date_time_out).in_hours if wd.blank?
 
-    wd_start = DateTime.civil_from_format(:local, date_time_in.year, date_time_in.month, date_time_in.day) + wd.start_time_seconds.seconds
-    wd_end = DateTime.civil_from_format(:local, date_time_in.year, date_time_in.month, date_time_in.day) + wd.end_time_seconds.seconds
+    wd_start = Time.zone.local(date_time_in.year, date_time_in.month, date_time_in.day) + wd.start_time_seconds.seconds
+    wd_end = Time.zone.local(date_time_in.year, date_time_in.month, date_time_in.day) + wd.end_time_seconds.seconds
     # http://stackoverflow.com/questions/325933/determine-whether-two-date-ranges-overlap find overlap by demorgans law of non overlap
     if (date_time_in < wd_end) and (date_time_out > wd_start)
       # only account for timings that occur after actual work hours
@@ -33,7 +33,7 @@ class TimeLogConfig < ActiveRecord::Base
   def config_adjusted_start_time(time_in)
     wd = self.workdays.where(name: time_in.strftime("%A"), enabled: true).first
     return time_in if wd.blank? || !self.auto_adjust_start_time?
-    wd_start = DateTime.civil_from_format(:local, time_in.year, time_in.month, time_in.day) + wd.start_time_seconds.seconds
+    wd_start = Time.zone.local(time_in.year, time_in.month, time_in.day) + wd.start_time_seconds.seconds
     difference = TimeDifference.between(wd_start, time_in).in_minutes
 
     if time_in < wd_start && difference <= self.start_time_lower_tolerance
@@ -48,7 +48,7 @@ class TimeLogConfig < ActiveRecord::Base
   def config_adjusted_end_time(time_in, time_out)
     wd = self.workdays.where(name: time_in.strftime("%A"), enabled: true).first
     return time_out if wd.blank? || !self.auto_adjust_end_time?
-    wd_end = DateTime.civil_from_format(:local, time_in.year, time_in.month, time_in.day) + wd.end_time_seconds.seconds
+    wd_end = Time.zone.local(time_in.year, time_in.month, time_in.day) + wd.end_time_seconds.seconds
 
     difference = TimeDifference.between(wd_end, time_out).in_minutes
 

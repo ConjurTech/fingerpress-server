@@ -72,11 +72,11 @@ if Rails.env.development?
   # Create Timelogs
   employee_id = Employee.first.id
   timelog_attributes = [
-      {date_time_in: DateTime.civil_from_format(:local, 2016,1,20,12), date_time_out: DateTime.civil_from_format(:local, 2016,1,20,17), employee_id: employee_id, pay_scheme_id: PayScheme.first.id},
-      {date_time_in: DateTime.civil_from_format(:local, 2016,1,22,12), date_time_out: DateTime.civil_from_format(:local, 2016,1,22,17), employee_id: employee_id, pay_scheme_id: PayScheme.first.id},
-      {date_time_in: DateTime.civil_from_format(:local, 2016,1,23,12), date_time_out: DateTime.civil_from_format(:local, 2016,1,23,17), employee_id: employee_id, pay_scheme_id: PayScheme.first.id},
-      {date_time_in: DateTime.civil_from_format(:local, 2016,1,21,17), date_time_out: DateTime.civil_from_format(:local, 2016,1,21,19), employee_id: employee_id, pay_scheme_id: PayScheme.first.id},
-      {date_time_in: DateTime.civil_from_format(:local, 2016,1,24,7), date_time_out: DateTime.civil_from_format(:local, 2016,1,24,17), employee_id: employee_id, pay_scheme_id: PayScheme.first.id}
+      {date_time_in: Time.zone.local(2016,1,20,12), date_time_out: Time.zone.local(2016,1,20,17), employee_id: employee_id, pay_scheme_id: PayScheme.first.id},
+      {date_time_in: Time.zone.local(2016,1,22,12), date_time_out: Time.zone.local(2016,1,22,17), employee_id: employee_id, pay_scheme_id: PayScheme.first.id},
+      {date_time_in: Time.zone.local(2016,1,23,12), date_time_out: Time.zone.local(2016,1,23,17), employee_id: employee_id, pay_scheme_id: PayScheme.first.id},
+      {date_time_in: Time.zone.local(2016,1,21,17), date_time_out: Time.zone.local(2016,1,21,19), employee_id: employee_id, pay_scheme_id: PayScheme.first.id},
+      {date_time_in: Time.zone.local(2016,1,24,7), date_time_out: Time.zone.local(2016,1,24,17), employee_id: employee_id, pay_scheme_id: PayScheme.first.id}
   ]
   timelog_attributes.each do |attributes|
     puts TimeLog.where(attributes).first.present?
@@ -85,8 +85,8 @@ if Rails.env.development?
 
   # Create Holidays
   holiday_attributes = [
-      {day: DateTime.civil_from_format(:local, 2016,1,22), name: "A Fun Holiday"},
-      {day: DateTime.civil_from_format(:local, 2016,1,23), name: "A More Fun Holiday"}
+      {day: Time.zone.local(2016,1,22), name: "A Fun Holiday"},
+      {day: Time.zone.local(2016,1,23), name: "A More Fun Holiday"}
   ]
   holiday_attributes.each do |attributes|
     puts Holiday.where(attributes).first.present?
