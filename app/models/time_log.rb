@@ -202,6 +202,6 @@ class TimeLog < ActiveRecord::Base
 
   def adjust_based_on_config
     self.date_time_in = TimeLogConfig.first.config_adjusted_start_time(self.date_time_in) if self.date_time_in.present?
-    self.date_time_out = TimeLogConfig.first.config_adjusted_end_time(self.date_time_in, self.date_time_out) if self.date_time_out.present?
+    self.date_time_out = TimeLogConfig.first.config_adjusted_end_time(self.date_time_in, self.date_time_out) if self.date_time_out.present? && self.date_time_in.present?
   end
 end

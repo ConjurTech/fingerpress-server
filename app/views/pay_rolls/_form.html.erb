@@ -4,7 +4,8 @@
         <%= f.error_notification %>
         <div class="input-field">
           <%= f.label 'Based on Pay Scheme Type', class: 'active' %>
-          <%= select_tag "fuc", options_for_select(PayScheme.all.collect { |p| [p.name, p.id] }), class: 'pay_scheme_dropdown browser-default' %>
+          <%= select_tag :pay_scheme_ids, options_for_select(PayScheme.all.collect { |p| [p.name, p.id] }), multiple: true, class: 'pay_scheme_dropdown' %>
+          <%= content_tag :a, 'Select All Pay Schemes', class: 'btn-flat select-all-pay-schemes-btn' %>
         </div>
         <div class="input-field">
           <%= f.label :employees, class: 'active' %>
