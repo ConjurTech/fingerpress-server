@@ -1,6 +1,3 @@
-$(document).ready ->
-  console.log $('.pay_scheme_dropdown').val()
-
 $(document).on 'change', '#pay_scheme_ids', ->
   $this = $(this)
   ids = $this.val()

@@ -56,9 +56,11 @@ class PaySchemesController < ApplicationController
   # DELETE /pay_schemes/1.json
   def destroy
     @pay_scheme.destroy
-    respond_to do |format|
-      format.html { redirect_to pay_schemes_url, notice: 'Pay scheme was successfully destroyed.' }
-      format.json { head :no_content }
+
+    if @pay_scheme.destroy
+      redirect_to pay_schemes_url, notice: 'Pay scheme was successfully destroyed.'
+    else
+      redirect_to pay_schemes_url, alert: @pay_scheme.errors.full_messages.join('. ')
     end
   end
 
