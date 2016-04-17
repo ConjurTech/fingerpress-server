@@ -13,7 +13,7 @@ class TimeLog < ActiveRecord::Base
   scope :complete, -> { where('date_time_in IS NOT NULL AND date_time_out IS NOT NULL') }
 
   def age
-    TimeDifference.between(self.date_time_in, DateTime.now).in_hours || 0
+    self.any_date_time_present? ? TimeDifference.between(first_available_date_time, DateTime.now).try(:in_hours) || 0 : 0
   end
 
   def date_in
