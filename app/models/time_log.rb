@@ -16,6 +16,20 @@ class TimeLog < ActiveRecord::Base
     self.any_date_time_present? ? TimeDifference.between(first_available_date_time, DateTime.now).try(:in_hours) || 0 : 0
   end
 
+  def any_date_time_present?
+    self.date_time_in.present? || self.date_time_out.present?
+  end
+
+  def both_date_time_present?
+    self.date_time_in.present? && self.date_time_out.present?
+  end
+
+  def first_available_date_time
+    return date_time_in if date_time_in.present?
+    return date_time_out if date_time_out.present?
+    nil
+  end
+
   def date_in
     return nil unless self[:date_time_in]
     date_time_in.strftime("%e %B, %Y")
