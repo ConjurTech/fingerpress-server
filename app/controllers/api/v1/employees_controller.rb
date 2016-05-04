@@ -10,7 +10,8 @@ class Api::V1::EmployeesController < Api::V1::BaseController
 
   # check in employee
   def fingerprint_check_in
-    @employee.time_logs.create!(date_time_in: Time.at(params[:timestamp].to_i))
+    check_in_time = Time.at(params[:timestamp].to_i)
+    @employee.time_logs.create!(date_time_in: check_in_time) unless @employee.time_logs.where(date_time_in: (check_in_time - 10.minutes)..check_in_time).any?
     render :show
   end
 
@@ -20,11 +21,14 @@ class Api::V1::EmployeesController < Api::V1::BaseController
   def fingerprint_check_out
     last_valid_timelog = @employee.time_logs.complete.order(date_time_out: :desc).first
     time_must_be_after = last_valid_timelog.try(:date_time_out) || Time.at(0) # for the first record
+    check_out_time = Time.at(params[:timestamp].to_i)
 
-    timelog = @employee.time_logs.where('date_time_in > ?', time_must_be_after).where(date_time_out: nil).first
-    timelog ||= @employee.time_logs.new
-    timelog.date_time_out = Time.at(params[:timestamp].to_i)
-    timelog.save!
+    unless @employee.time_logs.where(date_time_out: (check_out_time - 10.minutes)..check_out_time).any?
+      timelog = @employee.time_logs.where('date_time_in > ?', time_must_be_after).where(date_time_out: nil).first
+      timelog ||= @employee.time_logs.new
+      timelog.date_time_out = Time.at(check_out_time)
+      timelog.save!
+    end
 
     render :show
   end
