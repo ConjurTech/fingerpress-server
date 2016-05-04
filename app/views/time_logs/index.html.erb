@@ -5,9 +5,9 @@
 </div>
 
 <% if @invalid_time_logs.present? %>
-    <div class="card red lighten-2">
+    <div class="card red lighten-2 white-text">
       <div class="card-content">
-        <div class="card-title">Invalid Time Logs more than 1 day old</div>
+        <div class="card-title">Invalid Time Logs more than 1 day old<%= link_to 'Delete all', delete_all_invalid_time_logs_path, method: :post, data: {confirm: 'Are you sure?'}, class: 'right white-text' %></div>
         <table class="bordered">
           <thead>
           <tr>
@@ -30,17 +30,17 @@
                 <td><%= time_log.age %> hours</td>
                 <td>
                   <%= link_to time_log do %>
-                      <i class="material-icons">pageview</i>
+                      <i class="material-icons white-text">pageview</i>
                   <% end %>
                 </td>
                 <td>
                   <%= link_to edit_time_log_path(time_log) do %>
-                      <i class="material-icons">edit</i>
+                      <i class="material-icons white-text">edit</i>
                   <% end %>
                 </td>
                 <td>
                   <%= link_to time_log, method: :delete, data: {confirm: 'Are you sure?'} do %>
-                      <i class="material-icons">delete</i>
+                      <i class="material-icons white-text">delete</i>
                   <% end %>
                 </td>
               </tr>

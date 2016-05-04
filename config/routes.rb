@@ -15,7 +15,11 @@ Rails.application.routes.draw do
   devise_for :admins, :controllers => {sessions: 'admins/sessions', registrations: 'admins/registrations'}
 
   resources :holidays
-  resources :time_logs
+  resources :time_logs do
+    collection do
+      post :delete_all_invalid
+    end
+  end
   resources :pay_schemes
   resources :employees do
     member do

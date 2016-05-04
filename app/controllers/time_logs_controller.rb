@@ -11,6 +11,15 @@ class TimeLogsController < ApplicationController
     @invalid_time_logs = @invalid_time_logs.select { |time_log| time_log.age >= 24.0 }
   end
 
+  def delete_all_invalid
+    @invalid_time_logs = TimeLog.where(time_log_is_valid: false).order(created_at: :desc).page(params[:page])
+    @invalid_time_logs.destroy_all
+    respond_to do |format|
+      format.html { redirect_to time_logs_url, notice: 'Invalid Time log was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
   # GET /time_logs/1
   # GET /time_logs/1.json
   def show
