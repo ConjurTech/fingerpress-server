@@ -7,12 +7,11 @@ class TimeLogsController < ApplicationController
   # GET /time_logs.json
   def index
     @time_logs = TimeLog.all.order(created_at: :desc).page(params[:page]).per(10)
-    @invalid_time_logs = TimeLog.where(time_log_is_valid: false).order(created_at: :desc).page(params[:page])
-    @invalid_time_logs = @invalid_time_logs.select { |time_log| time_log.age >= 24.0 }
+    @invalid_time_logs = TimeLog.where(time_log_is_valid: false, created_at: Time.at(0)...1.days.ago).order(created_at: :desc).page(params[:page])
   end
 
   def delete_all_invalid
-    @invalid_time_logs = TimeLog.where(time_log_is_valid: false).order(created_at: :desc).page(params[:page])
+    @invalid_time_logs = TimeLog.where(time_log_is_valid: false, created_at: Time.at(0)...1.days.ago).order(created_at: :desc).page(params[:page])
     @invalid_time_logs.destroy_all
     respond_to do |format|
       format.html { redirect_to time_logs_url, notice: 'Invalid Time log was successfully destroyed.' }
