@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160222081952) do
+ActiveRecord::Schema.define(version: 20160530072303) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -150,14 +150,16 @@ ActiveRecord::Schema.define(version: 20160222081952) do
   add_index "payment_records", ["payment_record_pay_scheme_id"], name: "index_payment_records_on_payment_record_pay_scheme_id", using: :btree
 
   create_table "time_log_configs", force: :cascade do |t|
-    t.integer  "start_time_lower_tolerance", default: 15
-    t.integer  "start_time_upper_tolerance", default: 15
-    t.boolean  "auto_adjust_end_time",       default: true
-    t.boolean  "auto_adjust_start_time",     default: true
-    t.datetime "created_at",                                null: false
-    t.datetime "updated_at",                                null: false
-    t.integer  "end_time_lower_tolerance",   default: 15
-    t.integer  "end_time_upper_tolerance",   default: 15
+    t.integer  "start_time_lower_tolerance",  default: 15
+    t.integer  "start_time_upper_tolerance",  default: 15
+    t.boolean  "auto_adjust_end_time",        default: true
+    t.boolean  "auto_adjust_start_time",      default: true
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
+    t.integer  "end_time_lower_tolerance",    default: 15
+    t.integer  "end_time_upper_tolerance",    default: 15
+    t.integer  "check_in_time_start_seconds"
+    t.integer  "check_in_time_end_seconds"
   end
 
   create_table "time_logs", force: :cascade do |t|

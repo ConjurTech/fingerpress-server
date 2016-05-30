@@ -60,4 +60,27 @@ class TimeLogConfig < ActiveRecord::Base
       time_out
     end
   end
+
+  def check_in_time?(datetime)
+    return false unless check_in_time_start_seconds.present? && check_in_time_end_seconds.present?
+    time_start = Time.zone.local(datetime.year, datetime.month, datetime.day) + check_in_time_start_seconds.seconds
+    time_end = Time.zone.local(datetime.year, datetime.month, datetime.day) + check_in_time_end_seconds.seconds
+    (datetime <= time_end) and (datetime >= time_start)
+  end
+
+  def check_in_time_start
+    Time.at(self[:check_in_time_start_seconds]).utc.strftime('%I:%M%p') unless self.check_in_time_start_seconds.blank?
+  end
+
+  def check_in_time_end
+    Time.at(self[:check_in_time_end_seconds]).utc.strftime('%I:%M%p') unless self.check_in_time_end_seconds.blank?
+  end
+
+  def check_in_time_start=(time)
+    self.check_in_time_start_seconds = Time.zone.parse(time).seconds_since_midnight unless time.blank?
+  end
+
+  def check_in_time_end=(time)
+    self.check_in_time_end_seconds = Time.zone.parse(time).seconds_since_midnight unless time.blank?
+  end
 end

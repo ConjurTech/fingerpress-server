@@ -13,6 +13,23 @@
         <div class="form-inputs">
           <div class="card">
             <div class="card-content group-card">
+              <div class="card-title">Check In Timing</div>
+              <div class="row">
+                <div class="range-field col s12 m6 l6">
+                  <div class="input-group clockpicker">
+                    <%= f.text_field :check_in_time_start %>
+                  </div>
+                </div>
+                <div class="range-field col s12 m6 l6">
+                  <div class="input-group clockpicker">
+                    <%= f.text_field :check_in_time_end %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-content group-card">
               <div class="card-title">Config</div>
               <%= f.input :auto_adjust_start_time %>
               <div class="row">

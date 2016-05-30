@@ -5,6 +5,7 @@ Rails.application.routes.draw do
         collection do
           post :fingerprint_check_in
           post :fingerprint_check_out
+          post :fingerprint_check_in_out
           post :fingerprint_employees
           post :fingerprint_register
         end

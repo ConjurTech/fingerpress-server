@@ -1,5 +1,5 @@
 class Api::V1::EmployeesController < Api::V1::BaseController
-  before_action :set_employee_by_fingerprint, only: [:fingerprint_check_in, :fingerprint_check_out]
+  before_action :set_employee_by_fingerprint, only: [:fingerprint_check_in, :fingerprint_check_out, :fingerprint_check_in_out]
   before_action :set_employee, only: [:fingerprint_register]
 
   # GET api/v1/fingerprint_employees
@@ -9,10 +9,22 @@ class Api::V1::EmployeesController < Api::V1::BaseController
   end
 
   # check in employee
+  def fingerprint_check_in_out
+    if TimeLogConfig.first.check_in_time?(DateTime.now)
+      @check_in = true
+      fingerprint_check_in
+    else
+      @check_in = false
+      fingerprint_check_out
+    end
+    puts render_to_string( template: 'api/v1/employees/check_in_out_success.json.jbuilder')
+  end
+
+  # check in employee
   def fingerprint_check_in
     check_in_time = Time.at(params[:timestamp].to_i)
     @employee.time_logs.create!(date_time_in: check_in_time) unless @employee.time_logs.where(date_time_in: (check_in_time - 10.minutes)..check_in_time).any?
-    render :show
+    render :check_in_out_success
   end
 
   # check out employee
@@ -30,7 +42,7 @@ class Api::V1::EmployeesController < Api::V1::BaseController
       timelog.save!
     end
 
-    render :show
+    render :check_in_out_success
   end
 
   def fingerprint_register
