@@ -10,7 +10,7 @@ class Api::V1::EmployeesController < Api::V1::BaseController
 
   # check in employee
   def fingerprint_check_in_out
-    if TimeLogConfig.first.check_in_time?(DateTime.now)
+    if TimeLogConfig.first.check_in_time?(Time.at(params[:timestamp].to_i))
       @check_in = true
       fingerprint_check_in
     else
