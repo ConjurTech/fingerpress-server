@@ -1,7 +1,7 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
-$(document).ready ->
+$(document).on 'turbolinks:load', ->
   $('#pay_scheme_ot_multiplier_div').hide()
   $('#pay_scheme_pay_ot_div').hide()
   $('#pay_scheme_ot_time_div').hide()
