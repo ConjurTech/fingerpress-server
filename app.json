@@ -1,0 +1,20 @@
+{
+  "name": "Fingerpress app",
+  "description": "An app for fingerprint attendance.",
+  "repository": "https://github.com/ConjurTech/fingerpress-server",
+  "scripts": {
+    "dokku": {
+      "predeploy": "bundle exec rake db:migrate"
+    }
+  },
+  "image": "gliderlabs/herokuish",
+  "addons": [
+    "dokku-postgres",
+    "dokku-redis"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/ruby"
+    }
+  ]
+}
