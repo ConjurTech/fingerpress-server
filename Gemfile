@@ -77,6 +77,8 @@ gem 'whenever', require: false
 
 gem 'selectize-rails'
 
+gem 'active_model_serializers', '~> 0.10.0'
+
 # The Exception Notification gem provides a set of notifiers for sending notifications when errors occur in a Rack/Rails application.
 gem 'exception_notification'
 # For sending Exception Notifiers to slack for this app

@@ -1,14 +1,13 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
-      resources :employees, only: [] do
-        collection do
-          post :fingerprint_check_in
-          post :fingerprint_check_out
-          post :fingerprint_check_in_out
-          post :fingerprint_employees
-          post :fingerprint_register
-        end
+      namespace :fingerprint do
+        post :check_in
+        post :check_out
+        post :check_in_out
+        post :register
+        get :employees
+        post :delete
       end
     end
   end
