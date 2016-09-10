@@ -60,7 +60,7 @@ class Api::V1::FingerprintController < Api::V1::BaseController
   end
 
   def employees
-    @employees = Employee.all
+    @employees = Employee.all.order("LOWER(name)")
     render json: @employees, scanner_uuid: params[:scanner_uuid]
   end
 
