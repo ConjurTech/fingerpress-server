@@ -54,8 +54,8 @@ class Api::V1::FingerprintController < Api::V1::BaseController
     unless @employee.present?
       render(json: {}, status: :unprocessable_entity) and return
     end
-    fingerprint = @employee.find_by(fingerprint_id: params[:fingerprint_id])
-    fingerprint.destroy
+    employee = @employee.find_by(fingerprint_id: params[:fingerprint_id])
+    employee.update_columns(fingerprint_id: nil)
     render json: @employee
   end
 
